@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import './Components/Navigation';
 import Navigation from './Components/Navigation/Navigation';
 
 class App extends Component {
   render() {
-    const { breadcrumb, filestable, baseroute } = this.state
     return (
       <div className="App">
         <header className="App-header">
