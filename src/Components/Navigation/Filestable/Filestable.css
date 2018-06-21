@@ -1,5 +1,5 @@
 .filestable_header, .filestable_header > * ,
-.filestable_content_item, .filestable_content_item > * 
+.filestable_content_item, .filestable_content_item > *
 {
   border: solid black 1px;
   text-align: left;
@@ -46,8 +46,10 @@
 }
 
 .filestable_content {
-  padding: 0;  
+  padding: 0;
   margin: 0;
+  height: 230px; /* TODO: dynamic height using JS */
+  overflow-y: auto;
 }
 
 .filestable_content_item {
