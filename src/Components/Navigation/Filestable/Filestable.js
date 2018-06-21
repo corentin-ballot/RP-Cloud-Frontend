@@ -17,7 +17,7 @@ class Filestable extends Component {
                 </header>
                 <ol className="filestable_content">
                     {this.props.filestable.dirs.concat(this.props.filestable.files).map((item) => (
-                        <FilestableItem file={item} />
+                        <FilestableItem file={item} key={item.url} />
                     ))}
                 </ol>
             </div>
