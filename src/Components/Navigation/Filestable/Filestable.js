@@ -9,7 +9,7 @@ class Filestable extends Component {
             <div className="filestable">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <header className="filestable_header">
-                    <div className="filestable_header_select"><i class="material-icons">check_box_outline_blank</i></div>
+                    <div className="filestable_header_select"><i className="material-icons">check_box_outline_blank</i></div>
                     <div className="filestable_header_name">Name</div>
                     <div className="filestable_header_icons"></div>
                     <div className="filestable_header_lastupdate">Last update</div>
