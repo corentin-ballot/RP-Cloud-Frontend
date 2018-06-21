@@ -7,7 +7,7 @@ class Breadcrumb extends Component {
         return (
             <ul className="cloud_navigation_breadcrumb">
                 {this.props.breadcrumb.map((item) => (
-                    <li className="cloud_navigation_breadcrumb_item">
+                    <li className="cloud_navigation_breadcrumb_item" key={item.route}>
                         <a title={item.folderName} href={this.props.baseroute + item.route}>{item.folderName}</a>
                     </li>
                 ))}
