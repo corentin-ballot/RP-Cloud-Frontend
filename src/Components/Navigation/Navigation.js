@@ -26,9 +26,9 @@ class Navigation extends Component {
     getFilesinfos() {
         return {
         "dirs":[
-            {name:".","url":"/.",last_modif:"14/12/2017 20:15"},
-            {name:"..","url":"/..",last_modif:"23/05/2018 19:08"},
-            {name:"Documents","url":"/Documents",last_modif:"12/11/2017 15:33"}
+            {name:".","url":"/.",type:"dir",last_modif:"14/12/2017 20:15"},
+            {name:"..","url":"/..",type:"dir",last_modif:"23/05/2018 19:08"},
+            {name:"Documents","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"}
         ],
         "files":[
             {name:"markdown_cheatsheet.md",type:"file",url:"/markdown_cheatsheet.md",size:"2,82 Ko",last_modif:"05/06/2018 19:02"},
