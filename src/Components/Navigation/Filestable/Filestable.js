@@ -5,6 +5,7 @@ import FilestableItem from './FilestableItem/FilestableItem.js';
 
 class Filestable extends Component {
     state = {
+        allSelected: false,
         files: this.getFilesinfos(),
     }
 
@@ -39,13 +40,23 @@ class Filestable extends Component {
         this.setState({})
     }
 
+    handleSelectAllClick = () => {
+        this.setState(prevState => ({
+            files : prevState.files.map((file) => {
+                file.is_selected = !prevState.allSelected;
+                return file;
+            }),
+            allSelected : !prevState.allSelected
+        }));
+    }
+
     render() {
-        const { files } = this.state
+        const { files, allSelected } = this.state
         return (
             <div className="filestable">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <header className="filestable_header">
-                    <div className="filestable_header_select"><i className="material-icons">check_box_outline_blank</i></div>
+                    <div className="filestable_header_select" onClick={this.handleSelectAllClick}><i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i></div>
                     <div className="filestable_header_name">Name</div>
                     <div className="filestable_header_icons"></div>
                     <div className="filestable_header_lastupdate">Last update</div>
