@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class FilestableItem extends Component {
     state = {
         edit_name: false,
+        is_selected: false,
     }
 
     handleEditNameClick = () => {
@@ -23,11 +24,17 @@ class FilestableItem extends Component {
         }));
     }
 
+    handleSelectClick = () => {
+        this.setState(prevState => ({
+            is_selected: !prevState.is_selected
+        }));
+    }
+
     render() {
-        const { edit_name } = this.state
+        const { edit_name, is_selected } = this.state
         return (
             <li className="filestable_content_item">
-                <div className="filestable_content_item_select"><i className="material-icons">{this.props.file.type === "dir"? "folder_open":"insert_drive_file"}</i></div>
+                <div className="filestable_content_item_select" onClick={this.handleSelectClick}><i className="material-icons">{is_selected? "check_box":(this.props.file.type === "dir"? "folder_open":"insert_drive_file")}</i></div>
                 <div className="filestable_content_item_name">{this.props.file.name}</div>
                 <div className="filestable_content_item_icons">
                     {this.props.file.type !== "dir" && <a><i className="material-icons">file_download</i></a> }
