@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './FilestableItem.css';
+
 class FilestableItem extends Component {
     state = {
         edit_name: false,
@@ -37,13 +39,13 @@ class FilestableItem extends Component {
                 <div className="filestable_content_item_select" onClick={this.handleSelectClick}><i className="material-icons">{is_selected? "check_box":(this.props.file.type === "dir"? "folder_open":"insert_drive_file")}</i></div>
                 <div className="filestable_content_item_name">{this.props.file.name}</div>
                 <div className="filestable_content_item_icons">
-                    {this.props.file.type !== "dir" && <a><i className="material-icons">file_download</i></a> }
-                    {edit_name === false && <button onClick={this.handleEditNameClick}><i className="material-icons">mode_edit</i></button>}
-                    {edit_name === true  && <button onClick={this.handleSubmitEditNameClick}><i className="material-icons">done</i></button>}
-                    {edit_name === true  && <button onClick={this.handleCancelEditNameClick}><i className="material-icons">clear</i></button>}
+                    {this.props.file.type !== "dir" && <a className="filestable_content_item_icons_item"><i className="material-icons">file_download</i></a> }
+                    {edit_name === false && <button className="filestable_content_item_icons_item" onClick={this.handleEditNameClick}><i className="material-icons">mode_edit</i></button>}
+                    {edit_name === true  && <button className="filestable_content_item_icons_item" onClick={this.handleSubmitEditNameClick}><i className="material-icons">done</i></button>}
+                    {edit_name === true  && <button className="filestable_content_item_icons_item" onClick={this.handleCancelEditNameClick}><i className="material-icons">clear</i></button>}
                 </div>
                 <div className="filestable_content_item_lastupdate">{this.props.file.last_modif}</div>
-                <div className="filestable_content_item_size">{typeof this.props.file.size !== undefined? this.props.file.size:"-"}</div>
+                <div className="filestable_content_item_size">{typeof this.props.file.size === undefined? <span>-</span>:this.props.file.size}</div>
             </li>
         );
     }

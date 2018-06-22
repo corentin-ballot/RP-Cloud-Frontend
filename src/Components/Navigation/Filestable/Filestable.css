@@ -1,47 +1,49 @@
-.filestable_header, .filestable_header > * ,
-.filestable_content_item, .filestable_content_item > *
-{
-  border: solid black 1px;
-  text-align: left;
-}
-
 .filestable {
   font-size: 20px;
 }
 
-.filestable_header, .filestable_content_item {
+.filestable_header {
   display: flex;
   align-items: center;
   height: 64px;
+  margin: 8px 0px 8px 8px;
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.filestable_header_select, .filestable_content_item_select {
+.filestable_header_select {
+  text-align: center;
   width: 50px;
   line-height: 0;
   white-space: nowrap;
+  cursor: pointer;
+  border-right: 1px solid #ccc;
+  user-select: none;
 }
 
-.filestable_header_name, .filestable_content_item_name {
+.filestable_header_name {
   flex-grow:20;
   flex-shrink: 20;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
+  padding-left: 16px;
 }
 
-.filestable_header_icons, .filestable_content_item_icons {
+.filestable_header_icons {
   white-space: nowrap;
 }
 
-.filestable_header_lastupdate, .filestable_content_item_lastupdate {
+.filestable_header_lastupdate {
   width: 150px;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 }
 
-.filestable_header_size, .filestable_content_item_size {
+.filestable_header_size {
   width: 70px;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -50,9 +52,4 @@
   margin: 0;
   height: 230px; /* TODO: dynamic height using JS */
   overflow-y: auto;
-}
-
-.filestable_content_item {
-  list-style-type: none;
-  padding: 0;
 }
