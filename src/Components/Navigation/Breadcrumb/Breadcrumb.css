@@ -24,6 +24,14 @@
 	text-decoration: none;
 }
 
+.cloud_navigation_breadcrumb_item_dropdown > .material-icons{
+	vertical-align: bottom;
+}
+
+.cloud_navigation_breadcrumb_item_dropdown_menu {
+	display: none;
+}
+
 .cloud_navigation_breadcrumb_item:first-child, .cloud_navigation_breadcrumb_item:last-child {
 	flex-shrink: 0;
 	text-overflow: clip;
@@ -38,7 +46,7 @@
 }
 
 .cloud_navigation_breadcrumb_item > a:hover,
-.cloud_navigation_breadcrumb_item > label:hover {
+.cloud_navigation_breadcrumb_item_dropdown:hover {
 	background: rgba(158,158,158,.2);
 }
 
