@@ -20,7 +20,7 @@ class Breadcrumb extends Component {
                         // last one
                         return (
                             <li className="cloud_navigation_breadcrumb_item" key={item.route}>
-                                <button className="cloud_navigation_breadcrumb_item_dropdown" onClick={this.handleDropdownclick}>{item.folderName}<i className="material-icons">keyboard_arrow_down</i></button>
+                                <button className="cloud_navigation_breadcrumb_item_dropdown" onClick={this.handleDropdownclick}>{i === 0 ? <i class="material-icons">cloud</i>:item.folderName}<i className="material-icons">keyboard_arrow_down</i></button>
                                 <ul className="cloud_navigation_breadcrumb_item_dropdown_menu" aria-expanded={dropdown_open}>
                                     <li><button>Download files</button></li>
                                     <li><button>Delete files</button></li>
@@ -34,7 +34,7 @@ class Breadcrumb extends Component {
                     } else {
                         return (
                             <li className="cloud_navigation_breadcrumb_item" key={item.route}>
-                                <a title={item.folderName} href={this.props.baseroute + item.route}>{item.folderName}</a>
+                                <a title={item.folderName} href={this.props.baseroute + item.route}>{i === 0 ? <i class="material-icons">cloud</i>:item.folderName}</a>
                             </li>
                         )
                     }
