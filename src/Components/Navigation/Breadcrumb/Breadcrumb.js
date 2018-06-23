@@ -3,7 +3,16 @@ import React, { Component } from 'react';
 import './Breadcrumb.css';
 
 class Breadcrumb extends Component {
+    state = {
+        dropdown_open: false,
+    }
+
+    handleDropdownclick = () => {
+        this.setState((prevState) => {return {dropdown_open: !prevState.dropdown_open}})
+    }
+
     render() {
+        const { dropdown_open } = this.state
         return (
             <ul className="cloud_navigation_breadcrumb">
                 {this.props.breadcrumb.map((item, i, breadcrumb) => {
@@ -11,15 +20,14 @@ class Breadcrumb extends Component {
                         // last one
                         return (
                             <li className="cloud_navigation_breadcrumb_item" key={item.route}>
-                                <button className="cloud_navigation_breadcrumb_item_dropdown">{item.folderName}<i class="material-icons">keyboard_arrow_down</i></button>
-                                <ul className="cloud_navigation_breadcrumb_item_dropdown_menu">
-                                    <li>Download files</li>
-                                    <li>Delete files</li>
-                                    <li>Add new file</li>
-                                    <li>Add new folder</li>
-                                    <li>Upload file</li>
-                                    <li>Hide hidden files</li>
-                                    <li>Show hidden files</li>
+                                <button className="cloud_navigation_breadcrumb_item_dropdown" onClick={this.handleDropdownclick}>{item.folderName}<i className="material-icons">keyboard_arrow_down</i></button>
+                                <ul className="cloud_navigation_breadcrumb_item_dropdown_menu" aria-expanded={dropdown_open}>
+                                    <li><button>Download files</button></li>
+                                    <li><button>Delete files</button></li>
+                                    <li><button>Add new file</button></li>
+                                    <li><button>Add new folder</button></li>
+                                    <li><button>Upload file</button></li>
+                                    <li><button>Toggle hidden files</button></li>
                                 </ul>
                             </li>
                         )
