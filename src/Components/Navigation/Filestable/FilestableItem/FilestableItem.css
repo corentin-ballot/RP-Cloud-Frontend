@@ -35,6 +35,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-left: 16px;
+    cursor: pointer;
 }
 
 .filestable_content_item_icons {
