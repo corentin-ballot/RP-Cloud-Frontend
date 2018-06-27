@@ -64,7 +64,7 @@ class Filestable extends Component {
                 </header>
                 <ol className="filestable_content">
                     {files.map((item) => (
-                        <FilestableItem file={item} key={item.url} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick}/>
+                        item.name!="." && item.name!=".." && <FilestableItem file={item} key={item.url} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick}/>
                     ))}
                 </ol>
             </div>
