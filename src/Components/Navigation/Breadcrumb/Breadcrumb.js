@@ -27,7 +27,7 @@ class Breadcrumb extends Component {
                                     <li><button>Add new file</button></li>
                                     <li><button>Add new folder</button></li>
                                     <li><button>Upload file</button></li>
-                                    <li><button>Toggle hidden files</button></li>
+                                    <li><button onClick={this.props.onClickToggleHiddenFiles}>Toggle hidden files</button></li>
                                 </ul>
                             </li>
                         )
