@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './Filestable.css';
 import FilestableItem from './FilestableItem/FilestableItem.js';
+import FilestableNewFileItem from './FilestableNewFileItem/FilestableNewFileItem.js';
+import FilestableNewDirItem from './FilestableNewDirItem/FilestableNewDirItem.js';
 
 class Filestable extends Component {
     state = {
@@ -67,8 +69,10 @@ class Filestable extends Component {
                     <div className="filestable_header_size">Size</div>
                 </header>
                 <ol className="filestable_content">
+                    {this.props.displayNewFile && <FilestableNewFileItem />}
+                    {this.props.displayNewDir && <FilestableNewDirItem />}
                     {files.map((item) => (
-                        (item.name.charAt(0)!="." || (item.name.charAt(0)=="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick}/>
+                        (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick}/>
                     ))}
                 </ol>
             </div>

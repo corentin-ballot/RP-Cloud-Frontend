@@ -26,8 +26,8 @@ class Breadcrumb extends Component {
                                 <ul className="cloud_navigation_breadcrumb_item_dropdown_menu" aria-expanded={dropdown_open}>
                                     <li><button>Download files</button></li>
                                     <li><button>Delete files</button></li>
-                                    <li><button>Add new file</button></li>
-                                    <li><button>Add new folder</button></li>
+                                    <li><button onClick={this.props.onClickNewFile}>Add new file</button></li>
+                                    <li><button onClick={this.props.onClickNewDir}>Add new folder</button></li>
                                     <li><button>Upload file</button></li>
                                     <li><button onClick={this.props.onClickToggleHiddenFiles}>Toggle hidden files</button></li>
                                 </ul>

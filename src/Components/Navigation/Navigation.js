@@ -10,6 +10,8 @@ class Navigation extends Component {
         breadcrumb: this.getBreadcrumb(),
         baseroute: "/cloud",
         displayHiddenFiles: false,
+        displayNewFile: false,
+        displayNewDir: false,
     }
 
     getBreadcrumb() {
@@ -29,12 +31,24 @@ class Navigation extends Component {
         }));
     }
 
+    handleNewFileClick = () => {
+        this.setState(prevState => ({
+            displayNewFile: !prevState.displayNewFile
+        }));
+    }
+
+    handleNewDirClick = () => {
+        this.setState(prevState => ({
+            displayNewDir: !prevState.displayNewDir
+        }));
+    }
+
     render() {
-        const { breadcrumb, baseroute, displayHiddenFiles } = this.state
+        const { breadcrumb, baseroute, displayHiddenFiles, displayNewFile, displayNewDir } = this.state
         return (
             <div className="cloud_navigation">
-              <Breadcrumb breadcrumb={breadcrumb} baseroute={baseroute} onClickToggleHiddenFiles={this.handleToggleHiddenFilesClick} />
-              <Filestable displayHiddenFiles={displayHiddenFiles} />
+                <Breadcrumb breadcrumb={breadcrumb} baseroute={baseroute} onClickToggleHiddenFiles={this.handleToggleHiddenFilesClick} onClickNewFile={this.handleNewFileClick} onClickNewDir={this.handleNewDirClick} />
+                <Filestable baseroute={baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} />
             </div>
         );
     }
