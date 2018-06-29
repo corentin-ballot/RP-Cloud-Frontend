@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import './Breadcrumb.css';
 
 class Breadcrumb extends Component {
@@ -34,7 +36,7 @@ class Breadcrumb extends Component {
                     } else {
                         return (
                             <li className="cloud_navigation_breadcrumb_item" key={item.route}>
-                                <a title={item.folderName} href={this.props.baseroute + item.route}>{i === 0 ? <i class="material-icons">cloud</i>:item.folderName}</a>
+                                <Link title={item.folderName} to={this.props.baseroute + item.route}>{i === 0 ? <i className="material-icons">cloud</i>:item.folderName}</Link>
                             </li>
                         )
                     }
