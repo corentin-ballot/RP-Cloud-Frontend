@@ -9,8 +9,8 @@ class FilestableNewFileItem extends Component {
                     <input name="newfile" className="filestable_content_item_name_rename" type="text" placeholder="New file name" />
                 </form>
                 <div className="filestable_content_item_icons">
-                    <button className="filestable_content_item_icons_item" onClick={() => this.props.onEditNameSubmit(this.props.file)}><i className="material-icons">done</i></button>}
-                    <button className="filestable_content_item_icons_item" onClick={() => this.props.onEditNameCancel(this.props.file)}><i className="material-icons">clear</i></button>}
+                    <button className="filestable_content_item_icons_item"><i className="material-icons">done</i></button>}
+                    <button className="filestable_content_item_icons_item"><i className="material-icons">clear</i></button>}
                 </div>
                 <div className="filestable_content_item_lastupdate"></div>
                 <div className="filestable_content_item_size"></div>
