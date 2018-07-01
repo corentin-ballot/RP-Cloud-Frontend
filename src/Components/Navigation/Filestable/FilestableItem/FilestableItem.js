@@ -11,7 +11,7 @@ class FilestableItem extends Component {
                 <div className="filestable_content_item_select" onClick={() => this.props.onSelect(this.props.file)}><i className="material-icons">{this.props.file.is_selected? "check_box":(this.props.file.type === "dir"? "folder_open":"insert_drive_file")}</i></div>
                 {(this.props.file.edit_name !== true) && this.props.file.type === "dir" ? <Link to={this.props.file.url} className="filestable_content_item_name">{this.props.file.name}</Link> : <div className="filestable_content_item_name">{this.props.file.name}</div>}
                 {(this.props.file.edit_name === true) && (<form className="filestable_content_item_name">
-                    <input name="newfile" className="filestable_content_item_name_rename" id={"rename-" + this.props.file.url} type="text" value={this.props.file.url} />
+                    <input name="newfile" className="filestable_content_item_name_rename" id={"rename-" + this.props.file.url} type="text" defaultValue={this.props.file.url} />
                 </form>)}
                 <div className="filestable_content_item_icons">
                     {this.props.file.type !== "dir" && <a className="filestable_content_item_icons_item"><i className="material-icons">file_download</i></a> }
