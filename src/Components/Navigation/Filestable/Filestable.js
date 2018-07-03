@@ -12,18 +12,14 @@ class Filestable extends Component {
     }
 
     getFilesinfos() {
-        return ([
+        return [
             {name:".","url":"/.",type:"dir",last_modif:"14/12/2017 20:15"},
             {name:"..","url":"/..",type:"dir",last_modif:"23/05/2018 19:08"},
             {name:"Documents","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"},
             {name:"markdown_cheatsheet.md",type:"file",url:"/markdown_cheatsheet.md",size:"2,82 Ko",last_modif:"05/06/2018 19:02"},
             {name:"notes.md",type:"file",url:"/notes.md",size:"2,85 Ko",last_modif:"20/12/2017 8:53"},
             {name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"}
-        ].map((item, i, breadcrumb) => {
-            if(item.type === "dir")
-                item.url = this.props.baseroute + item.url;
-            return item;
-        }));
+        ];
     }
 
     handleEditNameClick = (file) => {
@@ -72,7 +68,7 @@ class Filestable extends Component {
                     {this.props.displayNewFile && <FilestableNewFileItem />}
                     {this.props.displayNewDir && <FilestableNewDirItem />}
                     {files.map((item) => (
-                        (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick}/>
+                        (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} baseroute={this.props.baseroute} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick}/>
                     ))}
                 </ol>
             </div>

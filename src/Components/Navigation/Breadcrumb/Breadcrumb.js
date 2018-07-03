@@ -36,7 +36,7 @@ class Breadcrumb extends Component {
                     } else {
                         return (
                             <li className="cloud_navigation_breadcrumb_item" key={item.route}>
-                                <Link title={item.folderName} to={this.props.baseroute + item.route}>{i === 0 ? <i className="material-icons">cloud</i>:item.folderName}</Link>
+                                <Link title={item.folderName} to={this.props.baseroute + item.route + window.location.hash}>{i === 0 ? <i className="material-icons">cloud</i>:item.folderName}</Link>
                             </li>
                         )
                     }
