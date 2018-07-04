@@ -15,17 +15,8 @@ class App extends Component {
       this.setState({ 
         isLoaded: true, 
         filemanager : {
-          breadcrumb : [
-            {route: '/', folderName: '.'},
-          ],
-          files: [
-            {name:".","url":"/.",type:"dir",last_modif:"14/12/2017 20:15"},
-            {name:"..","url":"/..",type:"dir",last_modif:"23/05/2018 19:08"},
-            {name:"Documents","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"},
-            {name:"markdown_cheatsheet.md",type:"file",url:"/markdown_cheatsheet.md",size:"2,82 Ko",last_modif:"05/06/2018 19:02"},
-            {name:"notes.md",type:"file",url:"/notes.md",size:"2,85 Ko",last_modif:"20/12/2017 8:53"},
-            {name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"}
-          ],
+          breadcrumb : [{route: '/', folderName: '.'},],
+          files: [{name:".","url":"/.",type:"dir",last_modif:"14/12/2017 20:15"},{name:"..","url":"/..",type:"dir",last_modif:"23/05/2018 19:08"},{name:"Documents","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"},{name:"markdown_cheatsheet.md",type:"file",url:"/markdown_cheatsheet.md",size:"2,82 Ko",last_modif:"05/06/2018 19:02"},{name:"notes.md",type:"file",url:"/notes.md",size:"2,85 Ko",last_modif:"20/12/2017 8:53"},{name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"}],
         }
       });
       break;
@@ -33,14 +24,8 @@ class App extends Component {
       this.setState({
         isLoaded: true, 
         filemanager : {
-          breadcrumb : [
-            {route: '/', folderName: '.'},
-            {route: '/Documents', folderName: 'Documents'},
-          ],
-          files: [
-            {name:"Test","url":"/Documents/Test",type:"dir",last_modif:"12/11/2017 15:33"},
-            {name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"},
-          ],
+          breadcrumb : [{route: '/', folderName: '.'},{route: '/Documents', folderName: 'Documents'},],
+          files: [{name:"Test","url":"/Documents/Test",type:"dir",last_modif:"12/11/2017 15:33"},{name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"},],
         }
       });
       break;
@@ -48,14 +33,8 @@ class App extends Component {
       this.setState({
         isLoaded: true, 
         filemanager : {
-          breadcrumb : [
-            {route: '/', folderName: '.'},
-            {route: '/Documents', folderName: 'Documents'},
-            {route: '/Documents/Test', folderName: 'Test'},
-          ],
-          files: [
-            {name:"> ..","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"},
-          ],
+          breadcrumb : [{route: '/', folderName: '.'},{route: '/Documents', folderName: 'Documents'},{route: '/Documents/Test', folderName: 'Test'}],
+          files: [{name:"> ..","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"},],
         }
       });
       break;
@@ -86,7 +65,6 @@ class App extends Component {
       console.log("Route change (" + action + "). New location : " + location.pathname + location.search + location.hash);
       switch (action) {
         case 'PUSH' : // location pathname change
-        /* TODO : update file table and breadcrumb on route change using ajax request */
         this.navigateTo(location.pathname.replace(this.state.baseroute, ''));
         break;
         case 'POP' : // location hash change
