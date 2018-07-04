@@ -30,14 +30,13 @@ class Filestable extends Component {
         this.setState({})
     }
 
-    handleSelectAllClick = () => {
-        this.setState(prevState => ({
-            files : prevState.files.map((file) => {
-                file.is_selected = !prevState.allSelected;
-                return file;
-            }),
-            allSelected : !prevState.allSelected
-        }));
+    handleSelectAllClick = (files) => {
+        files = files.map((file) => {
+            file.is_selected = !this.state.allSelected;
+            return file;
+        });
+
+        this.setState({allSelected : !this.state.allSelected})
     }
 
     render() {
@@ -46,7 +45,7 @@ class Filestable extends Component {
             <div className="filestable">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <header className="filestable_header">
-                    <div className="filestable_header_select" onClick={this.handleSelectAllClick}><i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i></div>
+                    <div className="filestable_header_select" onClick={() => this.handleSelectAllClick(this.props.files)}><i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i></div>
                     <div className="filestable_header_name">Name</div>
                     <div className="filestable_header_icons"></div>
                     <div className="filestable_header_lastupdate">Last update</div>
