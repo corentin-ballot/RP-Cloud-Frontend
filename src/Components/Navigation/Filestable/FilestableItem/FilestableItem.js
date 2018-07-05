@@ -5,11 +5,19 @@ import { Link } from 'react-router-dom';
 import './FilestableItem.css';
 
 class FilestableItem extends Component {
+    handleFileClick = (file) => {
+        var encoded_arr = window.location.hash === "" ? "[]" : window.location.hash;
+        var decoded_arr = decodeURIComponent(encoded_arr).replace('#','');
+        var arr = JSON.parse(decoded_arr);
+        arr.push(file.url);
+        window.location.hash = encodeURIComponent(JSON.stringify(arr));
+    }
+
     render() {
         return (
             <li className="filestable_content_item">
                 <div className="filestable_content_item_select" onClick={() => this.props.onSelect(this.props.file)}><i className="material-icons">{this.props.file.is_selected? "check_box":(this.props.file.type === "dir"? "folder_open":"insert_drive_file")}</i></div>
-                {(this.props.file.edit_name !== true) && (this.props.file.type === "dir"?(<Link to={this.props.baseroute + this.props.file.url + window.location.hash} className="filestable_content_item_name">{this.props.file.name}</Link>):(<div className="filestable_content_item_name">{this.props.file.name}</div>))}
+                {(this.props.file.edit_name !== true) && (this.props.file.type === "dir"?(<Link to={this.props.baseroute + this.props.file.url + window.location.hash} className="filestable_content_item_name">{this.props.file.name}</Link>):(<div className="filestable_content_item_name" onClick={() => this.handleFileClick(this.props.file)}>{this.props.file.name}</div>))}
                 {(this.props.file.edit_name === true) && (<form className="filestable_content_item_name">
                     <input name="newfile" className="filestable_content_item_name_rename" id={"rename-" + this.props.file.url} type="text" defaultValue={this.props.file.url} />
                 </form>)}
