@@ -18,9 +18,7 @@ class App extends Component {
     });
   }
 
-  navigateTo(path) {
-    this.updateBreadcrumb(path);
-
+  updateFileList(path) {
     switch(path){
       case "/":case "":
       this.setState({ 
@@ -62,6 +60,11 @@ class App extends Component {
       }
     )
     /*/
+  }
+
+  navigateTo(path) {
+    this.updateBreadcrumb(path);
+    this.updateFileList(path);
   }
 
   componentWillMount() {

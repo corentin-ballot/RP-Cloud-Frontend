@@ -9,7 +9,7 @@ class FilestableItem extends Component {
         var encoded_arr = window.location.hash === "" ? "[]" : window.location.hash;
         var decoded_arr = decodeURIComponent(encoded_arr).replace('#','');
         var arr = JSON.parse(decoded_arr);
-        arr.push(file.url);
+        arr.push({n:file.name,u:file.url});
         window.location.hash = encodeURIComponent(JSON.stringify(arr));
     }
 
