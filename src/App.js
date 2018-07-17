@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navigation from './Components/Navigation/Navigation';
+import Preview from './Components/Preview/Preview';
 
 class App extends Component {
   state = {
     baseroute: "/cloud",
     breadcrumb: [],
     files: [],
+    preview: [],
   }
 
   updateBreadcrumb(path) {
@@ -67,6 +69,13 @@ class App extends Component {
     this.updateFileList(path);
   }
 
+  updatePreviewItems() {
+    var encoded_arr = window.location.hash === "" ? "[]" : window.location.hash;
+    var decoded_arr = decodeURIComponent(encoded_arr).replace('#','');
+    var arr = JSON.parse(decoded_arr);
+    this.setState({preview: arr});
+  }
+
   componentWillMount() {
     this.unlisten = this.props.history.listen((location, action) => {
       console.log("Route change (" + action + "). New location : " + location.pathname + location.search + location.hash);
@@ -75,28 +84,30 @@ class App extends Component {
         this.navigateTo(location.pathname.replace(this.state.baseroute, ''));
         break;
         case 'POP' : // location hash change
-        /* TODO : update file preview */
+        this.updatePreviewItems();
         break;
         default: break;
       }
     });
 
     this.navigateTo(window.location.pathname.replace(this.state.baseroute, ''));
+    this.updatePreviewItems();
   }
   componentWillUnmount() {
       this.unlisten();
   }
 
   render() {
-    const { files, breadcrumb, baseroute } = this.state
+    const { files, breadcrumb, baseroute, preview } = this.state
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactApp</h1>
         </header>
-        <div>
+        <div className="cloud">
           <Navigation breadcrumb={breadcrumb} files={files} baseroute={baseroute} />
+          <Preview preview={preview} />
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.

@@ -1,0 +1,16 @@
+.cloud_preview {
+    width: 60%;
+}
+.cloud_preview_tabsbar {
+    display: flex;
+}
+.cloud_preview_tabsbar_item {
+    flex-grow: 1;
+    text-align: left;
+}
+.cloud_preview_panel {
+    width: 100%;
+}
+.cloud_preview_panel_item {
+    width: 100%;
+}

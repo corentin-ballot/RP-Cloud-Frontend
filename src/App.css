@@ -26,3 +26,9 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.cloud {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}

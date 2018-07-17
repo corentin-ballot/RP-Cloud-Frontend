@@ -1,4 +1,5 @@
 .cloud_navigation {
     display: flex;
     flex-direction: column;
+    width: 40%;
 }
