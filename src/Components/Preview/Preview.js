@@ -7,8 +7,11 @@ class Preview extends Component {
         activePanel: 0,
     }
 
-    handleTabClick = (index) => {
-        this.setState({activePanel : index});
+    handleTabClick = (file, index) => {
+        file.content = "SUPER CONTENT !";
+        file.isLoaded = true;
+        this.props.preview.selectedFile = index;
+        this.setState({});
     }
 
     handleCloseTabClick = (index) => {
@@ -29,17 +32,17 @@ class Preview extends Component {
         return (
             <div className="cloud_preview">
                 <div className="cloud_preview_tabsbar" role="tablist">
-                    {this.props.preview.map((item, index) => (
-                        <div key={item.u} className="cloud_preview_tabsbar_item" aria-selected={index === activePanel}>
-                            <button role="tab" className="cloud_preview_tabsbar_item_name" id={"preview-" + index} onClick={() => this.handleTabClick(index)} title={item.u}> {item.n} </button>
-                            <button className="cloud_preview_tabsbar_item_close_btn material-icons" onClick={() => this.handleCloseTabClick(index)}>close</button>
+                    {this.props.preview.files.map((item, index) => (
+                        <div key={item.url} className="cloud_preview_tabsbar_item" aria-selected={index === this.props.preview.selectedFile}>
+                            <button role="tab" className="cloud_preview_tabsbar_item_name" id={"preview-" + index} onClick={() => this.handleTabClick(item, index)} title={item.url}> {item.name} </button>
+                            <button className="cloud_preview_tabsbar_item_close_btn material-icons" onClick={() => this.props.onCloseTab(item.url)}>close</button>
                         </div>
                     ))}
                 </div>
 
                 <div className="cloud_preview_panel">
-                    {this.props.preview.map((item, index) => (
-                        <div key={item.u} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== activePanel}>{item.isLoaded ? "pending..." : item.content}</div>
+                    {this.props.preview.files.map((item, index) => (
+                        <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.preview.selectedFile}>{item.isLoaded ? item.content : item.name + " content pending..."}</div>
                     ))}
                 </div>
             </div>

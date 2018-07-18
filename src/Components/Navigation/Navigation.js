@@ -43,7 +43,7 @@ class Navigation extends Component {
         return (
             <div className="cloud_navigation">
                 <Breadcrumb breadcrumb={this.props.breadcrumb} baseroute={this.props.baseroute} onClickToggleHiddenFiles={this.handleToggleHiddenFilesClick} onClickNewFile={this.handleNewFileClick} onClickNewDir={this.handleNewDirClick} />
-                <Filestable files={this.props.files} baseroute={this.props.baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} onClickCancelNewDir={this.handleCancelNewDirClick} onClickCancelNewFile={this.handleCancelNewFileClick} />
+                <Filestable files={this.props.files} baseroute={this.props.baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} onClickCancelNewDir={this.handleCancelNewDirClick} onClickCancelNewFile={this.handleCancelNewFileClick} onClickFile={this.props.onPreviewFile} />
             </div>
         );
     }
