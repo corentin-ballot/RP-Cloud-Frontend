@@ -15,7 +15,7 @@ class App extends Component {
   updateBreadcrumb(path) {
     this.setState({ 
       breadcrumb: path.split('/').map((item, index, array) => {
-        return {route:array.map((x, y) => {if(y<=index) return x}).join('/'), folderName: item}
+        return {route:array.filter((x, y) => y <= index).join('/'), folderName: item}
       })
     });
   }
