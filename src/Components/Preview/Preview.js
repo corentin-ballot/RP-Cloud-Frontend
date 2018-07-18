@@ -18,13 +18,15 @@ class Preview extends Component {
             <div className="cloud_preview">
                 <div className="cloud_preview_tabsbar" role="tablist">
                     {this.props.preview.map((item, index) => (
-                        <button role="tab" className="cloud_preview_tabsbar_item" id={"preview-" + index} aria-selected={index === activePanel} onClick={() => this.handleTabClick(index)} title={item.u + item.n}>{item.n}</button>
+                        <div key={item.u} className="cloud_preview_tabsbar_item" aria-selected={index === activePanel}>
+                            <button role="tab" className="cloud_preview_tabsbar_item_name" id={"preview-" + index} onClick={() => this.handleTabClick(index)} title={item.u}> {item.n} </button>
+                        </div>
                     ))}
                 </div>
 
                 <div className="cloud_preview_panel">
                     {this.props.preview.map((item, index) => (
-                        <div role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== activePanel}>{index + " : " + item.content}</div>
+                        <div key={item.u} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== activePanel}>{item.isLoaded ? "pending..." : item.content}</div>
                     ))}
                 </div>
             </div>
