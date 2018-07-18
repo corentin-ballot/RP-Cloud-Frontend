@@ -3,14 +3,48 @@
 }
 .cloud_preview_tabsbar {
     display: flex;
+    align-items: stretch;
 }
 .cloud_preview_tabsbar_item {
     flex-grow: 1;
     text-align: left;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.cloud_preview_tabsbar_item:hover {
+    background-color: #00000033;
+}
+.cloud_preview_tabsbar_item[aria-selected="true"] {
+    background-color: #00000011;
+    border-bottom: solid 2px blue;
+}
+.cloud_preview_tabsbar_item_name {
+    flex-grow: 1;
+    text-align: left;
+    padding: 0;
+    border:none;
+    border-radius: 20px;
+    background-color: transparent;
+    cursor: pointer;
+
+    padding: 8px 0 8px 8px;
 }
 .cloud_preview_panel {
     width: 100%;
 }
 .cloud_preview_panel_item {
     width: 100%;
+}
+.cloud_preview_tabsbar_item_close_btn.cloud_preview_tabsbar_item_close_btn {
+    padding: 0;
+    border:none;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 8px 0 0;
+}
+.cloud_preview_tabsbar_item_close_btn:hover {
+    background-color: #00000055;
 }
