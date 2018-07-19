@@ -84,7 +84,9 @@ class App extends Component {
         this.updateHash();
       });
     } else {
-      // File already open... Select concerned tab ?
+      this.setState(prevState => ({
+        preview: {...prevState.preview, selectedFile: prevState.preview.files.indexOf(prevState.preview.files.filter((e) => e.url === filePath)[0])}
+      }));
     }
   }
 
