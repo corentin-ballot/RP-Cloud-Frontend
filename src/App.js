@@ -72,16 +72,19 @@ class App extends Component {
   initPreviewItems() {
     var encoded_arr = window.location.hash === "" ? "[]" : window.location.hash;
     var decoded_arr = decodeURIComponent(encoded_arr).replace('#','');
-    var arr = JSON.parse(decoded_arr).map((e, i, a) => {return {url: e, name: e.split('/')[e.split('/').length -1], isLoaded: false }});
-    this.setState({preview: {files:arr, selectedFile: 0}});
+    var arr = JSON.parse(decoded_arr).map((e, i, a) => {return {url: e, name: e.split('/')[e.split('/').length -1]}});
+    this.setState({preview: {files:arr, selectedFile: 0}}, () => {
+      this.loadFilesContent();
+    });
   }
 
   addPreviewItem = (filePath) => {
     if(this.state.preview.files.filter((e) => e.url === filePath).length <= 0) {
       this.setState(prevState => ({
-        preview: {...prevState.preview, files:[...prevState.preview.files, {url: filePath, name: filePath.split('/')[filePath.split('/').length -1], isLoaded: false}], selectedFile: this.state.preview.files.length}
+        preview: {...prevState.preview, files:[...prevState.preview.files, {url: filePath, name: filePath.split('/')[filePath.split('/').length -1]}], selectedFile: this.state.preview.files.length}
       }), () => {
         this.updateHash();
+        this.loadFilesContent();
       });
     } else {
       this.setState(prevState => ({
@@ -95,6 +98,34 @@ class App extends Component {
       preview: {...prevState.preview, files:prevState.preview.files.filter((e) => e.url !== filePath), selectedFile: prevState.preview.selectedFile < prevState.preview.files.length -1 ? prevState.preview.selectedFile:prevState.preview.files.length-2 },
     }), () => {
       this.updateHash();
+    });
+  }
+
+  loadFilesContent = () => {
+    this.state.preview.files.forEach((e,i,a) => {
+      if(typeof e.content === 'undefined' && typeof e.isLoaded === 'undefined') {
+        e.isLoaded = false;
+        this.setState({});
+
+        fetch("/api/cloud/modal", {method: 'POST', body: { "file": e.url }})
+        .then(function(res){
+          return res.text();
+        })
+        .then(
+          (html) => {
+            e.isLoaded = true;
+            e.content = html;
+            this.setState({});
+          },
+          (error) => {
+            e.isLoaded = true;
+            e.content = error;
+            this.setState({});
+          }
+        )
+      } else {
+        // content is loaded or loading, nothing to do.
+      }
     });
   }
 

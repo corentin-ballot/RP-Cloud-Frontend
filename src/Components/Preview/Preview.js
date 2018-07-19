@@ -34,7 +34,7 @@ class Preview extends Component {
 
                 <div className="cloud_preview_panel">
                     {this.props.preview.files.map((item, index) => (
-                        <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.preview.selectedFile}>{item.isLoaded ? item.content : item.name + " content pending..."}</div>
+                        <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.preview.selectedFile} dangerouslySetInnerHTML={{__html: item.isLoaded ? item.content : 'Loading content, please wait...'}}></div>
                     ))}
                 </div>
             </div>
