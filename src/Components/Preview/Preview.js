@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import './Preview.css';
 
 class Preview extends Component {
-    state = {
-        activePanel: 0,
-    }
-
     handleTabClick = (file, index) => {
         file.content = "SUPER CONTENT !";
         file.isLoaded = true;
@@ -27,8 +23,6 @@ class Preview extends Component {
     }
 
     render() {
-        const { activePanel} = this.state
-
         return (
             <div className="cloud_preview">
                 <div className="cloud_preview_tabsbar" role="tablist">
