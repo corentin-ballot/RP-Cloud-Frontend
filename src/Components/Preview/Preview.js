@@ -4,8 +4,6 @@ import './Preview.css';
 
 class Preview extends Component {
     handleTabClick = (file, index) => {
-        file.content = "SUPER CONTENT !";
-        file.isLoaded = true;
         this.props.preview.selectedFile = index;
         this.setState({});
     }
