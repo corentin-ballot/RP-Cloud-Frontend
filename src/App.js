@@ -81,7 +81,7 @@ class App extends Component {
       this.setState(prevState => ({
         preview: {...prevState.preview, files:[...prevState.preview.files, {url: filePath, name: filePath.split('/')[filePath.split('/').length -1], isLoaded: false}], selectedFile: this.state.preview.files.length}
       }), () => {
-        window.location.hash = encodeURIComponent(JSON.stringify(this.state.preview.files.map((e) => {return e.url})));
+        this.updateHash();
       });
     } else {
       // File already open... Select concerned tab ?
@@ -92,8 +92,12 @@ class App extends Component {
     this.setState(prevState => ({
       preview: {...prevState.preview, files:prevState.preview.files.filter((e) => e.url !== filePath), selectedFile: prevState.preview.selectedFile < prevState.preview.files.length -1 ? prevState.preview.selectedFile:prevState.preview.files.length-2 },
     }), () => {
-      window.location.hash = encodeURIComponent(JSON.stringify(this.state.preview.files.map((e) => {return e.url})));
+      this.updateHash();
     });
+  }
+
+  updateHash = () => {
+    window.location.hash = typeof this.state.preview.files !== 'undefined' && this.state.preview.files.length > 0 ? encodeURIComponent(JSON.stringify(this.state.preview.files.map((e) => {return e.url}))) : "";
   }
 
   componentWillMount() {
