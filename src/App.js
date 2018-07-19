@@ -31,13 +31,13 @@ class App extends Component {
       case "/Documents":
       this.setState({
         isLoaded: true,
-        files: [{name:"Test","url":"/Documents/Test",type:"dir",last_modif:"12/11/2017 15:33"},{name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"},],
+        files: [{name:"Test","url":"/Documents/Test",type:"dir",last_modif:"12/11/2017 15:33"},{name:"speedshare",type:"file",url:"/Documents/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"},],
       });
       break;
       default:
       this.setState({
         isLoaded: true,
-        files: [{name:"Root","url":"",type:"dir",last_modif:"00/00/0000 00:00"},],
+        files: [{name:"Root","url":"",type:"dir",last_modif:"00/00/0000 00:00"},{name:"test.md",type:"file",url:"/Documents/Test/test.md",size:"245 o",last_modif:"19/12/2028 18:51"},],
       });
       break;
     }
