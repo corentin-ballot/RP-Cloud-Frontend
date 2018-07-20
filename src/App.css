@@ -31,4 +31,6 @@
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
+  
+  background-color: #f6f8fa;
 }
