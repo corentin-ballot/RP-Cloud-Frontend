@@ -21,37 +21,15 @@ class App extends Component {
   }
 
   updateFileList(path) {
-    switch(path){
-      case "/":case "":
-      this.setState({
-        isLoaded: true,
-        files: [{name:".","url":"/.",type:"dir",last_modif:"14/12/2017 20:15"},{name:"..","url":"/..",type:"dir",last_modif:"23/05/2018 19:08"},{name:"Documents","url":"/Documents",type:"dir",last_modif:"12/11/2017 15:33"},{name:"markdown_cheatsheet.md",type:"file",url:"/markdown_cheatsheet.md",size:"2,82 Ko",last_modif:"05/06/2018 19:02"},{name:"notes.md",type:"file",url:"/notes.md",size:"2,85 Ko",last_modif:"20/12/2017 8:53"},{name:"speedshare",type:"file",url:"/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"}],
-      });
-      break;
-      case "/Documents":
-      this.setState({
-        isLoaded: true,
-        files: [{name:"Test","url":"/Documents/Test",type:"dir",last_modif:"12/11/2017 15:33"},{name:"speedshare",type:"file",url:"/Documents/speedshare",size:"245 o",last_modif:"26/09/2017 8:51"},],
-      });
-      break;
-      default:
-      this.setState({
-        isLoaded: true,
-        files: [{name:"Root","url":"",type:"dir",last_modif:"00/00/0000 00:00"},{name:"test.md",type:"file",url:"/Documents/Test/test.md",size:"245 o",last_modif:"19/12/2028 18:51"},],
-      });
-      break;
-    }
-
-    /*/ Should work in prod
     this.setState({isLoaded: false});
 
-    fetch("/api/cloud/updatepath", {method: 'POST', body: { "path": path }})
+    fetch("http://localhost/web/app.php/api/cloud/navigate?path=" + path, {method: 'GET'})
     .then(function(res){ return res.json(); })
     .then(
       (json) => {
         this.setState({
           isLoaded: true,
-          files : json
+          files : json.dirs.map((e,i,a) => {e.type='dir'; return e;}).concat(json.files)
         });
       },
       (error) => {
@@ -61,7 +39,7 @@ class App extends Component {
         });
       }
     )
-    /*/
+    //
   }
 
   navigateTo(path) {
@@ -107,14 +85,14 @@ class App extends Component {
         e.isLoaded = false;
         this.setState({});
 
-        fetch("/api/cloud/modal", {method: 'POST', body: { "file": e.url }})
+        fetch("http://localhost/web/app.php/api/cloud/filecontent?fileurl=" + e.url, {method: 'GET'})
         .then(function(res){
-          return res.text();
+          return res.json();
         })
         .then(
-          (html) => {
+          (json) => {
             e.isLoaded = true;
-            e.content = html;
+            e.content = json.content;
             this.setState({});
           },
           (error) => {
