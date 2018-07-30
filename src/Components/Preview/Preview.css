@@ -45,6 +45,7 @@
     margin:0;
     padding: 4px;
     box-sizing: border-box;
+    text-align: left;
 }
 .cloud_preview_tabsbar_item_close_btn.cloud_preview_tabsbar_item_close_btn {
     padding: 0;
