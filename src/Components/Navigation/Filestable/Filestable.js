@@ -20,9 +20,23 @@ class Filestable extends Component {
         this.setState({})
     }
 
-    handleSubmitEditNameClick = (file) => {
-        file.edit_name = false;
-        this.setState({})
+    handleSubmitEditNameClick = (file, newurl) => {
+        fetch("http://localhost/web/app.php/api/cloud/renamefile?fileurl=" + file.url + "&newurl=" + newurl, {method: 'GET'})
+        .then(function(res){
+          return res.json();
+        })
+        .then(
+          (json) => {
+            file.edit_name = false;
+            this.setState({});
+            // TODO: update file table
+          },
+          (error) => {
+            file.edit_name = false;
+            this.setState({});
+            // TODO: display error
+          }
+        )
     }
 
     handleSelectClick = (file) => {
