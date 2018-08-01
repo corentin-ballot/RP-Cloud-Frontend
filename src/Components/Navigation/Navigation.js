@@ -54,6 +54,23 @@ class Navigation extends Component {
             console.log(json);
         })
     }
+
+    handleDeleteSelectedFilesClick = () => {
+        const selected = this.props.files.filter((e) => {
+            return e.is_selected;
+        }).map((e) => {
+            return e.url;
+        });
+
+        fetch("http://localhost/web/app.php/api/cloud/delete?files=" + JSON.stringify(selected))
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(json){
+            console.log(json);
+        })
+    }
+
     render() {
         const { displayHiddenFiles, displayNewFile, displayNewDir } = this.state
         return (
