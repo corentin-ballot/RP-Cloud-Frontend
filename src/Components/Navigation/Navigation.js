@@ -38,6 +38,22 @@ class Navigation extends Component {
         this.setState({displayNewDir: false});
     }
 
+    handleZipSelectedFilesClick = () => {
+        const selected = this.props.files.filter((e) => {
+            return e.is_selected;
+        }).map((e) => {
+            return e.url;
+        });
+        const path = "/";
+
+        fetch("http://localhost/web/app.php/api/cloud/zip?files=" + JSON.stringify(selected) + "&path=" + path)
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(json){
+            console.log(json);
+        })
+    }
     render() {
         const { displayHiddenFiles, displayNewFile, displayNewDir } = this.state
         return (
