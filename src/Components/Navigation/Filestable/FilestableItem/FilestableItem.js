@@ -14,7 +14,7 @@ class FilestableItem extends Component {
                     <input name="newfile" className="filestable_content_item_name_rename" id={"rename-" + this.props.file.url} type="text" defaultValue={this.props.file.url} ref={el => this.newurl=el} />
                 </form>)}
                 <div className="filestable_content_item_icons">
-                    {this.props.file.type !== "dir" && <a className="filestable_content_item_icons_item"><i className="material-icons">file_download</i></a> }
+                    {this.props.file.type !== "dir" && <a className="filestable_content_item_icons_item" /*onClick={() => this.props.onClickDownload(this.props.file)}*/ href={"http://localhost/web/app.php/api/cloud/downloadfile?fileurl=" + encodeURI(this.props.file.url)}><i className="material-icons">file_download</i></a> }
                     {(this.props.file.edit_name !== true) && <button className="filestable_content_item_icons_item" onClick={() => this.props.onEditName(this.props.file)}><i className="material-icons">mode_edit</i></button>}
                     {(this.props.file.edit_name === true ) && <button className="filestable_content_item_icons_item" onClick={() => this.props.onEditNameSubmit(this.props.file, this.newurl.value)}><i className="material-icons">done</i></button>}
                     {(this.props.file.edit_name === true ) && <button className="filestable_content_item_icons_item" onClick={() => this.props.onEditNameCancel(this.props.file)}><i className="material-icons">clear</i></button>}
