@@ -69,7 +69,7 @@ class Filestable extends Component {
                     {this.props.displayNewFile && <FilestableNewFileItem onClickCancel={this.props.onClickCancelNewFile} />}
                     {this.props.displayNewDir && <FilestableNewDirItem onClickCancel={this.props.onClickCancelNewDir} />}
                     {this.props.files.map((item) => (
-                        (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} baseroute={this.props.baseroute} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick} onClickFile={this.props.onClickFile} />
+                        (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} baseroute={this.props.baseroute} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick} onClickFile={this.props.onClickFile} onClickDownload={this.handleDownloadFileClick} />
                     ))}
                 </ol>
             </div>

@@ -6,7 +6,7 @@ import Preview from './Components/Preview/Preview';
 
 class App extends Component {
   state = {
-    baseroute: "/cloud",
+    baseroute: this.props.baseroute,
     breadcrumb: [],
     files: [],
     preview: {},
@@ -15,7 +15,8 @@ class App extends Component {
   updateBreadcrumb(path) {
     this.setState({
       breadcrumb: path.split('/').map((item, index, array) => {
-        return {route:array.filter((x, y) => y <= index).join('/'), folderName: item}
+        if(index === 0) return {route:'/', folderName: item}
+        else return {route:array.filter((x, y) => y <= index).join('/'), folderName: item}
       })
     });
   }
@@ -92,7 +93,7 @@ class App extends Component {
         .then(
           (json) => {
             e.isLoaded = true;
-            e.content = json.content;
+            e.content = json;
             this.setState({});
           },
           (error) => {
