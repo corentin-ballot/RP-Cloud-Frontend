@@ -1,0 +1,403 @@
+/* markdown preview part (from GitHub) */
+.modal-markdown-textpreview {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+.modal-markdown-textpreview::before {
+    content: "";
+    display: table;
+}
+.modal-markdown-textpreview::after {
+    clear: both;
+    content: "";
+    display: table;
+}
+.modal-markdown-textpreview > *:first-child {
+    margin-top: 0 !important;
+}
+.modal-markdown-textpreview > *:last-child {
+    margin-bottom: 0 !important;
+}
+.modal-markdown-textpreview a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+.modal-markdown-textpreview .absent {
+    color: #cb2431;
+}
+.modal-markdown-textpreview .anchor {
+    float: left;
+    line-height: 1;
+    margin-left: -20px;
+    padding-right: 4px;
+}
+.modal-markdown-textpreview .anchor:focus {
+    outline: medium none;
+}
+.modal-markdown-textpreview p, .modal-markdown-textpreview blockquote, .modal-markdown-textpreview ul, .modal-markdown-textpreview ol, .modal-markdown-textpreview dl, .modal-markdown-textpreview table, .modal-markdown-textpreview pre {
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+.modal-markdown-textpreview hr {
+    background-color: #e1e4e8;
+    border: 0 none;
+    height: 0.25em;
+    margin: 24px 0;
+    padding: 0;
+}
+.modal-markdown-textpreview blockquote {
+    border-left: 0.25em solid #dfe2e5;
+    padding: 0 1em;
+}
+.modal-markdown-textpreview blockquote > *:first-child {
+    margin-top: 0;
+}
+.modal-markdown-textpreview blockquote > *:last-child {
+    margin-bottom: 0;
+    vertical-align: top;
+    color: #6a737d;
+}
+.modal-markdown-textpreview blockquote::before {
+    position: absolute;
+    left: -50px;
+    top: -20px;
+    content: '“';
+    font-size: 70px;
+    font-family: Trebuchet MS, sans-serif;
+}
+.modal-markdown-textpreview blockquote::after {
+    content: ' ';
+    margin-left: 0;
+    font-family: Trebuchet MS, sans-serif;
+    vertical-align: top;
+}
+.modal-markdown-textpreview kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #fafbfc;
+    border-color: #c6cbd1 #c6cbd1 #959da5;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 -1px 0 #959da5 inset;
+    color: #444d56;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 10px;
+    padding: 3px 5px;
+    vertical-align: middle;
+}
+.modal-markdown-textpreview {
+    counter-reset: h1counter;
+}
+.modal-markdown-textpreview h1 {
+    counter-reset: h2counter;
+}
+.modal-markdown-textpreview h1::before {
+    content: counter(h1counter,decimal) ".\0000a0\0000a0";
+    counter-increment: h1counter;
+}
+.modal-markdown-textpreview h2 {
+    counter-reset: h3counter;
+}
+.modal-markdown-textpreview h2::before {
+    content: counter(h1counter,decimal) "." counter(h2counter,decimal) ".\0000a0\0000a0";
+    counter-increment: h2counter;
+}
+.modal-markdown-textpreview h3 {
+    counter-reset: h4counter;
+}
+.modal-markdown-textpreview h3::before {
+    content: counter(h1counter,decimal) "." counter(h2counter,decimal) "." counter(h3counter,decimal) ".\0000a0\0000a0";
+    counter-increment: h3counter;
+}
+.modal-markdown-textpreview h4 {
+    counter-reset: h5counter;
+}
+.modal-markdown-textpreview h4::before {
+    content: counter(h1counter,decimal) "." counter(h2counter,decimal) "." counter(h3counter,decimal) "." counter(h4counter,decimal) ".\0000a0\0000a0";
+    counter-increment: h4counter;
+}
+.modal-markdown-textpreview h5 {
+    counter-reset: h6counter;
+}
+.modal-markdown-textpreview h5::before {
+    content: counter(h1counter,decimal) "." counter(h2counter,decimal) "." counter(h3counter,decimal) "." counter(h4counter,decimal) "." counter(h5counter,decimal) ".\0000a0\0000a0";
+    counter-increment: h5counter;
+}
+.modal-markdown-textpreview h6::before {
+    content: counter(h1counter,decimal) "." counter(h2counter,decimal) "." counter(h3counter,decimal) "." counter(h4counter,decimal) "." counter(h5counter,decimal) "." counter(h6counter,decimal) ".\0000a0\0000a0";
+    counter-increment: h6counter;
+}
+.modal-markdown-textpreview h1, .modal-markdown-textpreview h2, .modal-markdown-textpreview h3, .modal-markdown-textpreview h4, .modal-markdown-textpreview h5, .modal-markdown-textpreview h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    margin-top: 24px;
+}
+.modal-markdown-textpreview h1 .octicon-link, .modal-markdown-textpreview h2 .octicon-link, .modal-markdown-textpreview h3 .octicon-link, .modal-markdown-textpreview h4 .octicon-link, .modal-markdown-textpreview h5 .octicon-link, .modal-markdown-textpreview h6 .octicon-link {
+    color: #1b1f23;
+    vertical-align: middle;
+    visibility: hidden;
+}
+.modal-markdown-textpreview h1:hover .anchor, .modal-markdown-textpreview h2:hover .anchor, .modal-markdown-textpreview h3:hover .anchor, .modal-markdown-textpreview h4:hover .anchor, .modal-markdown-textpreview h5:hover .anchor, .modal-markdown-textpreview h6:hover .anchor {
+    text-decoration: none;
+}
+.modal-markdown-textpreview h1:hover .anchor .octicon-link, .modal-markdown-textpreview h2:hover .anchor .octicon-link, .modal-markdown-textpreview h3:hover .anchor .octicon-link, .modal-markdown-textpreview h4:hover .anchor .octicon-link, .modal-markdown-textpreview h5:hover .anchor .octicon-link, .modal-markdown-textpreview h6:hover .anchor .octicon-link {
+    visibility: visible;
+}
+.modal-markdown-textpreview h1 tt, .modal-markdown-textpreview h1 code, .modal-markdown-textpreview h2 tt, .modal-markdown-textpreview h2 code, .modal-markdown-textpreview h3 tt, .modal-markdown-textpreview h3 code, .modal-markdown-textpreview h4 tt, .modal-markdown-textpreview h4 code, .modal-markdown-textpreview h5 tt, .modal-markdown-textpreview h5 code, .modal-markdown-textpreview h6 tt, .modal-markdown-textpreview h6 code {
+    font-size: inherit;
+}
+.modal-markdown-textpreview h1 {
+    border-bottom: 1px solid #eaecef;
+    font-size: 2em;
+    padding-bottom: 0.3em;
+}
+.modal-markdown-textpreview h2 {
+    border-bottom: 1px solid #eaecef;
+    font-size: 1.5em;
+    padding-bottom: 0.3em;
+}
+.modal-markdown-textpreview h3 {
+    font-size: 1.25em;
+}
+.modal-markdown-textpreview h4 {
+    font-size: 1em;
+}
+.modal-markdown-textpreview h5 {
+    font-size: 0.875em;
+}
+.modal-markdown-textpreview h6 {
+    color: #6a737d;
+    font-size: 0.85em;
+}
+.modal-markdown-textpreview ul, .modal-markdown-textpreview ol {
+    padding-left: 2em;
+}
+.modal-markdown-textpreview ul.no-list, .modal-markdown-textpreview ol.no-list {
+    list-style-type: none;
+    padding: 0;
+}
+.modal-markdown-textpreview ul ul, .modal-markdown-textpreview ul ol, .modal-markdown-textpreview ol ol, .modal-markdown-textpreview ol ul {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.modal-markdown-textpreview li > p {
+    margin-top: 16px;
+}
+.modal-markdown-textpreview li + li {
+    margin-top: 0.25em;
+}
+.modal-markdown-textpreview dl {
+    padding: 0;
+}
+.modal-markdown-textpreview dl dt {
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 16px;
+    padding: 0;
+}
+.modal-markdown-textpreview dl dd {
+    margin-bottom: 16px;
+    padding: 0 16px;
+}
+.modal-markdown-textpreview table {
+    display: block;
+    overflow: auto;
+    width: 100%;
+}
+.modal-markdown-textpreview table th {
+    font-weight: 600;
+}
+.modal-markdown-textpreview table th, .modal-markdown-textpreview table td {
+    border: 1px solid #dfe2e5;
+    padding: 6px 13px;
+}
+.modal-markdown-textpreview table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+.modal-markdown-textpreview table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+.modal-markdown-textpreview table img {
+    background-color: transparent;
+}
+.modal-markdown-textpreview img {
+    background-color: #fff;
+    box-sizing: content-box;
+    max-width: 100%;
+}
+.modal-markdown-textpreview img[align="right"] {
+    padding-left: 20px;
+}
+.modal-markdown-textpreview img[align="left"] {
+    padding-right: 20px;
+}
+.modal-markdown-textpreview .emoji {
+    background-color: transparent;
+    max-width: none;
+    vertical-align: text-top;
+}
+.modal-markdown-textpreview span.frame {
+    display: block;
+    overflow: hidden;
+}
+.modal-markdown-textpreview span.frame > span {
+    border: 1px solid #dfe2e5;
+    display: block;
+    float: left;
+    margin: 13px 0 0;
+    overflow: hidden;
+    padding: 7px;
+    width: auto;
+}
+.modal-markdown-textpreview span.frame span img {
+    display: block;
+    float: left;
+}
+.modal-markdown-textpreview span.frame span span {
+    clear: both;
+    color: #24292e;
+    display: block;
+    padding: 5px 0 0;
+}
+.modal-markdown-textpreview span.align-center {
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+.modal-markdown-textpreview span.align-center > span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: center;
+}
+.modal-markdown-textpreview span.align-center span img {
+    margin: 0 auto;
+    text-align: center;
+}
+.modal-markdown-textpreview span.align-right {
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+.modal-markdown-textpreview span.align-right > span {
+    display: block;
+    margin: 13px 0 0;
+    overflow: hidden;
+    text-align: right;
+}
+.modal-markdown-textpreview span.align-right span img {
+    margin: 0;
+    text-align: right;
+}
+.modal-markdown-textpreview span.float-left {
+    display: block;
+    float: left;
+    margin-right: 13px;
+    overflow: hidden;
+}
+.modal-markdown-textpreview span.float-left span {
+    margin: 13px 0 0;
+}
+.modal-markdown-textpreview span.float-right {
+    display: block;
+    float: right;
+    margin-left: 13px;
+    overflow: hidden;
+}
+.modal-markdown-textpreview span.float-right > span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: right;
+}
+.modal-markdown-textpreview code, .modal-markdown-textpreview tt {
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    padding: 0.2em 0;
+}
+.modal-markdown-textpreview code::before, .modal-markdown-textpreview code::after, .modal-markdown-textpreview tt::before, .modal-markdown-textpreview tt::after {
+    content: " ";
+    letter-spacing: -0.2em;
+}
+.modal-markdown-textpreview code br, .modal-markdown-textpreview tt br {
+    display: none;
+}
+.modal-markdown-textpreview del code {
+    text-decoration: inherit;
+}
+.modal-markdown-textpreview pre {
+    overflow-wrap: normal;
+    border-left: 3px solid #37474f;
+    border-radius: 3px;
+}
+.modal-markdown-textpreview pre > code {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    word-break: normal;
+}
+.modal-markdown-textpreview .highlight {
+    margin-bottom: 16px;
+}
+.modal-markdown-textpreview .highlight pre {
+    margin-bottom: 0;
+    word-break: normal;
+}
+.modal-markdown-textpreview .highlight pre, .modal-markdown-textpreview pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+}
+.modal-markdown-textpreview pre code, .modal-markdown-textpreview pre tt {
+    background-color: transparent;
+    border: 0 none;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    overflow: visible;
+    overflow-wrap: normal;
+    padding: 0;
+}
+.modal-markdown-textpreview pre code::before, .modal-markdown-textpreview pre code::after, .modal-markdown-textpreview pre tt::before, .modal-markdown-textpreview pre tt::after {
+    content: normal;
+}
+.modal-markdown-textpreview .csv-data td, .modal-markdown-textpreview .csv-data th {
+    font-size: 12px;
+    line-height: 1;
+    overflow: hidden;
+    padding: 5px;
+    text-align: left;
+    white-space: nowrap;
+}
+.modal-markdown-textpreview .csv-data .blob-num {
+    background: #fff none repeat scroll 0 0;
+    border: 0 none;
+    padding: 10px 8px 9px;
+    text-align: right;
+}
+.modal-markdown-textpreview .csv-data tr {
+    border-top: 0 none;
+}
+.modal-markdown-textpreview .csv-data th {
+    background: #f6f8fa none repeat scroll 0 0;
+    border-top: 0 none;
+    font-weight: 600;
+}
