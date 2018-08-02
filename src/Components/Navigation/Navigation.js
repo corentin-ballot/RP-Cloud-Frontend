@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone'
 
 import Breadcrumb from './Breadcrumb/Breadcrumb';
 import Filestable from './Filestable/Filestable';
@@ -71,12 +72,31 @@ class Navigation extends Component {
         })
     }
 
+    onDrop(files) {
+        files.forEach(file => {
+            let data = new FormData();
+            data.append('path', window.location.pathname.replace(this.props.baseroute, ''));
+            data.append('file', file);
+
+            fetch('http://localhost/web/app.php/api/cloud/uploadfile', { // Your POST endpoint
+                method: 'POST',
+                body: data
+            }).then(
+                // TODO : Reload file list
+            );
+        });
+
+    }
+
     render() {
-        const { displayHiddenFiles, displayNewFile, displayNewDir } = this.state
+        const { displayHiddenFiles, displayNewFile, displayNewDir } = this.state;
         return (
             <div className="cloud_navigation">
-                <Breadcrumb breadcrumb={this.props.breadcrumb} baseroute={this.props.baseroute} onClickToggleHiddenFiles={this.handleToggleHiddenFilesClick} onClickNewFile={this.handleNewFileClick} onClickNewDir={this.handleNewDirClick} onClickZipFiles={this.handleZipSelectedFilesClick} onClickDeleteFiles={this.handleDeleteSelectedFilesClick} />
-                <Filestable files={this.props.files} baseroute={this.props.baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} onClickCancelNewDir={this.handleCancelNewDirClick} onClickCancelNewFile={this.handleCancelNewFileClick} onClickFile={this.props.onPreviewFile} />
+                <Breadcrumb breadcrumb={this.props.breadcrumb} baseroute={this.props.baseroute} DropdownRef={this.dropzoneRef} onClickToggleHiddenFiles={this.handleToggleHiddenFilesClick} onClickNewFile={this.handleNewFileClick} onClickNewDir={this.handleNewDirClick} onClickZipFiles={this.handleZipSelectedFilesClick} onClickDeleteFiles={this.handleDeleteSelectedFilesClick} />
+
+                <Dropzone className="cloud_navigation_dropzone" onDrop={this.onDrop.bind(this)} disableClick ref={(node) => { this.dropzoneRef = node; }}>
+                    <Filestable files={this.props.files} baseroute={this.props.baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} onClickCancelNewDir={this.handleCancelNewDirClick} onClickCancelNewFile={this.handleCancelNewFileClick} onClickFile={this.props.onPreviewFile} />
+                </Dropzone>
             </div>
         );
     }

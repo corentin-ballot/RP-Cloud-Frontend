@@ -13,6 +13,10 @@ class Breadcrumb extends Component {
         this.setState((prevState) => {return {dropdown_open: !prevState.dropdown_open}})
     }
 
+    handleDownloadfilesClick = () => {
+        this.props.DropdownRef.open();
+    }
+
     render() {
         const { dropdown_open } = this.state
         return (
@@ -26,6 +30,7 @@ class Breadcrumb extends Component {
                                 <ul className="cloud_navigation_breadcrumb_item_dropdown_menu" aria-expanded={dropdown_open}>
                                     <li><button onClick={this.props.onClickZipFiles}>Zip files</button></li>
                                     <li><button onClick={this.props.onClickDeleteFiles}>Delete files</button></li>
+                                    <li><button onClick={this.handleDownloadfilesClick}>Upload files</button></li>
                                     <li><button onClick={this.props.onClickNewFile}>Add new file</button></li>
                                     <li><button onClick={this.props.onClickNewDir}>Add new folder</button></li>
                                     <li><button onClick={this.props.onClickToggleHiddenFiles}>Toggle hidden files</button></li>
