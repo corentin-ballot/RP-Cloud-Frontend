@@ -81,7 +81,7 @@ class App extends Component {
 
   loadFilesContent = () => {
     this.state.preview.files.forEach((e,i,a) => {
-      if(typeof e.content === 'undefined' && typeof e.isLoaded === 'undefined') {
+      if(typeof e.preview === 'undefined' && typeof e.isLoaded === 'undefined') {
         e.isLoaded = false;
         this.setState({});
 
@@ -92,12 +92,12 @@ class App extends Component {
         .then(
           (json) => {
             e.isLoaded = true;
-            e.content = json;
+            e.preview = json;
             this.setState({});
           },
           (error) => {
             e.isLoaded = true;
-            e.content = error;
+            e.preview = error;
             this.setState({});
           }
         )
