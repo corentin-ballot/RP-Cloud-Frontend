@@ -62,6 +62,18 @@ class Filestable extends Component {
         });
         this.props.onClickCancelNewDir();
     }
+
+    handleSubmitNewFileClick = (filename) => {
+        window.location.pathname.replace(this.props.baseroute, '')
+        fetch('http://localhost/web/app.php/api/cloud/newfile', { // Your POST endpoint
+            method: 'POST',
+            body: JSON.stringify({filename: filename, path: window.location.pathname.replace(this.props.baseroute, '')})
+        }).then(() => {
+            // TODO : Reload file list
+        });
+        this.props.onClickCancelNewFile();
+    }
+
     render() {
         const { allSelected } = this.state
         return (
@@ -75,6 +87,7 @@ class Filestable extends Component {
                     <div className="filestable_header_size">Size</div>
                 </header>
                 <ol className="filestable_content">
+                    {this.props.displayNewFile && <FilestableNewFileItem onClickSubmit={this.handleSubmitNewFileClick} onClickCancel={this.props.onClickCancelNewFile} />}
                     {this.props.displayNewDir && <FilestableNewDirItem onClickSubmit={this.handleSubmitNewDirClick} onClickCancel={this.props.onClickCancelNewDir} />}
                     {this.props.files.map((item) => (
                         (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} baseroute={this.props.baseroute} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick} onClickFile={this.props.onClickFile} onClickDownload={this.handleDownloadFileClick} />
