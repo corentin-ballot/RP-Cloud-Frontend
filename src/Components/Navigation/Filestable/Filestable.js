@@ -4,6 +4,7 @@ import './Filestable.css';
 import FilestableItem from './FilestableItem/FilestableItem.js';
 import FilestableNewFileItem from './FilestableNewFileItem/FilestableNewFileItem.js';
 import FilestableNewDirItem from './FilestableNewDirItem/FilestableNewDirItem.js';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.js';
 
 class Filestable extends Component {
     state = {
@@ -78,7 +79,6 @@ class Filestable extends Component {
         const { allSelected } = this.state
         return (
             <div className="filestable">
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <header className="filestable_header">
                     <div className="filestable_header_select" onClick={() => this.handleSelectAllClick(this.props.files)}><i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i></div>
                     <div className="filestable_header_name">Name</div>
@@ -87,9 +87,10 @@ class Filestable extends Component {
                     <div className="filestable_header_size">Size</div>
                 </header>
                 <ol className="filestable_content">
-                    {this.props.displayNewFile && <FilestableNewFileItem onClickSubmit={this.handleSubmitNewFileClick} onClickCancel={this.props.onClickCancelNewFile} />}
-                    {this.props.displayNewDir && <FilestableNewDirItem onClickSubmit={this.handleSubmitNewDirClick} onClickCancel={this.props.onClickCancelNewDir} />}
-                    {this.props.files.map((item) => (
+                    {!this.props.contentLoaded && <li className="filestable_content_item"><LoadingSpinner /></li>}
+                    {this.props.contentLoaded && this.props.displayNewFile && <FilestableNewFileItem onClickSubmit={this.handleSubmitNewFileClick} onClickCancel={this.props.onClickCancelNewFile} />}
+                    {this.props.contentLoaded && this.props.displayNewDir && <FilestableNewDirItem onClickSubmit={this.handleSubmitNewDirClick} onClickCancel={this.props.onClickCancelNewDir} />}
+                    {this.props.contentLoaded && this.props.files.map((item) => (
                         (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FilestableItem file={item} key={item.url} baseroute={this.props.baseroute} onSelect={this.handleSelectClick} onEditName={this.handleEditNameClick} onEditNameSubmit={this.handleSubmitEditNameClick} onEditNameCancel={this.handleCancelEditNameClick} onClickFile={this.props.onClickFile} onClickDownload={this.handleDownloadFileClick} />
                     ))}
                 </ol>

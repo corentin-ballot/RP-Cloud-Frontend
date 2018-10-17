@@ -95,7 +95,7 @@ class Navigation extends Component {
                 <Breadcrumb breadcrumb={this.props.breadcrumb} baseroute={this.props.baseroute} DropdownRef={this.dropzoneRef} onClickToggleHiddenFiles={this.handleToggleHiddenFilesClick} onClickNewFile={this.handleNewFileClick} onClickNewDir={this.handleNewDirClick} onClickZipFiles={this.handleZipSelectedFilesClick} onClickDeleteFiles={this.handleDeleteSelectedFilesClick} />
 
                 <Dropzone className="cloud_navigation_dropzone" onDrop={this.onDrop.bind(this)} disableClick ref={(node) => { this.dropzoneRef = node; }}>
-                    <Filestable files={this.props.files} baseroute={this.props.baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} onClickCancelNewDir={this.handleCancelNewDirClick} onClickCancelNewFile={this.handleCancelNewFileClick} onClickFile={this.props.onPreviewFile} />
+                    <Filestable files={this.props.files} baseroute={this.props.baseroute} displayHiddenFiles={displayHiddenFiles} displayNewFile={displayNewFile} displayNewDir={displayNewDir} onClickCancelNewDir={this.handleCancelNewDirClick} onClickCancelNewFile={this.handleCancelNewFileClick} onClickFile={this.props.onPreviewFile} contentLoaded={this.props.contentLoaded} />
                 </Dropzone>
             </div>
         );
