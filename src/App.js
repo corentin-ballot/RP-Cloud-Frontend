@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navigation from './Components/Navigation/Navigation';
 import Preview from './Components/Preview/Preview';
@@ -136,17 +135,10 @@ class App extends Component {
     const { files, breadcrumb, baseroute, preview } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">ReactApp</h1>
-        </header>
         <div className="cloud">
           <Navigation breadcrumb={breadcrumb} files={files} baseroute={baseroute} onPreviewFile={this.addPreviewItem} />
           <Preview preview={preview} onCloseTab={this.removePreviewItem} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
