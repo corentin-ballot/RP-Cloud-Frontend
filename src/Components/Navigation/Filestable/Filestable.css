@@ -50,6 +50,6 @@
 .filestable_content {
   padding: 0;
   margin: 0;
-  height: 230px; /* TODO: dynamic height using JS */
+  /*height: 230px;  TODO: dynamic height using JS */
   overflow-y: auto;
 }

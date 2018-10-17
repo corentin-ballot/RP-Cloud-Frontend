@@ -13,11 +13,14 @@ class Text extends Component {
         this.setState({});
     }
 
+    componentWillMount() {
+        this.props.addButton(this.props.file, "Save", this.handleSaveClick);
+    }
+
     render() {
         return (
             <div>
                 <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content=el} defaultValue={this.props.file.preview.content} onChange={this.handleValueChange}></textarea>
-                <button className="cloud_preview_panel_item_savebutton" onClick={this.handleSaveClick}>Save</button>
             </div>
         );
     }

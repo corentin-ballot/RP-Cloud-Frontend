@@ -25,6 +25,19 @@ class Preview extends Component {
         }
     }
 
+    addButton = (file, label, callback) => {
+        if(typeof file.preview === "undefined"){
+            file.preview.actions = [{label: label, click: callback}];
+        }else{
+            if(typeof file.preview.actions === "undefined"){
+                file.preview.actions = [{label: label, click: callback}];
+            }else{
+                file.preview.actions = [...file.preview.actions, {label: label, click: callback}];
+            }
+        }
+        this.setState({});
+    }
+
     render() {
         return (
             <div className="cloud_preview">
@@ -42,11 +55,16 @@ class Preview extends Component {
                         <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.preview.selectedFile} /*dangerouslySetInnerHTML={{__html: item.isLoaded ? item.content : 'Loading content, please wait...'}}*/>
                             {
                                 typeof item.preview !== "undefined" && (
-                                    (item.preview.type === "markdown" && <Markdown file={item} />)
-                                 || (item.preview.type === "image" && <Image url={item.preview.url} alt={item.name} />)
-                                 || (item.preview.type === "text" && <Text file={item} />)
-                                 || (item.preview.type === "html" && <HTML file={item} />)
+                                    (item.preview.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
+                                 || (item.preview.type === "image" && <Image url={item.preview.url} alt={item.name} addButton={this.addButton} />)
+                                 || (item.preview.type === "text" && <Text file={item} addButton={this.addButton} />)
+                                 || (item.preview.type === "html" && <HTML file={item} addButton={this.addButton} />)
                                 )
+                            }
+                            {
+                                typeof item.preview !== "undefined" && typeof item.preview.actions !== "undefined" && item.preview.actions.map((e, i, a) => (
+                                    <button className="cloud_preview_panel_item_action" onClick={e.click} key={e.label}>{e.label}</button>
+                                ))
                             }
                         </div>
                     ))}

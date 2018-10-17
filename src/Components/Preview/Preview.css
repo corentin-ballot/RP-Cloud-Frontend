@@ -60,3 +60,7 @@
 .cloud_preview_tabsbar_item_close_btn:hover {
     background-color: #00000055;
 }
+
+.cloud_preview_panel_item_action {
+    float: right;
+}
