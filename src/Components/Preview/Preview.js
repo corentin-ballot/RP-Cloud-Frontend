@@ -3,6 +3,7 @@ import Markdown from './Markdown/Markdown';
 import Image from './Image/Image';
 import Text from './Text/Text';
 import HTML from './HTML/HTML';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
 
 import './Preview.css';
 
@@ -53,6 +54,7 @@ class Preview extends Component {
                 <div className="cloud_preview_panel">
                     {this.props.preview.files.map((item, index) => (
                         <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.preview.selectedFile} /*dangerouslySetInnerHTML={{__html: item.isLoaded ? item.content : 'Loading content, please wait...'}}*/>
+                            {!item.isLoaded && <LoadingSpinner />}
                             {
                                 typeof item.preview !== "undefined" && (
                                     (item.preview.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
