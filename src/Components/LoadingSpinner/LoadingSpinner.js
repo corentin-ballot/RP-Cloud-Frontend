@@ -5,7 +5,7 @@ import './LoadingSpinner.css';
 class LoadingSpinner extends Component {
     render() {
         return (
-            <div class="lds-dual-ring"></div>
+            <div className="lds-dual-ring"></div>
         );
     }
 }
