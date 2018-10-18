@@ -43,6 +43,7 @@
 
 .cloud_navigation_breadcrumb_item_dropdown_menu[aria-expanded="true"] {
 	display: block;
+	z-index: 20;
 }
 
 .cloud_navigation_breadcrumb_item_dropdown_menu li button {

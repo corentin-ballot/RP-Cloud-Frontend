@@ -45,6 +45,8 @@
     margin:0;
     padding: 4px;
     box-sizing: border-box;
+    text-align: left;
+    position: relative;
 }
 .cloud_preview_tabsbar_item_close_btn.cloud_preview_tabsbar_item_close_btn {
     padding: 0;
@@ -57,4 +59,8 @@
 }
 .cloud_preview_tabsbar_item_close_btn:hover {
     background-color: #00000055;
+}
+
+.cloud_preview_panel_item_action {
+    float: right;
 }
