@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './Filestable.css';
 import FilestableItem from './FilestableItem/FilestableItem.js';
+import FilestableActionsButton from './FilestableActionsButton/FilestableActionsButton.js';
 import FilestableNewFileItem from './FilestableNewFileItem/FilestableNewFileItem.js';
 import FilestableNewDirItem from './FilestableNewDirItem/FilestableNewDirItem.js';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.js';
@@ -82,9 +83,7 @@ class Filestable extends Component {
                 <header className="filestable_header">
                     <div className="filestable_header_select" onClick={() => this.handleSelectAllClick(this.props.files)}><i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i></div>
                     <div className="filestable_header_name">Name</div>
-                    <div className="filestable_header_icons"></div>
-                    <div className="filestable_header_lastupdate">Last update</div>
-                    <div className="filestable_header_size">Size</div>
+                    <FilestableActionsButton />
                 </header>
                 <ol className="filestable_content">
                     {!this.props.contentLoaded && <li className="filestable_content_item"><LoadingSpinner /></li>}
