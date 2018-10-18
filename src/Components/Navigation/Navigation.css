@@ -7,4 +7,5 @@
 
 .cloud_navigation_dropzone {
     z-index: 0;
+    display: contents;
 }
