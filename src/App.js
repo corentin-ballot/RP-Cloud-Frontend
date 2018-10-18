@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navigation from './Components/Navigation/Navigation';
 import Preview from './Components/Preview/Preview';
+import { connect } from 'react-redux'
 
 class App extends Component {
   state = {
@@ -111,6 +112,7 @@ class App extends Component {
   }
 
   componentWillMount() {
+    const { dispatch } = this.props;
     this.unlisten = this.props.history.listen((location, action) => {
       console.log("Route change (" + action + "). New location : " + location.pathname + location.search + location.hash);
       switch (action) {
@@ -136,8 +138,7 @@ class App extends Component {
     return (
       <div className="App">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_purple.min.css" /> 
-        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
         <div className="cloud">
           <Navigation breadcrumb={breadcrumb} files={files} baseroute={baseroute} onPreviewFile={this.addPreviewItem} contentLoaded={isLoaded} />
           <Preview preview={preview} onCloseTab={this.removePreviewItem} />
@@ -147,4 +148,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App)
