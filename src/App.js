@@ -136,8 +136,6 @@ class App extends Component {
     return (
       <div className="App">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_purple.min.css" /> 
-        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <div className="cloud">
           <Navigation breadcrumb={breadcrumb} files={files} baseroute={baseroute} onPreviewFile={this.addPreviewItem} contentLoaded={isLoaded} />
           <Preview preview={preview} onCloseTab={this.removePreviewItem} />
