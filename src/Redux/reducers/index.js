@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import {fileList, files} from './files';
+import {fileList, previewFileList} from './files'
 
 export default combineReducers({
     fileList,
-    files
+    previewFileList
 });

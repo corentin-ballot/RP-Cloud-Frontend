@@ -5,11 +5,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './reducers'
+import store from './Redux/configureStore'
 
 const basePath = "/cloud";
-const store = createStore(rootReducer);
 
 ReactDOM.render(
 <Provider store={store}>

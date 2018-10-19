@@ -148,4 +148,10 @@ class App extends Component {
   }
 }
 
-export default connect()(App)
+const mapStateToProps = (state) => {
+  return {
+    favoritesFilm: state.favoritesFilm
+  }
+};
+
+export default connect(mapStateToProps)(App);
