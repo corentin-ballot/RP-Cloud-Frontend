@@ -1,5 +1,9 @@
 .cloud_preview {
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
 }
 .cloud_preview_tabsbar {
     display: flex;
@@ -15,6 +19,7 @@
     display: flex;
     align-items: center;
     width: 100%;
+    height: 100%;
 }
 .cloud_preview_tabsbar_item:hover {
     background-color: #00000033;
@@ -39,14 +44,18 @@
 }
 .cloud_preview_panel {
     width: 100%;
+    z-index: 0;
+    flex-grow: 10;
+    overflow: auto;
+    position: relative;
 }
 .cloud_preview_panel_item {
     width: 100%;
+    height: 100%;
     margin:0;
-    padding: 4px;
     box-sizing: border-box;
     text-align: left;
-    position: relative;
+    overflow: auto;
 }
 .cloud_preview_tabsbar_item_close_btn.cloud_preview_tabsbar_item_close_btn {
     padding: 0;
@@ -63,4 +72,14 @@
 
 .cloud_preview_panel_item_action {
     float: right;
+}
+
+.cloud_preview_panel_item_container {
+    height: 100%;
+}
+
+.cloud_preview_panel_item_actions_group {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }

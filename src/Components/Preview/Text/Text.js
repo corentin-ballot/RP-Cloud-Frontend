@@ -19,7 +19,7 @@ class Text extends Component {
 
     render() {
         return (
-            <div>
+            <div className="cloud_preview_panel_item_container">
                 <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content=el} defaultValue={this.props.file.preview.content} onChange={this.handleValueChange}></textarea>
             </div>
         );
