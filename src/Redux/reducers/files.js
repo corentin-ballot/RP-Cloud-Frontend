@@ -1,10 +1,11 @@
 const initialState = {
   fileList: [],
   isFileListLoaded: true,
-  previewFileList: []
+  previewFileList: [],
+  breadcrumb: []
 };
 
-export const fileList = (state = initialState, action) => {
+export const navigation = (state = initialState, action) => {
   switch (action.type) {
     case 'RECEIVE_FILE_LIST':
       return {
@@ -30,6 +31,7 @@ export const fileList = (state = initialState, action) => {
     case 'REQUEST_FILE_LIST':
       return {
         ...state,
+        breadcrumb: action.breadcrumb,
         isFileListLoaded: false
       };
     default:
@@ -37,7 +39,7 @@ export const fileList = (state = initialState, action) => {
   }
 };
 
-export const previewFileList = (state = [], action) => {
+export const preview = (state = [], action) => {
   switch (action.type) {
     case 'ADD_PREVIEW_FILE':
       return {
@@ -58,5 +60,3 @@ export const previewFileList = (state = [], action) => {
       return state;
   }
 };
-
-export default fileList;
