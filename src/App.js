@@ -3,145 +3,42 @@ import './App.css';
 import Navigation from './Components/Navigation/Navigation';
 import Preview from './Components/Preview/Preview';
 import { connect } from 'react-redux'
+import { requestPath } from './Redux/actions/files'
+
+import { Link } from 'react-router-dom';
 
 class App extends Component {
-  state = {
-    baseroute: this.props.baseroute,
-    breadcrumb: [],
-    files: [],
-    preview: {},
-  }
-
-  updateBreadcrumb(path) {
-    this.setState({
-      breadcrumb: (path.slice(-1)==='/'? path.substring(0, path.length - 1):path).split('/').map((item, index, array) => {
-        return {route:array.filter((x, y) => y <= index).join('/'), folderName: item}
-      })
-    });
-  }
-
-  updateFileList(path) {
-    this.setState({isLoaded: false});
-
-    fetch("http://localhost/web/app.php/api/cloud/navigate?path=" + path, {method: 'GET'})
-    .then(function(res){ return res.json(); })
-    .then(
-      (json) => {
-        this.setState({
-          isLoaded: true,
-          files : json.dirs.map((e,i,a) => {e.type='dir'; return e;}).concat(json.files)
-        });
-      },
-      (error) => {
-        this.setState({
-          isLoaded: true,
-          error
-        });
-      }
-    )
-    //
-  }
-
-  navigateTo(path) {
-    this.updateBreadcrumb(path);
-    this.updateFileList(path);
-  }
-
-  initPreviewItems() {
-    var encoded_arr = window.location.hash === "" ? "[]" : window.location.hash;
-    var decoded_arr = decodeURIComponent(encoded_arr).replace('#','');
-    var arr = JSON.parse(decoded_arr).map((e, i, a) => {return {url: e, name: e.split('/')[e.split('/').length -1]}});
-    this.setState({preview: {files:arr, selectedFile: 0}}, () => {
-      this.loadFilesContent();
-    });
-  }
-
-  addPreviewItem = (filePath) => {
-    if(this.state.preview.files.filter((e) => e.url === filePath).length <= 0) {
-      this.setState(prevState => ({
-        preview: {...prevState.preview, files:[...prevState.preview.files, {url: filePath, name: filePath.split('/')[filePath.split('/').length -1]}], selectedFile: this.state.preview.files.length}
-      }), () => {
-        this.updateHash();
-        this.loadFilesContent();
-      });
-    } else {
-      this.setState(prevState => ({
-        preview: {...prevState.preview, selectedFile: prevState.preview.files.indexOf(prevState.preview.files.filter((e) => e.url === filePath)[0])}
-      }));
-    }
-  }
-
-  removePreviewItem = (filePath) => {
-    this.setState(prevState => ({
-      preview: {...prevState.preview, files:prevState.preview.files.filter((e) => e.url !== filePath), selectedFile: prevState.preview.selectedFile < prevState.preview.files.length -1 ? prevState.preview.selectedFile:prevState.preview.files.length-2 },
-    }), () => {
-      this.updateHash();
-    });
-  }
-
-  loadFilesContent = () => {
-    this.state.preview.files.forEach((e,i,a) => {
-      if(typeof e.preview === 'undefined' && typeof e.isLoaded === 'undefined') {
-        e.isLoaded = false;
-        this.setState({});
-
-        fetch("http://localhost/web/app.php/api/cloud/filecontent?fileurl=" + e.url, {method: 'GET'})
-        .then(function(res){
-          return res.json();
-        })
-        .then(
-          (json) => {
-            e.isLoaded = true;
-            e.preview = json;
-            this.setState({});
-          },
-          (error) => {
-            e.isLoaded = true;
-            e.preview = error;
-            this.setState({});
-          }
-        )
-      } else {
-        // content is loaded or loading, nothing to do.
-      }
-    });
-  }
-
-  updateHash = () => {
-    window.location.hash = typeof this.state.preview.files !== 'undefined' && this.state.preview.files.length > 0 ? encodeURIComponent(JSON.stringify(this.state.preview.files.map((e) => {return e.url}))) : "";
-  }
 
   componentWillMount() {
-    const { dispatch } = this.props;
+    // init breadcrumb
+    this.props.dispatch(requestPath(this.props.location.pathname));
+
     this.unlisten = this.props.history.listen((location, action) => {
       console.log("Route change (" + action + "). New location : " + location.pathname + location.search + location.hash);
       switch (action) {
         case 'PUSH' : // location pathname change
-        this.navigateTo(location.pathname.replace(this.state.baseroute, ''));
+        this.props.dispatch(requestPath(location.pathname));
+        // TODO : dispatch REQUEST_FILE_LIST and RECEIVE_FILE_LIST on received
         break;
         case 'POP' : // location hash change
-        //this.updatePreviewItems();
+        // TODO : dispatch ( ADD_PREVIEW_FILE, REQUEST_PREVIEW_CONTENT and RECEIVE_PREVIEW_CONTENT on received ) or REMOVE_PREVIEW_FILE
         break;
         default: break;
       }
     });
-
-    this.navigateTo(window.location.pathname.replace(this.state.baseroute, ''));
-    this.initPreviewItems();
   }
   componentWillUnmount() {
       this.unlisten();
   }
 
   render() {
-    const { files, breadcrumb, baseroute, preview, isLoaded } = this.state
     return (
       <div className="App">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
         <div className="cloud">
-          <Navigation breadcrumb={breadcrumb} files={files} baseroute={baseroute} onPreviewFile={this.addPreviewItem} contentLoaded={isLoaded} />
-          <Preview preview={preview} onCloseTab={this.removePreviewItem} />
+          <Navigation />
+          {/*<Preview />*/}
         </div>
       </div>
     );
@@ -149,9 +46,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    favoritesFilm: state.favoritesFilm
-  }
+  // Don't need data ?
+  return {}
 };
 
 export default connect(mapStateToProps)(App);
