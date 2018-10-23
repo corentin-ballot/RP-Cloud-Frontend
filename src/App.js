@@ -3,9 +3,7 @@ import './App.css';
 import Navigation from './Components/Navigation/Navigation';
 import Preview from './Components/Preview/Preview';
 import { connect } from 'react-redux'
-import { fetchFileList } from './Redux/actions/files'
-
-import { Link } from 'react-router-dom';
+import { fetchFileList } from './Redux/actions/navigation'
 
 class App extends Component {
 
@@ -18,7 +16,6 @@ class App extends Component {
       switch (action) {
         case 'PUSH' : // location pathname change
         this.props.dispatch(fetchFileList(location.pathname));
-        // TODO : dispatch REQUEST_FILE_LIST and RECEIVE_FILE_LIST on received
         break;
         case 'POP' : // location hash change
         // TODO : dispatch ( ADD_PREVIEW_FILE, REQUEST_PREVIEW_CONTENT and RECEIVE_PREVIEW_CONTENT on received ) or REMOVE_PREVIEW_FILE
@@ -38,7 +35,7 @@ class App extends Component {
 
         <div className="cloud">
           <Navigation />
-          {/*<Preview />*/}
+          <Preview />
         </div>
       </div>
     );
@@ -46,7 +43,6 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  // Don't need data ?
   return {}
 };
 

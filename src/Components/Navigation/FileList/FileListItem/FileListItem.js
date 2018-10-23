@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { renameFile, toggleFileSelect, enableFileEditName, disableFileEditName } from '../../../../Redux/actions/files';
+import { renameFile, toggleFileSelect, enableFileEditName, disableFileEditName } from '../../../../Redux/actions/navigation';
+import { previewFile } from '../../../../Redux/actions/preview';
 import { connect } from 'react-redux'
 
 import './FileListItem.css';
@@ -24,7 +25,7 @@ class FileListItem extends Component {
     }
 
     handleFileClick = () => {
-        //this.props.dispatch(previewFile(this.props.file));
+        this.props.dispatch(previewFile(this.props.file));
     }
 
     render() {
@@ -49,7 +50,6 @@ class FileListItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // Don't need data ?
     return {}
   };
   

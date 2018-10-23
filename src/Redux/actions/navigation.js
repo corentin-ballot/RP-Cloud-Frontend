@@ -16,7 +16,6 @@ function pathToBreadcrumb(path) {
 }
 
 function requestFileList(path) {
-    console.log('requestFileList', path)
     return {
         type: REQUEST_FILE_LIST,
         breadcrumb: pathToBreadcrumb(path),
@@ -94,7 +93,6 @@ export function hideNewFile() {
 }
 
 export function submitNewDir(path, name) {
-    console.log("submitNewDir", path, name);
     return function action(dispatch) {
         dispatch(hideNewDir());
         return fetch('http://localhost/web/app.php/api/cloud/newfolder', {
@@ -107,7 +105,6 @@ export function submitNewDir(path, name) {
 }
 
 export function submitNewFile(path, name) {
-    console.log("submitNewFile", path, name);
     return function action(dispatch) {
         dispatch(hideNewFile());
         return fetch('http://localhost/web/app.php/api/cloud/newfile', {

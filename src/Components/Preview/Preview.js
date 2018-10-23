@@ -5,35 +5,29 @@ import Text from './Text/Text';
 import HTML from './HTML/HTML';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
 
+import { connect } from 'react-redux'
+import { selectPreview, closePreviewFile } from '../../Redux/actions/preview';
+
 import './Preview.css';
 
 class Preview extends Component {
 
     handleTabClick = (file, index) => {
-        this.props.preview.selectedFile = index;
-        this.setState({});
+        this.props.dispatch(selectPreview(index));
     }
 
-    handleCloseTabClick = (index) => {
-        var encoded_arr = window.location.hash === "" ? "[]" : window.location.hash;
-        var decoded_arr = decodeURIComponent(encoded_arr).replace('#','');
-        var arr = JSON.parse(decoded_arr);
-        arr.splice(index, 1);
-        window.location.hash = encodeURIComponent(JSON.stringify(arr));
-
-        if(this.state.activePanel >= arr.length) {
-            this.setState({activePanel : arr.length-1});
-        }
+    handleCloseTabClick = (url) => {
+        this.props.dispatch(closePreviewFile(url));
     }
 
     addButton = (file, label, callback) => {
-        if(typeof file.preview === "undefined"){
-            file.preview.actions = [{label: label, click: callback}];
+        if(typeof file.actions === "undefined"){
+            file.actions = [{label: label, click: callback}];
         }else{
-            if(typeof file.preview.actions === "undefined"){
-                file.preview.actions = [{label: label, click: callback}];
+            if(typeof file.actions === "undefined"){
+                file.actions = [{label: label, click: callback}];
             }else{
-                file.preview.actions = [...file.preview.actions, {label: label, click: callback}];
+                file.actions = [...file.actions, {label: label, click: callback}];
             }
         }
         this.setState({});
@@ -43,24 +37,24 @@ class Preview extends Component {
         return (
             <div className="cloud_preview">
                 <div className="cloud_preview_tabsbar" role="tablist">
-                    {this.props.preview.files.map((item, index) => (
-                        <div key={item.url} className="cloud_preview_tabsbar_item" aria-selected={index === this.props.preview.selectedFile}>
+                    {this.props.previewFiles.map((item, index) => (
+                        <div key={item.url} className="cloud_preview_tabsbar_item" aria-selected={index === this.props.activePreview}>
                             <button role="tab" className="cloud_preview_tabsbar_item_name" id={"preview-" + index} onClick={() => this.handleTabClick(item, index)} title={item.url}> {item.name} </button>
-                            <button className="cloud_preview_tabsbar_item_close_btn material-icons" onClick={() => this.props.onCloseTab(item.url)}>close</button>
+                            <button className="cloud_preview_tabsbar_item_close_btn material-icons" onClick={() => this.handleCloseTabClick(item.url)}>close</button>
                         </div>
                     ))}
                 </div>
 
                 <div className="cloud_preview_panel">
-                    {this.props.preview.files.map((item, index) => (
-                        <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.preview.selectedFile} /*dangerouslySetInnerHTML={{__html: item.isLoaded ? item.content : 'Loading content, please wait...'}}*/>
-                            {!item.isLoaded && <LoadingSpinner />}
+                    {this.props.previewFiles.map((item, index) => (
+                        <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.activePreview}>
+                            {!item.isContentLoaded && <LoadingSpinner />}
                             {
-                                typeof item.preview !== "undefined" && (
-                                    (item.preview.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
-                                 || (item.preview.type === "image" && <Image url={item.preview.url} alt={item.name} addButton={this.addButton} />)
-                                 || (item.preview.type === "text" && <Text file={item} addButton={this.addButton} />)
-                                 || (item.preview.type === "html" && <HTML file={item} addButton={this.addButton} />)
+                                typeof item.type !== "undefined" && (
+                                    (item.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
+                                 || (item.type === "image" && <Image url={item.preview.url} alt={item.name} addButton={this.addButton} />)
+                                 || (item.type === "text" && <Text file={item} addButton={this.addButton} />)
+                                 || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
                                 )
                             }
                             {
@@ -76,4 +70,11 @@ class Preview extends Component {
     }
 }
 
-export default Preview;
+const mapStateToProps = (state) => {
+    return {
+        previewFiles: state.preview.fileList,
+        activePreview: state.preview.activePreview
+    }
+};
+
+export default connect(mapStateToProps)(Preview);

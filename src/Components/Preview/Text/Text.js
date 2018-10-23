@@ -9,18 +9,19 @@ class Text extends Component {
     }
 
     handleValueChange = () => {
-        this.props.file.preview.content = this.content.value;
+        this.props.file.content = this.content.value;
         this.setState({});
     }
 
     componentWillMount() {
         this.props.addButton(this.props.file, "Save", this.handleSaveClick);
+        console.log(this.props);
     }
 
     render() {
         return (
             <div>
-                <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content=el} defaultValue={this.props.file.preview.content} onChange={this.handleValueChange}></textarea>
+                <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content=el} defaultValue={this.props.file.content} onChange={this.handleValueChange}></textarea>
             </div>
         );
     }

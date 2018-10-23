@@ -8,7 +8,7 @@ import './Markdown.css';
 class Markdown extends Component {
     state = {
         preview_mode: true,
-        preview_content: this.props.file.preview.content,
+        preview_content: this.props.file.content,
     }
 
     handleSwapClick = () => {

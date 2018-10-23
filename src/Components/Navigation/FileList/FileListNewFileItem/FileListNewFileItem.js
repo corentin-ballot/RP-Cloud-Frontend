@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
-import { submitNewFile, hideNewFile } from '../../../../Redux/actions/files';
+import { submitNewFile, hideNewFile } from '../../../../Redux/actions/navigation';
 
 class FilestableNewFileItem extends Component {
 

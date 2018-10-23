@@ -6,7 +6,7 @@ import FileListNewFileItem from './FileListNewFileItem/FileListNewFileItem.js';
 import FileListNewDirItem from './FileListNewDirItem/FileListNewDirItem.js';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.js';
 
-import { selectAllFiles } from '../../../Redux/actions/files';
+import { selectAllFiles } from '../../../Redux/actions/navigation';
 
 import { connect } from 'react-redux'
 
