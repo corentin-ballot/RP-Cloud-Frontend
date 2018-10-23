@@ -3,21 +3,21 @@ import './App.css';
 import Navigation from './Components/Navigation/Navigation';
 import Preview from './Components/Preview/Preview';
 import { connect } from 'react-redux'
-import { requestPath } from './Redux/actions/files'
+import { fetchFileList } from './Redux/actions/files'
 
 import { Link } from 'react-router-dom';
 
 class App extends Component {
 
   componentWillMount() {
-    // init breadcrumb
-    this.props.dispatch(requestPath(this.props.location.pathname));
+    // init breadcrumb & file list
+    this.props.dispatch(fetchFileList(this.props.location.pathname));
 
     this.unlisten = this.props.history.listen((location, action) => {
       console.log("Route change (" + action + "). New location : " + location.pathname + location.search + location.hash);
       switch (action) {
         case 'PUSH' : // location pathname change
-        this.props.dispatch(requestPath(location.pathname));
+        this.props.dispatch(fetchFileList(location.pathname));
         // TODO : dispatch REQUEST_FILE_LIST and RECEIVE_FILE_LIST on received
         break;
         case 'POP' : // location hash change
