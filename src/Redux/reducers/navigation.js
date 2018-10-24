@@ -4,8 +4,8 @@ const initialNavigationState = {
   previewFileList: [],
   breadcrumb: [],
   displayHiddenFiles: false,
-  displayNewDir: true,
-  displayNewFile: true,
+  displayNewDir: false,
+  displayNewFile: false,
   path: '/'
 };
 
