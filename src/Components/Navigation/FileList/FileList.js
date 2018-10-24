@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './FileList.css';
 import FileListItem from './FileListItem/FileListItem';
+import FileListActionsButton from './FileListActionsButton/FileListActionsButton.js';
 import FileListNewFileItem from './FileListNewFileItem/FileListNewFileItem.js';
 import FileListNewDirItem from './FileListNewDirItem/FileListNewDirItem.js';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.js';
@@ -32,9 +33,7 @@ class FileList extends Component {
                         <i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i>
                     </div>
                     <div className="filestable_header_name">Name</div>
-                    <div className="filestable_header_icons"></div>
-                    <div className="filestable_header_lastupdate">Last update</div>
-                    <div className="filestable_header_size">Size</div>
+                    <FileListActionsButton DropdownRef={this.dropzoneRef} onClickToggleHiddenFiles={this.props.onClickToggleHiddenFiles} onClickNewFile={this.props.onClickNewFile} onClickNewDir={this.props.onClickNewDir} onClickZipFiles={this.props.onClickZipFiles} onClickDeleteFiles={this.props.onClickDeleteFiles} />
                 </header>
                 <ol className="filestable_content">
                     {!this.props.isFileListLoaded && <li className="filestable_content_item"><LoadingSpinner /></li>}
