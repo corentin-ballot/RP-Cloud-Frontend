@@ -42,8 +42,10 @@ class FileListItem extends Component {
                     {(this.props.file.editName === true ) && <button className="filestable_content_item_icons_item" onClick={() => this.handleSubmitEditNameClick(this.newurl.value)}><i className="material-icons">done</i></button>}
                     {(this.props.file.editName === true ) && <button className="filestable_content_item_icons_item" onClick={() => this.handleCancelEditNameClick()}><i className="material-icons">clear</i></button>}
                 </div>
-                <div className="filestable_content_item_lastupdate">{this.props.file.last_modif}</div>
-                <div className="filestable_content_item_size">{typeof this.props.file.size === undefined? "-":this.props.file.size}</div>
+                <div className="filestable_content_item_info">
+                    <div className="filestable_content_item_info_size">{typeof this.props.file.size === undefined? "-":this.props.file.size}</div>
+                    <div className="filestable_content_item_info_lastupdate">{this.props.file.last_modif}</div>
+                </div>
             </li>
         );
     }
