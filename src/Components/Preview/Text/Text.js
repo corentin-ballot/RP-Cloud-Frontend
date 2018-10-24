@@ -14,7 +14,7 @@ class Text extends Component {
     }
 
     componentWillMount() {
-        this.props.addButton(this.props.file, "Save", this.handleSaveClick);
+        this.props.addButton(this.props.file, "save", this.handleSaveClick);
         console.log(this.props);
     }
 
