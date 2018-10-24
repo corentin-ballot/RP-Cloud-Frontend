@@ -52,7 +52,7 @@ class Preview extends Component {
                             {
                                 typeof item.type !== "undefined" && (
                                     (item.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
-                                 || (item.type === "image" && <Image url={item.preview.url} alt={item.name} addButton={this.addButton} />)
+                                 || (item.type === "image" && <Image url={item.url} alt={item.name} addButton={this.addButton} />)
                                  || (item.type === "text" && <Text file={item} addButton={this.addButton} />)
                                  || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
                                 )
