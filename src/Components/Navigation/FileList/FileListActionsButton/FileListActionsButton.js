@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import './FilestableActionsButton.css';
+import './FileListActionsButton.css';
 
-class FilestableActionsButton extends Component {
+class FileListActionsButton extends Component {
     state = {
         hidden: true
     }
@@ -55,4 +55,4 @@ class FilestableActionsButton extends Component {
     }
 }
 
-export default FilestableActionsButton;
+export default FileListActionsButton;
