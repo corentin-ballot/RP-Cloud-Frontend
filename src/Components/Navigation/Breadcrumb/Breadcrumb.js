@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 import './Breadcrumb.css';
 
 class Breadcrumb extends Component {
-    state = {
-        dropdown_open: false,
-    }
-
-    handleDropdownclick = () => {
-        this.setState((prevState) => {return {dropdown_open: !prevState.dropdown_open}})
-    }
-
-    handleDownloadfilesClick = () => {
-        this.props.DropdownRef.open();
-    }
-
+    
     render() {
         return (
             <ul className="cloud_navigation_breadcrumb">
@@ -32,4 +21,10 @@ class Breadcrumb extends Component {
     }
 }
 
-export default Breadcrumb;
+const mapStateToProps = (state) => {
+    return {
+        breadcrumb: state.navigation.breadcrumb
+    }
+  };
+  
+export default connect(mapStateToProps)(Breadcrumb);

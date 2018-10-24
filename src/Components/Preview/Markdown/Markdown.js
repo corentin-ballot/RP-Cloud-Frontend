@@ -8,17 +8,17 @@ import './Markdown.css';
 class Markdown extends Component {
     state = {
         preview_mode: true,
-        preview_content: this.props.file.preview.content,
+        preview_content: this.props.file.content,
     }
 
     handleSwapClick = () => {
         this.setState(prevState => (
-            {preview_mode: !prevState.preview_mode, preview_content: this.props.file.preview.content}
+            {preview_mode: !prevState.preview_mode, preview_content: this.props.file.content}
         ));
     };
 
     componentWillMount() {
-        this.props.addButton(this.props.file, "Preview/Edit", this.handleSwapClick);
+        this.props.addButton(this.props.file, "code", this.handleSwapClick);
     }
 
     render() {
