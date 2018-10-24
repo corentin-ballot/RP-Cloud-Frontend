@@ -4,8 +4,8 @@ const initialNavigationState = {
   previewFileList: [],
   breadcrumb: [],
   displayHiddenFiles: false,
-  displayNewDir: false,
-  displayNewFile: false,
+  displayNewDir: true,
+  displayNewFile: true,
   path: '/'
 };
 
@@ -17,6 +17,15 @@ export const navigation = (state = initialNavigationState, action) => {
         fileList: action.fileList,
         isFileListLoaded: true
       };
+    case 'REFRESH_FILE_LIST':
+      return {
+        ...state,
+        fileList: action.fileList.map(function(e,i,a) {
+          return {...state.fileList.filter((function(elem, index, self) {
+            return index === self.map((element) => element.url).indexOf(e.url);
+          }))[0], ...e}
+        })
+      }
     case 'ADD_FILE':
       return {
         ...state,

@@ -8,6 +8,7 @@ export const DISPLAY_NEW_DIR = 'DISPLAY_NEW_DIR';
 export const DISPLAY_NEW_FILE = 'DISPLAY_NEW_FILE';
 export const HIDE_NEW_DIR = 'HIDE_NEW_DIR';
 export const HIDE_NEW_FILE = 'HIDE_NEW_FILE';
+export const REFRESH_FILE_LIST = 'REFRESH_FILE_LIST';
 
 function pathToBreadcrumb(path) {
     return (path.slice(-1)==='/'? path.substring(0, path.length - 1):path).split('/').map((item, index, array) => {
@@ -37,6 +38,21 @@ export function fetchFileList(path) {
         return fetch(`http://localhost/web/app.php/api/cloud/navigate?path=${path}`)
             .then(response => response.json())
             .then(json => dispatch(receiveFileList(json)));
+    }
+}
+
+function receiveRefreshFileList(json) {
+    return {
+        type: REFRESH_FILE_LIST,
+        fileList: json.dirs.map((e,i,a) => {e.type='dir'; return e;}).concat(json.files)
+    }
+}
+
+export function refreshFileList(path) {
+    return function action(dispatch) {
+        return fetch(`http://localhost/web/app.php/api/cloud/navigate?path=${path}`)
+            .then(response => response.json())
+            .then(json => dispatch(receiveRefreshFileList(json)));
     }
 }
 
@@ -99,7 +115,7 @@ export function submitNewDir(path, name) {
             method: 'POST',
             body: JSON.stringify({foldername: name, path: path})
         }).then(() => {
-            dispatch(fetchFileList(path));
+            dispatch(refreshFileList(path));
         });
     }
 }
@@ -111,7 +127,7 @@ export function submitNewFile(path, name) {
             method: 'POST',
             body: JSON.stringify({filename: name, path: path})
         }).then(() => {
-            dispatch(fetchFileList(path));
+            dispatch(refreshFileList(path));
         });
     }
 }
@@ -122,13 +138,12 @@ export function renameFile(file, newUrl){
             .then(function(res){
             return res.json();
             })
-            .then(() => dispatch(fetchFileList(file.url.replace(file.name, ''))));
+            .then(() => dispatch(refreshFileList(file.url.replace(file.name, ''))));
     }
 }
 
 export function uploadFiles(files, path) {
     return function action(dispatch) {
-        dispatch(fetchFileList(path));
         files.forEach(file => {
             let data = new FormData();
             data.append('path', path);
@@ -137,7 +152,7 @@ export function uploadFiles(files, path) {
             fetch('http://localhost/web/app.php/api/cloud/uploadfile', {
                 method: 'POST',
                 body: data
-            }).then(() => dispatch(fetchFileList(path)));
+            }).then(() => dispatch(refreshFileList(path)));
         });
     }
 }
