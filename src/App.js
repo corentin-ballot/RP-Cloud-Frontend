@@ -32,7 +32,6 @@ class App extends Component {
     return (
       <div className="App">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-
         <div className="cloud">
           <Navigation />
           <Preview />

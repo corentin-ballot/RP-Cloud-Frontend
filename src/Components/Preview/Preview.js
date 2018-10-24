@@ -57,11 +57,13 @@ class Preview extends Component {
                                  || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
                                 )
                             }
+                            <div className="cloud_preview_panel_item_actions_group">
                             {
                                 typeof item.actions !== "undefined" && item.actions.map((e, i, a) => (
                                     <button className="cloud_preview_panel_item_action" onClick={e.click} key={e.label}><i className="material-icons">{e.label}</i></button>
                                 ))
                             }
+                            </div>
                         </div>
                     ))}
                 </div>

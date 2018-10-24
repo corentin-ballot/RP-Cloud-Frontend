@@ -75,14 +75,15 @@
     background-color: rgba(158,158,158,.2);
 }
 
-.filestable_content_item_lastupdate {
-    width: 150px;
+.filestable_content_item_info {
     white-space: nowrap;
-    padding-left: 16px;
-}
-
-.filestable_content_item_size {
-    width: 70px;
-    white-space: nowrap;
+    font-size: 12px;
     padding: 0 16px;
+    text-align: right;
+    vertical-align: bottom;
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: darkgray;
 }

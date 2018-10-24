@@ -1,0 +1,61 @@
+.filestable_actions_button-container {
+    padding: 0 16px;
+    position: relative;
+}
+
+.filestable_actions_button-icon {
+    vertical-align: middle;
+}
+
+.filestable_actions_button_actions-container {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+    transition: max-width .4s ease;
+    vertical-align: middle;
+    border-radius: 8px;
+    background-color: transparent;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.filestable_actions_button-icon i {
+    transition: transform .4s linear;
+}
+
+.filestable_actions_button-container[aria-expanded="true"] > .filestable_actions_button-icon i {
+    transform: rotate(-45deg);
+}
+
+.filestable_actions_button-container[aria-expanded="true"] > .filestable_actions_button_actions-container {
+    background-color: #f6f8fa;
+    max-width: 200px;
+}
+
+.filestable_actions_button-icon,
+.filestable_actions_button_action-icon {
+    display: inline-block;
+    -vertical-align: middle;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    height: 24px;
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 24px;
+    width: 24px;
+    padding: 4px;
+    color: inherit;
+    line-height: normal;
+    background-color: transparent;
+    cursor: pointer;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    transition: transform .4s linear;
+}
+
+.filestable_actions_button_action-icon:hover,
+.filestable_actions_button-icon:hover {
+    background-color: rgba(158,158,158,.2);
+}
