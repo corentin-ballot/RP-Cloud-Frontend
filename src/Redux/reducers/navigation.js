@@ -63,15 +63,15 @@ export const navigation = (state = initialNavigationState, action) => {
         ...state,
         fileList: state.fileList.map(file => (file.url === action.file.url) ? {...file, editName: false} : file)        
       }
-    case 'DISPLAY_NEW_DIR':
+    case 'TOGGLE_NEW_DIR':
       return {
         ...state,
-        displayNewDir: true
+        displayNewDir: !state.displayNewDir
       }
-    case 'DISPLAY_NEW_FILE':
+    case 'TOGGLE_NEW_FILE':
       return {
         ...state,
-        displayNewFile: true
+        displayNewFile: !state.displayNewFile
       }
     case 'HIDE_NEW_DIR':
       return {
@@ -82,7 +82,12 @@ export const navigation = (state = initialNavigationState, action) => {
       return {
         ...state,
         displayNewFile: false
-      }  
+      }
+    case 'TOGGLE_HIDDEN_FILES':
+      return {
+        ...state,
+        displayHiddenFiles: !state.displayHiddenFiles
+      }
     default:
       return state;
   }

@@ -15,8 +15,8 @@
     transition: max-width .4s ease;
     vertical-align: middle;
     border-radius: 8px;
-    background-color: transparent;
-    padding: 5px;
+    background-color: #f6f8fa;
+    padding: 5px 0;
     margin: 0 5px;
 }
 
@@ -29,8 +29,8 @@
 }
 
 .filestable_actions_button-container[aria-expanded="true"] > .filestable_actions_button_actions-container {
-    background-color: #f6f8fa;
     max-width: 200px;
+    padding: 5px;
 }
 
 .filestable_actions_button-icon,

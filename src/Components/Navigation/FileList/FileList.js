@@ -7,7 +7,8 @@ import FileListNewFileItem from './FileListNewFileItem/FileListNewFileItem.js';
 import FileListNewDirItem from './FileListNewDirItem/FileListNewDirItem.js';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.js';
 
-import { selectAllFiles } from '../../../Redux/actions/navigation';
+
+import { selectAllFiles, toggleHiddenFiles, toggleNewDir, toggleNewFile, compressFiles, deleteFiles, uploadFiles } from '../../../Redux/actions/navigation';
 
 import { connect } from 'react-redux'
 
@@ -24,6 +25,10 @@ class FileList extends Component {
         }));
     }
 
+
+    handleToggleHiddenFilesClick = () => {
+        this.props.dispatch(toggleHiddenFiles());
+    }
     render() {
         const { allSelected } = this.state
         return (
@@ -33,7 +38,14 @@ class FileList extends Component {
                         <i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i>
                     </div>
                     <div className="filestable_header_name">Name</div>
-                    <FileListActionsButton DropdownRef={this.dropzoneRef} onClickToggleHiddenFiles={this.props.onClickToggleHiddenFiles} onClickNewFile={this.props.onClickNewFile} onClickNewDir={this.props.onClickNewDir} onClickZipFiles={this.props.onClickZipFiles} onClickDeleteFiles={this.props.onClickDeleteFiles} />
+                    <FileListActionsButton>
+                        <button className="filestable_actions_button_action-icon" title="Compress files (zip)" onClick={this.handleCompressfilesClick}><i className="material-icons">archive</i></button>
+                        <button className="filestable_actions_button_action-icon" title="Delete files" onClick={this.handleDeletefilesClick}><i className="material-icons">delete</i></button>
+                        <button className="filestable_actions_button_action-icon" title="Upload files" onClick={this.handleUploadFilesClick}><i className="material-icons">cloud_upload</i></button>
+                        <button className="filestable_actions_button_action-icon" title="New file" onClick={this.handleNewFileClick}><i className="material-icons">note_add</i></button>
+                        <button className="filestable_actions_button_action-icon" title="New folder" onClick={this.handleNewDirClick}><i className="material-icons">create_new_folder</i></button>
+                        <button className="filestable_actions_button_action-icon" title="Toggle hidden files" onClick={this.handleToggleHiddenFilesClick}><i className="material-icons">visibility_off</i></button>
+                    </FileListActionsButton>
                 </header>
                 <ol className="filestable_content">
                     {!this.props.isFileListLoaded && <li className="filestable_content_item"><LoadingSpinner /></li>}

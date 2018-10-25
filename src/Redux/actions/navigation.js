@@ -4,11 +4,12 @@ export const ENABLE_FILE_EDIT_NAME = 'ENABLE_FILE_EDIT_NAME';
 export const DISABLE_FILE_EDIT_NAME = 'DISABLE_FILE_EDIT_NAME';
 export const TOGGLE_SELECT_FILE = 'TOGGLE_SELECT_FILE';
 export const SELECT_ALL_FILES = 'SELECT_ALL_FILES';
-export const DISPLAY_NEW_DIR = 'DISPLAY_NEW_DIR';
-export const DISPLAY_NEW_FILE = 'DISPLAY_NEW_FILE';
+export const TOGGLE_NEW_DIR = 'TOGGLE_NEW_DIR';
+export const TOGGLE_NEW_FILE = 'TOGGLE_NEW_FILE';
 export const HIDE_NEW_DIR = 'HIDE_NEW_DIR';
 export const HIDE_NEW_FILE = 'HIDE_NEW_FILE';
 export const REFRESH_FILE_LIST = 'REFRESH_FILE_LIST';
+export const TOGGLE_HIDDEN_FILES = 'TOGGLE_HIDDEN_FILES';
 
 function pathToBreadcrumb(path) {
     return (path.slice(-1)==='/'? path.substring(0, path.length - 1):path).split('/').map((item, index, array) => {
@@ -84,15 +85,15 @@ export function disableFileEditName(file) {
     }
 }
 
-export function displayNewDir() {
+export function toggleNewDir() {
     return {
-        type: DISPLAY_NEW_DIR,
+        type: TOGGLE_NEW_DIR,
     }
 }
 
-export function displayNewFile() {
+export function toggleNewFile() {
     return {
-        type: DISPLAY_NEW_FILE,
+        type: TOGGLE_NEW_FILE,
     }
 }
 
@@ -154,5 +155,35 @@ export function uploadFiles(files, path) {
                 body: data
             }).then(() => dispatch(refreshFileList(path)));
         });
+    }
+}
+
+export function toggleHiddenFiles() {
+    return {
+        type: TOGGLE_HIDDEN_FILES
+    }
+}
+
+export function compressFiles(urls, path) {
+    return function action(dispatch) {
+        fetch("http://localhost/web/app.php/api/cloud/zip?files=" + JSON.stringify(urls) + "&path=" + path)
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(json){
+            dispatch(refreshFileList(path));
+        })
+    }
+}
+
+export function deleteFiles(urls, path) {
+    return function action(dispatch) {
+        fetch("http://localhost/web/app.php/api/cloud/delete?files=" + JSON.stringify(urls) + "&path=" + path)
+        .then(function(res){
+            return res.json();
+        })
+        .then(function(json){
+            dispatch(fetchFileList(path));
+        })
     }
 }
