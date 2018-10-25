@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone'
 
 import './FileList.css';
 import FileListItem from './FileListItem/FileListItem';
@@ -25,10 +26,34 @@ class FileList extends Component {
         }));
     }
 
+    handleCompressfilesClick = () => {
+        this.props.dispatch(compressFiles(this.props.fileList.filter((e) => e.selected).map((e) => e.url), this.props.path));
+    }
+
+    handleDeletefilesClick = () => {
+        this.props.dispatch(deleteFiles(this.props.fileList.filter((e) => e.selected).map((e) => e.url), this.props.path));
+    }
+
+    handleUploadFilesClick = () => {
+        this.dropzoneRef.open();
+    }
+
+    handleNewDirClick = () => {
+        this.props.dispatch(toggleNewDir());
+    }
+
+    handleNewFileClick = () => {
+        this.props.dispatch(toggleNewFile());
+    }
 
     handleToggleHiddenFilesClick = () => {
         this.props.dispatch(toggleHiddenFiles());
     }
+
+    onDrop(files) {
+        this.props.dispatch(uploadFiles(files, this.props.path));
+    }
+
     render() {
         const { allSelected } = this.state
         return (
@@ -47,6 +72,7 @@ class FileList extends Component {
                         <button className="filestable_actions_button_action-icon" title="Toggle hidden files" onClick={this.handleToggleHiddenFilesClick}><i className="material-icons">visibility_off</i></button>
                     </FileListActionsButton>
                 </header>
+                <Dropzone className="cloud_navigation_dropzone" onDrop={this.onDrop.bind(this)} disableClick ref={(node) => { this.dropzoneRef = node; }}>
                 <ol className="filestable_content">
                     {!this.props.isFileListLoaded && <li className="filestable_content_item"><LoadingSpinner /></li>}
                     {this.props.isFileListLoaded && this.props.displayNewFile && <FileListNewFileItem />}
@@ -55,6 +81,7 @@ class FileList extends Component {
                         (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FileListItem file={item} key={item.url} />
                     ))}
                 </ol>
+                </Dropzone>
             </div>
         );
     }
@@ -67,6 +94,7 @@ const mapStateToProps = (state) => {
         displayHiddenFiles: state.navigation.displayHiddenFiles,
         displayNewDir: state.navigation.displayNewDir,
         displayNewFile: state.navigation.displayNewFile,
+        path: state.navigation.path
     }
 };
   
