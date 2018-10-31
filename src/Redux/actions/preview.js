@@ -7,9 +7,9 @@ export const UPDATE_PREVIEW_TAB = 'UPDATE_PREVIEW_TAB';
 export function previewFile(file) {
     return function action(dispatch) {
         dispatch(addPreviewFile(file));
-        fetch("http://localhost/web/app.php/api/cloud/filecontent?fileurl=" + file.url, {method: 'GET'})
-          .then(response => response.json())
-          .then((json) => dispatch(receivePreviewContent(file, json)))
+        fetch("http://corentin-ballot.duckdns.org/api/cloud/filecontent?fileurl=" + file.url, { method: 'GET' })
+            .then(response => response.json())
+            .then((json) => dispatch(receivePreviewContent(file, json)))
     }
 }
 
