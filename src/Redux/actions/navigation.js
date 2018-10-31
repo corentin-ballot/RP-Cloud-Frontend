@@ -1,3 +1,5 @@
+import { addNotification } from "./notifications";
+
 export const RECEIVE_FILE_LIST = 'RECEIVE_FILE_LIST';
 export const REQUEST_FILE_LIST = 'REQUEST_FILE_LIST';
 export const ENABLE_FILE_EDIT_NAME = 'ENABLE_FILE_EDIT_NAME';
@@ -12,8 +14,8 @@ export const REFRESH_FILE_LIST = 'REFRESH_FILE_LIST';
 export const TOGGLE_HIDDEN_FILES = 'TOGGLE_HIDDEN_FILES';
 
 function pathToBreadcrumb(path) {
-    return (path.slice(-1)==='/'? path.substring(0, path.length - 1):path).split('/').map((item, index, array) => {
-        return {route:array.filter((x, y) => y <= index).join('/'), folderName: item}
+    return (path.slice(-1) === '/' ? path.substring(0, path.length - 1) : path).split('/').map((item, index, array) => {
+        return { route: array.filter((x, y) => y <= index).join('/'), folderName: item }
     });
 }
 
@@ -28,7 +30,7 @@ function requestFileList(path) {
 function receiveFileList(json) {
     return {
         type: RECEIVE_FILE_LIST,
-        fileList: json.dirs.map((e,i,a) => {e.type='dir'; return e;}).concat(json.files)
+        fileList: json.dirs.map((e, i, a) => { e.type = 'dir'; return e; }).concat(json.files)
     };
 }
 
@@ -36,22 +38,22 @@ export function fetchFileList(path) {
     return function action(dispatch) {
         dispatch(requestFileList(path));
 
-        return fetch(`http://localhost/web/app.php/api/cloud/navigate?path=${path}`)
+        return fetch(`http://corentin-ballot.duckdns.org/api/cloud/navigate?path=${path}`)
             .then(response => response.json())
-            .then(json => dispatch(receiveFileList(json)));
+            .then(json => dispatch(receiveFileList(json)))
     }
 }
 
 function receiveRefreshFileList(json) {
     return {
         type: REFRESH_FILE_LIST,
-        fileList: json.dirs.map((e,i,a) => {e.type='dir'; return e;}).concat(json.files)
+        fileList: json.dirs.map((e, i, a) => { e.type = 'dir'; return e; }).concat(json.files)
     }
 }
 
 export function refreshFileList(path) {
     return function action(dispatch) {
-        return fetch(`http://localhost/web/app.php/api/cloud/navigate?path=${path}`)
+        return fetch(`http://corentin-ballot.duckdns.org/api/cloud/navigate?path=${path}`)
             .then(response => response.json())
             .then(json => dispatch(receiveRefreshFileList(json)));
     }
@@ -112,11 +114,12 @@ export function hideNewFile() {
 export function submitNewDir(path, name) {
     return function action(dispatch) {
         dispatch(hideNewDir());
-        return fetch('http://localhost/web/app.php/api/cloud/newfolder', {
+        return fetch('http://corentin-ballot.duckdns.org/api/cloud/newfolder', {
             method: 'POST',
-            body: JSON.stringify({foldername: name, path: path})
-        }).then(() => {
+            body: JSON.stringify({ foldername: name, path: path })
+        }).then(response => response.json()).then((json) => {
             dispatch(refreshFileList(path));
+            dispatch(addNotification(json.msg, json.detail));
         });
     }
 }
@@ -124,22 +127,23 @@ export function submitNewDir(path, name) {
 export function submitNewFile(path, name) {
     return function action(dispatch) {
         dispatch(hideNewFile());
-        return fetch('http://localhost/web/app.php/api/cloud/newfile', {
+        return fetch('http://corentin-ballot.duckdns.org/api/cloud/newfile', {
             method: 'POST',
-            body: JSON.stringify({filename: name, path: path})
-        }).then(() => {
+            body: JSON.stringify({ filename: name, path: path })
+        }).then(response => response.json()).then((json) => {
             dispatch(refreshFileList(path));
+            dispatch(addNotification(json.msg, json.detail));
         });
     }
 }
 
-export function renameFile(file, newUrl){
+export function renameFile(file, newUrl) {
     return function action(dispatch) {
-        return fetch("http://localhost/web/app.php/api/cloud/renamefile?fileurl=" + file.url + "&newurl=" + newUrl, {method: 'GET'})
-            .then(function(res){
-            return res.json();
-            })
-            .then(() => dispatch(refreshFileList(file.url.replace(file.name, ''))));
+        return fetch("http://corentin-ballot.duckdns.org/api/cloud/renamefile?fileurl=" + file.url + "&newurl=" + newUrl, { method: 'GET' })
+            .then(response => response.json()).then((json) => {
+                dispatch(refreshFileList(file.url.replace(file.name, '')));
+                dispatch(addNotification(json.msg, json.detail));
+            });
     }
 }
 
@@ -150,10 +154,13 @@ export function uploadFiles(files, path) {
             data.append('path', path);
             data.append('file', file);
 
-            fetch('http://localhost/web/app.php/api/cloud/uploadfile', {
+            fetch('http://corentin-ballot.duckdns.org/api/cloud/uploadfile', {
                 method: 'POST',
                 body: data
-            }).then(() => dispatch(refreshFileList(path)));
+            }).then(response => response.json()).then((json) => {
+                dispatch(refreshFileList(path));
+                dispatch(addNotification(json.msg, json.detail));
+            });
         });
     }
 }
@@ -166,24 +173,20 @@ export function toggleHiddenFiles() {
 
 export function compressFiles(urls, path) {
     return function action(dispatch) {
-        fetch("http://localhost/web/app.php/api/cloud/zip?files=" + JSON.stringify(urls) + "&path=" + path)
-        .then(function(res){
-            return res.json();
-        })
-        .then(function(json){
-            dispatch(refreshFileList(path));
-        })
+        fetch("http://corentin-ballot.duckdns.org/api/cloud/zip?files=" + JSON.stringify(urls) + "&path=" + path)
+            .then(response => response.json()).then((json) => {
+                dispatch(refreshFileList(path));
+                dispatch(addNotification(json.msg, json.detail));
+            });
     }
 }
 
 export function deleteFiles(urls, path) {
     return function action(dispatch) {
-        fetch("http://localhost/web/app.php/api/cloud/delete?files=" + JSON.stringify(urls) + "&path=" + path)
-        .then(function(res){
-            return res.json();
-        })
-        .then(function(json){
-            dispatch(fetchFileList(path));
-        })
+        fetch("http://corentin-ballot.duckdns.org/api/cloud/delete?files=" + JSON.stringify(urls) + "&path=" + path)
+            .then(response => response.json()).then((json) => {
+                dispatch(fetchFileList(path));
+                dispatch(addNotification(json.msg, json.detail));
+            });
     }
 }
