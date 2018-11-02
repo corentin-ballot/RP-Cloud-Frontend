@@ -46,3 +46,13 @@ export function selectPreview(index) {
         index
     }
 }
+
+export function saveFile(fileurl, content) {
+    return function action(dispatch) {
+        fetch("http://corentin-ballot.duckdns.org/api/cloud/savetextfile", { method: 'POST', body: JSON.stringify({ fileurl: fileurl, content: content }) })
+            .then(response => response.json())
+            .then((json) => {
+                if (typeof json.content !== 'string') dispatch(addNotification(json.msg, json.detail));
+            });
+    }
+}

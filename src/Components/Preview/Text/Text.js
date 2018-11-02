@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux'
+import { saveFile } from '../../../Redux/actions/preview';
+
 import './Text.css';
 
 class Text extends Component {
 
     handleSaveClick = () => {
-        fetch("http://localhost/web/app.php/api/cloud/savetextfile", {method: 'POST', body: JSON.stringify({fileurl: this.props.file.url, content: this.content.value})});
+        this.props.dispatch(saveFile(this.props.file.url, this.content.value));
     }
 
     handleValueChange = () => {
@@ -15,16 +18,19 @@ class Text extends Component {
 
     componentWillMount() {
         this.props.addButton(this.props.file, "save", this.handleSaveClick);
-        console.log(this.props);
     }
 
     render() {
         return (
             <div className="cloud_preview_panel_item_container">
-                <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content=el} defaultValue={this.props.file.content} onChange={this.handleValueChange}></textarea>
+                <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content = el} defaultValue={this.props.file.content} onChange={this.handleValueChange}></textarea>
             </div>
         );
     }
 }
 
-export default Text;
+const mapStateToProps = (state) => {
+    return {}
+};
+
+export default connect(mapStateToProps)(Text);
