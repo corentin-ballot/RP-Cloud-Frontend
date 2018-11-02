@@ -35,7 +35,7 @@ class Preview extends Component {
 
     render() {
         return (
-            <div className="cloud_preview">
+            <div className="cloud_preview" style={this.props.style}>
                 <div className="cloud_preview_tabsbar" role="tablist">
                     {this.props.previewFiles.map((item, index) => (
                         <div key={item.url} className="cloud_preview_tabsbar_item" aria-selected={index === this.props.activePreview}>

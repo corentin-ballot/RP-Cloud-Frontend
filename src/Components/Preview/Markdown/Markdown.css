@@ -4,6 +4,7 @@
     font-size: 16px;
     line-height: 1.5;
     overflow-wrap: break-word;
+    padding: 8px;
 }
 .modal-markdown-textpreview::before {
     content: "";
@@ -14,10 +15,10 @@
     content: "";
     display: table;
 }
-.modal-markdown-textpreview > *:first-child {
+.modal-markdown-textpreview > * *:first-child {
     margin-top: 0 !important;
 }
-.modal-markdown-textpreview > *:last-child {
+.modal-markdown-textpreview > * *:last-child {
     margin-bottom: 0 !important;
 }
 .modal-markdown-textpreview a:not([href]) {

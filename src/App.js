@@ -34,8 +34,8 @@ class App extends Component {
       <div className="App">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <div className="cloud">
-          <Navigation />
-          <Preview />
+          <Navigation style={{ width: this.props.preview.length > 0 ? "40%" : "100%" }} />
+          <Preview style={{ width: this.props.preview.length > 0 ? "60%" : "0%" }} />
           <Notifications />
         </div>
       </div>
@@ -44,7 +44,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    preview: state.preview.fileList
+  }
 };
 
 export default connect(mapStateToProps)(App);

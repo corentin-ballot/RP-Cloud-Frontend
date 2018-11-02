@@ -13,7 +13,7 @@ class Markdown extends Component {
 
     handleSwapClick = () => {
         this.setState(prevState => (
-            {preview_mode: !prevState.preview_mode, preview_content: this.props.file.content}
+            { preview_mode: !prevState.preview_mode, preview_content: this.props.file.content }
         ));
     };
 
@@ -23,11 +23,11 @@ class Markdown extends Component {
 
     render() {
         return (
-            <div>
-                <div style={this.state.preview_mode ? {display: 'none'} : {display: 'block'}}>
+            <div style={{ height: '100%' }}>
+                <div style={this.state.preview_mode ? { display: 'none', height: '100%' } : { display: 'block', height: '100%' }}>
                     <Text file={this.props.file} addButton={this.props.addButton} />
                 </div>
-                <div className="modal-markdown-textpreview" style={this.state.preview_mode ? {display: 'block'} : {display: 'none'}}>
+                <div className="modal-markdown-textpreview" style={this.state.preview_mode ? { display: 'block', height: '100%' } : { display: 'none', height: '100%' }}>
                     <ReactMarkdown source={this.state.preview_content} skipHtml={false} escapeHtml={false} />
                 </div>
             </div>

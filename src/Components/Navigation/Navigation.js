@@ -9,7 +9,7 @@ class Navigation extends Component {
 
     render() {
         return (
-            <div className="cloud_navigation">
+            <div className="cloud_navigation" style={this.props.style}>
                 <Breadcrumb />
                 <FileList />
             </div>
