@@ -1,3 +1,5 @@
+import { addNotification } from "./notifications";
+
 export const ADD_PREVIEW_FILE = 'ADD_PREVIEW_FILE';
 export const REMOVE_PREVIEW_FILE = 'REMOVE_PREVIEW_FILE';
 export const REQUEST_PREVIEW_CONTENT = 'REQUEST_PREVIEW_CONTENT';
@@ -9,7 +11,10 @@ export function previewFile(file) {
         dispatch(addPreviewFile(file));
         fetch("http://corentin-ballot.duckdns.org/api/cloud/filecontent?fileurl=" + file.url, { method: 'GET' })
             .then(response => response.json())
-            .then((json) => dispatch(receivePreviewContent(file, json)))
+            .then((json) => {
+                dispatch(receivePreviewContent(file, json));
+                if (typeof json.content !== 'string') dispatch(addNotification(json.msg, json.detail));
+            });
     }
 }
 
