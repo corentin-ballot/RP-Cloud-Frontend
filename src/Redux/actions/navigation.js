@@ -38,7 +38,7 @@ export function fetchFileList(path) {
     return function action(dispatch) {
         dispatch(requestFileList(path));
 
-        return fetch(`http://corentin-ballot.duckdns.org/api/cloud/navigate?path=${path}`)
+        return fetch(`/api/cloud/navigate?path=${path}`)
             .then(response => response.json())
             .then(json => dispatch(receiveFileList(json)))
     }
@@ -53,7 +53,7 @@ function receiveRefreshFileList(json) {
 
 export function refreshFileList(path) {
     return function action(dispatch) {
-        return fetch(`http://corentin-ballot.duckdns.org/api/cloud/navigate?path=${path}`)
+        return fetch(`/api/cloud/navigate?path=${path}`)
             .then(response => response.json())
             .then(json => dispatch(receiveRefreshFileList(json)));
     }
@@ -114,7 +114,7 @@ export function hideNewFile() {
 export function submitNewDir(path, name) {
     return function action(dispatch) {
         dispatch(hideNewDir());
-        return fetch('http://corentin-ballot.duckdns.org/api/cloud/newfolder', {
+        return fetch('/api/cloud/newfolder', {
             method: 'POST',
             body: JSON.stringify({ foldername: name, path: path })
         }).then(response => response.json()).then((json) => {
@@ -127,7 +127,7 @@ export function submitNewDir(path, name) {
 export function submitNewFile(path, name) {
     return function action(dispatch) {
         dispatch(hideNewFile());
-        return fetch('http://corentin-ballot.duckdns.org/api/cloud/newfile', {
+        return fetch('/api/cloud/newfile', {
             method: 'POST',
             body: JSON.stringify({ filename: name, path: path })
         }).then(response => response.json()).then((json) => {
@@ -139,7 +139,7 @@ export function submitNewFile(path, name) {
 
 export function renameFile(file, newUrl) {
     return function action(dispatch) {
-        return fetch("http://corentin-ballot.duckdns.org/api/cloud/renamefile?fileurl=" + file.url + "&newurl=" + newUrl, { method: 'GET' })
+        return fetch("/api/cloud/renamefile?fileurl=" + file.url + "&newurl=" + newUrl, { method: 'GET' })
             .then(response => response.json()).then((json) => {
                 dispatch(refreshFileList(file.url.replace(file.name, '')));
                 dispatch(addNotification(json.msg, json.detail));
@@ -154,7 +154,7 @@ export function uploadFiles(files, path) {
             data.append('path', path);
             data.append('file', file);
 
-            fetch('http://corentin-ballot.duckdns.org/api/cloud/uploadfile', {
+            fetch('/api/cloud/uploadfile', {
                 method: 'POST',
                 body: data
             }).then(response => response.json()).then((json) => {
@@ -173,7 +173,7 @@ export function toggleHiddenFiles() {
 
 export function compressFiles(urls, path) {
     return function action(dispatch) {
-        fetch("http://corentin-ballot.duckdns.org/api/cloud/zip?files=" + JSON.stringify(urls) + "&path=" + path)
+        fetch("/api/cloud/zip?files=" + JSON.stringify(urls) + "&path=" + path)
             .then(response => response.json()).then((json) => {
                 dispatch(refreshFileList(path));
                 dispatch(addNotification(json.msg, json.detail));
@@ -183,7 +183,7 @@ export function compressFiles(urls, path) {
 
 export function deleteFiles(urls, path) {
     return function action(dispatch) {
-        fetch("http://corentin-ballot.duckdns.org/api/cloud/delete?files=" + JSON.stringify(urls) + "&path=" + path)
+        fetch("/api/cloud/delete?files=" + JSON.stringify(urls) + "&path=" + path)
             .then(response => response.json()).then((json) => {
                 dispatch(fetchFileList(path));
                 dispatch(addNotification(json.msg, json.detail));

@@ -9,7 +9,7 @@ export const UPDATE_PREVIEW_TAB = 'UPDATE_PREVIEW_TAB';
 export function previewFile(file) {
     return function action(dispatch) {
         dispatch(addPreviewFile(file));
-        fetch("http://corentin-ballot.duckdns.org/api/cloud/filecontent?fileurl=" + file.url, { method: 'GET' })
+        fetch("/api/cloud/filecontent?fileurl=" + file.url, { method: 'GET' })
             .then(response => response.json())
             .then((json) => {
                 dispatch(receivePreviewContent(file, json));
@@ -49,7 +49,7 @@ export function selectPreview(index) {
 
 export function saveFile(fileurl, content) {
     return function action(dispatch) {
-        fetch("http://corentin-ballot.duckdns.org/api/cloud/savetextfile", { method: 'POST', body: JSON.stringify({ fileurl: fileurl, content: content }) })
+        fetch("/api/cloud/savetextfile", { method: 'POST', body: JSON.stringify({ fileurl: fileurl, content: content }) })
             .then(response => response.json())
             .then((json) => {
                 if (typeof json.content !== 'string') dispatch(addNotification(json.msg, json.detail));
