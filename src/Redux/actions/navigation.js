@@ -30,7 +30,14 @@ function requestFileList(path) {
 function receiveFileList(json) {
     return {
         type: RECEIVE_FILE_LIST,
-        fileList: json.dirs.map((e, i, a) => { e.type = 'dir'; return e; }).concat(json.files)
+        fileList: json.sort((a, b) => {
+            if (a.type === b.type) {
+                if (a.firstname < b.firstname) return -1;
+                if (a.firstname > b.firstname) return 1;
+                return 0;
+            } else if (a.type === "dir" && b.type === "file") return -1;
+            else return 1;
+        })
     };
 }
 
@@ -38,7 +45,7 @@ export function fetchFileList(path) {
     return function action(dispatch) {
         dispatch(requestFileList(path));
 
-        return fetch(`/api/cloud/navigate?path=${path}`)
+        return fetch(`/api/cloud/browse?path=${path}`, { method: 'POST' })
             .then(response => response.json())
             .then(json => dispatch(receiveFileList(json)))
     }
@@ -47,13 +54,22 @@ export function fetchFileList(path) {
 function receiveRefreshFileList(json) {
     return {
         type: REFRESH_FILE_LIST,
-        fileList: json.dirs.map((e, i, a) => { e.type = 'dir'; return e; }).concat(json.files)
+        //fileList: json.dirs.map((e, i, a) => { e.type = 'dir'; return e; }).concat(json.files)
+        fileList: json.sort((a, b) => {
+            if (a.type === "dir" && b.type === "file") return 1;
+            if (a.type === b.type) {
+                if (a.firstname < b.firstname) return -1;
+                if (a.firstname > b.firstname) return 1;
+                return 0;
+            } else if (a.type === "dir" && b.type === "file") return 1;
+            else return -1;
+        })
     }
 }
 
 export function refreshFileList(path) {
     return function action(dispatch) {
-        return fetch(`/api/cloud/navigate?path=${path}`)
+        return fetch(`/api/cloud/browse?path=${path}`, { method: 'POST' })
             .then(response => response.json())
             .then(json => dispatch(receiveRefreshFileList(json)));
     }
@@ -114,9 +130,9 @@ export function hideNewFile() {
 export function submitNewDir(path, name) {
     return function action(dispatch) {
         dispatch(hideNewDir());
-        return fetch('/api/cloud/newfolder', {
+        return fetch('/api/cloud/newdir', {
             method: 'POST',
-            body: JSON.stringify({ foldername: name, path: path })
+            body: JSON.stringify({ dirname: name, path: path })
         }).then(response => response.json()).then((json) => {
             dispatch(refreshFileList(path));
             dispatch(addNotification(json.msg, json.detail));
@@ -139,7 +155,7 @@ export function submitNewFile(path, name) {
 
 export function renameFile(file, newUrl) {
     return function action(dispatch) {
-        return fetch("/api/cloud/renamefile?fileurl=" + file.url + "&newurl=" + newUrl, { method: 'GET' })
+        return fetch("/api/cloud/rename?fileurl=" + file.url + "&newurl=" + newUrl, { method: 'POST' })
             .then(response => response.json()).then((json) => {
                 dispatch(refreshFileList(file.url.replace(file.name, '')));
                 dispatch(addNotification(json.msg, json.detail));
@@ -149,18 +165,16 @@ export function renameFile(file, newUrl) {
 
 export function uploadFiles(files, path) {
     return function action(dispatch) {
-        files.forEach(file => {
-            let data = new FormData();
-            data.append('path', path);
-            data.append('file', file);
+        let data = new FormData();
+        data.append('path', path);
+        data.append('files', files);
 
-            fetch('/api/cloud/uploadfile', {
-                method: 'POST',
-                body: data
-            }).then(response => response.json()).then((json) => {
-                dispatch(refreshFileList(path));
-                dispatch(addNotification(json.msg, json.detail));
-            });
+        fetch('/api/cloud/upload', {
+            method: 'POST',
+            body: data
+        }).then(response => response.json()).then((json) => {
+            dispatch(refreshFileList(path));
+            dispatch(addNotification(json.msg, json.detail));
         });
     }
 }
@@ -183,7 +197,7 @@ export function compressFiles(urls, path) {
 
 export function deleteFiles(urls, path) {
     return function action(dispatch) {
-        fetch("/api/cloud/delete?files=" + JSON.stringify(urls) + "&path=" + path)
+        fetch("/delete?files=" + JSON.stringify(urls), { method: 'POST' })
             .then(response => response.json()).then((json) => {
                 dispatch(fetchFileList(path));
                 dispatch(addNotification(json.msg, json.detail));

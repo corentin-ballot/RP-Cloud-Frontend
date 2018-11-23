@@ -9,7 +9,7 @@ export const UPDATE_PREVIEW_TAB = 'UPDATE_PREVIEW_TAB';
 export function previewFile(file) {
     return function action(dispatch) {
         dispatch(addPreviewFile(file));
-        fetch("/api/cloud/filecontent?fileurl=" + file.url, { method: 'GET' })
+        fetch("/api/cloud/preview?fileurl=" + file.url, { method: 'POST' })
             .then(response => response.json())
             .then((json) => {
                 dispatch(receivePreviewContent(file, json));
@@ -30,7 +30,7 @@ function addPreviewFile(file) {
         type: ADD_PREVIEW_FILE,
         file
     }
-}
+} zzz
 
 function receivePreviewContent(file, json) {
     return {
