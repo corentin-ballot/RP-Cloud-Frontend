@@ -1,0 +1,49 @@
+.cloud_preview_panel_item_zip_dir {
+    text-align: left;
+}
+.cloud_preview_panel_item_zip_dir_infos {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 4px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.cloud_preview_panel_item_zip_dir_infos:hover {
+    background-color: #E1E1E1;
+}
+.cloud_preview_panel_item_zip_file_icon,
+.cloud_preview_panel_item_zip_dir_infos_icon {
+    height: 24px;
+}
+.cloud_preview_panel_item_zip_file_name,
+.cloud_preview_panel_item_zip_dir_infos_name {
+    flex-grow: 1;
+    text-align: left;
+    margin: 0 8px;
+    font-size: 16px;
+}
+.cloud_preview_panel_item_zip_file_size {
+    margin: 0 8px;
+}
+.cloud_preview_panel_item_zip_dir_content {
+    padding-left: 16px;
+    margin-left: 16px;
+    border-left: 2px solid #E1E1E1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+}
+.cloud_preview_panel_item_zip_dir[aria-expanded=false] > .cloud_preview_panel_item_zip_dir_content {
+    display: none;
+}
+
+.cloud_preview_panel_item_zip_file {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    font-size: 14px;
+}

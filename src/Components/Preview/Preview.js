@@ -3,6 +3,7 @@ import Markdown from './Markdown/Markdown';
 import Image from './Image/Image';
 import Text from './Text/Text';
 import HTML from './HTML/HTML';
+import Zip from './Zip/Zip';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
 
 import { connect } from 'react-redux'
@@ -21,13 +22,13 @@ class Preview extends Component {
     }
 
     addButton = (file, label, callback) => {
-        if(typeof file.actions === "undefined"){
-            file.actions = [{label: label, click: callback}];
-        }else{
-            if(typeof file.actions === "undefined"){
-                file.actions = [{label: label, click: callback}];
-            }else{
-                file.actions = [...file.actions, {label: label, click: callback}];
+        if (typeof file.actions === "undefined") {
+            file.actions = [{ label: label, click: callback }];
+        } else {
+            if (typeof file.actions === "undefined") {
+                file.actions = [{ label: label, click: callback }];
+            } else {
+                file.actions = [...file.actions, { label: label, click: callback }];
             }
         }
         this.setState({});
@@ -52,17 +53,18 @@ class Preview extends Component {
                             {
                                 typeof item.type !== "undefined" && (
                                     (item.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
-                                 || (item.type === "image" && <Image url={item.url} alt={item.name} addButton={this.addButton} />)
-                                 || (item.type === "text" && <Text file={item} addButton={this.addButton} />)
-                                 || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
+                                    || (item.type === "image" && <Image url={item.url} alt={item.name} addButton={this.addButton} />)
+                                    || (item.type === "text" && <Text file={item} addButton={this.addButton} />)
+                                    || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
+                                    || (item.type === "zip" && <Zip file={item} addButton={this.addButton} />)
                                 )
                             }
                             <div className="cloud_preview_panel_item_actions_group">
-                            {
-                                typeof item.actions !== "undefined" && item.actions.map((e, i, a) => (
-                                    <button className="cloud_preview_panel_item_action" onClick={e.click} key={e.label}><i className="material-icons">{e.label}</i></button>
-                                ))
-                            }
+                                {
+                                    typeof item.actions !== "undefined" && item.actions.map((e, i, a) => (
+                                        <button className="cloud_preview_panel_item_action" onClick={e.click} key={e.label}><i className="material-icons">{e.label}</i></button>
+                                    ))
+                                }
                             </div>
                         </div>
                     ))}
