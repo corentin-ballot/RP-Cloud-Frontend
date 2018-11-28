@@ -10,11 +10,13 @@ export function previewFile(file) {
     return function action(dispatch) {
         dispatch(addPreviewFile(file));
         fetch("/api/cloud/preview?fileurl=" + file.url, { method: 'POST' })
-            .then(response => response.json())
-            .then((json) => {
-                dispatch(receivePreviewContent(file, json));
-                if (typeof json.content !== 'string') dispatch(addNotification(json.msg, json.detail));
-            });
+            .then(response => {
+                if (response.ok) {
+                    response.json().then((json) => { dispatch(receivePreviewContent(file, json)); });
+                } else {
+                    response.text().then((text) => { dispatch(receivePreviewContent(file, {})); dispatch(addNotification(response.statusText, text)) });
+                }
+            })
     }
 }
 
@@ -50,9 +52,12 @@ export function selectPreview(index) {
 export function saveFile(fileurl, content) {
     return function action(dispatch) {
         fetch("/api/cloud/savetextfile", { method: 'POST', body: JSON.stringify({ fileurl: fileurl, content: content }) })
-            .then(response => response.json())
-            .then((json) => {
-                if (typeof json.content !== 'string') dispatch(addNotification(json.msg, json.detail));
-            });
+            .then(response => {
+                if (response.ok) {
+                    response.json().then((json) => { dispatch(addNotification(json.msg, json.detail)) });
+                } else {
+                    response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
+                }
+            })
     }
 }
