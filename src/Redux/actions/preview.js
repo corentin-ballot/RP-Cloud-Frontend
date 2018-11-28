@@ -30,7 +30,7 @@ function addPreviewFile(file) {
         type: ADD_PREVIEW_FILE,
         file
     }
-} zzz
+}
 
 function receivePreviewContent(file, json) {
     return {
