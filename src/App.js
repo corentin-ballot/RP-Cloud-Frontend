@@ -31,14 +31,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <div className="cloud">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <Navigation style={{ width: this.props.preview.length > 0 ? "40%" : "100%" }} />
           <Preview style={{ width: this.props.preview.length > 0 ? "60%" : "0%" }} />
           <Notifications />
         </div>
-      </div>
     );
   }
 }
