@@ -3,8 +3,8 @@
 	flex-wrap: nowrap;
 	align-items: center;
 	font-size: 16px;
-	padding: 0;
-	margin: 8px;
+	padding: 8px 0;
+	margin: 0;
 }
 
 .cloud_navigation_breadcrumb_item {
@@ -91,6 +91,10 @@
     text-decoration: none;
     cursor: pointer;
     display: inline-block;
+}
+
+.cloud_navigation_breadcrumb_item_text .material-icons {
+	vertical-align: bottom;
 }
 
 .cloud_navigation_breadcrumb_item:first-child .cloud_navigation_breadcrumb_item_text{

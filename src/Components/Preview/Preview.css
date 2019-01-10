@@ -4,15 +4,14 @@
     flex-direction: column;
     align-items: stretch;
     align-content: stretch;
+    padding: .5rem;
 }
 .cloud_preview_tabsbar {
     display: flex;
     align-items: stretch;
     flex-wrap: nowrap;
     font-size: 16px;
-    margin: 8px 0;
-
-
+    margin: 0 0 .5rem 0;
 }
 .cloud_preview_tabsbar_item {
     flex-grow: 1;
@@ -54,6 +53,7 @@
     flex-grow: 10;
     overflow: auto;
     position: relative;
+    background-color: #FFF;
 }
 
 .cloud_preview_panel_item {
