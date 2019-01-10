@@ -3,6 +3,7 @@ import Markdown from './Markdown/Markdown';
 import Image from './Image/Image';
 import Text from './Text/Text';
 import HTML from './HTML/HTML';
+import PDF from './PDF/PDF';
 import Error from './Error/Error';
 import Zip from './Zip/Zip';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
@@ -58,6 +59,7 @@ class Preview extends Component {
                                     || (item.type === "text" && <Text file={item} addButton={this.addButton} />)
                                     || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
                                     || (item.type === "zip" && <Zip file={item} addButton={this.addButton} />)
+                                    || (item.type === "pdf" && <PDF file={item} addButton={this.addButton} />)
                                     || (item.type === "error" && <Error />)
                                 )
                             }
