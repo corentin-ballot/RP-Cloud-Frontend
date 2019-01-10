@@ -14,7 +14,7 @@ export function previewFile(file) {
                 if (response.ok) {
                     response.json().then((json) => { dispatch(receivePreviewContent(file, json)); });
                 } else {
-                    response.text().then((text) => { dispatch(receivePreviewContent(file, {})); dispatch(addNotification(response.statusText, text)) });
+                    response.text().then((text) => { dispatch(receivePreviewContent(file, { type: 'error' })); dispatch(addNotification(response.statusText, text)) });
                 }
             })
     }
