@@ -23,7 +23,7 @@ class Text extends Component {
     render() {
         return (
             <div className="cloud_preview_panel_item_container">
-                <textarea className="cloud_preview_panel_item_textedit" ref={el => this.content = el} defaultValue={this.props.file.content} onChange={this.handleValueChange}></textarea>
+                <textarea className="cloud_preview_panel_item_textedit" wrap="off" ref={el => this.content = el} defaultValue={this.props.file.content} onChange={this.handleValueChange}></textarea>
             </div>
         );
     }
