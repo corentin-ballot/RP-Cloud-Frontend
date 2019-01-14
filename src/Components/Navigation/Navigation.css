@@ -1,12 +1,22 @@
 .cloud_navigation {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 100%;
     align-items: stretch;
     padding: .5rem;
+}
+
+.cloud_navigation[aria-expanded=false] {
+    width: 40%;
 }
 
 .cloud_navigation_dropzone {
     z-index: 0;
     display: contents;
+}
+
+@media screen and (max-width:48rem) {
+    .cloud_navigation[aria-expanded=false] {
+        display: none;
+    }
 }
