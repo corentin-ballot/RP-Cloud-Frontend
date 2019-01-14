@@ -1,4 +1,5 @@
 import { addNotification } from "./notifications";
+import { saveAs } from 'file-saver';
 
 export const RECEIVE_FILE_LIST = 'RECEIVE_FILE_LIST';
 export const REQUEST_FILE_LIST = 'REQUEST_FILE_LIST';
@@ -230,5 +231,18 @@ export function deleteFiles(urls, path) {
                     response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
                 }
             })
+    }
+}
+
+export function downloadFile(file) {
+    return function action(dispatch) {
+        fetch('/api/cloud/download?fileurl=' + file.url, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    response.blob().then(blob => saveAs(blob, file.name));
+                } else {
+                    response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
+                }
+            });
     }
 }
