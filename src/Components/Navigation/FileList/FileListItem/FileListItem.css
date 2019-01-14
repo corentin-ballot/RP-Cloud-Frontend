@@ -134,7 +134,7 @@
 
     .filestable_content_item_size, .filestable_content_item_lastupdate {
         font-size: .75rem;
-        color: lightgrey;
+        color: rgb(91, 91, 91);
         align-self: start;
     }
 }
