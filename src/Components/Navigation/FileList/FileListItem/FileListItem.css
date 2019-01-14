@@ -106,7 +106,7 @@
       
     .filestable_content_item_name {
         grid-column-start: 2;
-        grid-column-end: 5;
+        grid-column-end: 4;
         align-self: end;
     }
       
