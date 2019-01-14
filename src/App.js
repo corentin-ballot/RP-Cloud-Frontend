@@ -33,8 +33,8 @@ class App extends Component {
     return (
         <div className="cloud">
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-          <Navigation style={{ width: this.props.preview.length > 0 ? "40%" : "100%" }} />
-          <Preview style={{ width: this.props.preview.length > 0 ? "60%" : "0%" }} />
+          <Navigation aria-expanded={ this.props.preview.length <= 0 } />
+          <Preview aria-expanded={ this.props.preview.length > 0 } />
           <Notifications />
         </div>
     );
