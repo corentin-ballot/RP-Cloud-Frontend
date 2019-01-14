@@ -1,6 +1,7 @@
 .filestable_actions_button-container {
     padding: 0 16px;
-    position: relative;
+    position: absolute;
+    right: 0;
 }
 
 .filestable_actions_button-icon {
