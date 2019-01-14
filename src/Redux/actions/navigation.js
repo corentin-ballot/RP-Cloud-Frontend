@@ -223,7 +223,7 @@ export function compressFiles(urls, path) {
 
 export function deleteFiles(urls, path) {
     return function action(dispatch) {
-        fetch("/delete?files=" + JSON.stringify(urls), { method: 'POST' })
+        fetch("/api/cloud/delete?files=" + JSON.stringify(urls), { method: 'POST' })
             .then(response => {
                 if (response.ok) {
                     response.json().then((json) => { dispatch(refreshFileList(path)); dispatch(addNotification(json.msg, json.detail)); });
