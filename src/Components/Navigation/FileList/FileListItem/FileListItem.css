@@ -87,4 +87,54 @@
     padding: 0 .5rem;
     box-sizing: border-box;
 }
+
+@media screen and (max-width:48rem) {
+    .filestable_content_item {
+        grid-template-columns: 3rem 6.5rem 4rem auto min-content;
+        grid-template-rows: 70% 30%;
+    }
+
+    .filestable_content_item_select, .filestable_content_item_icons {
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+      
+    .filestable_content_item_select {
+        grid-column-start: 1;
+        grid-column-end: 1;
+    }
+      
+    .filestable_content_item_name {
+        grid-column-start: 2;
+        grid-column-end: 5;
+        align-self: end;
+    }
+      
+    .filestable_content_item_icons {
+        grid-column-start: 5;
+        grid-column-end: 5;
+    }
+
+    .filestable_content_item_size {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        text-align: end;
+        width: 4rem;
+    }
+    
+    .filestable_content_item_lastupdate {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        text-align: start;
+        width: 7.5rem;
+        padding: 0 1rem;
+    }
+
+    .filestable_content_item_size, .filestable_content_item_lastupdate {
+        font-size: .75rem;
+        color: lightgrey;
+        align-self: start;
+    }
 }
