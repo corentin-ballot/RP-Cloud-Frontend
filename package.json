@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "file-saver": "^2.0.0",
+    "for-editor": "0.0.11",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-dropzone": "^4.2.13",
