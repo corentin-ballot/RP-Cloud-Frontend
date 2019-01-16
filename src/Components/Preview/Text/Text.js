@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { saveFile } from '../../../Redux/actions/preview';
 
-import Editor from 'for-editor'
+import TextEditor from '../../TextEditor'
 
 import './Text.css';
 
@@ -25,7 +25,7 @@ class Text extends Component {
     render() {
         return (
             <div className="cloud_preview_panel_item_container">
-                <Editor style="height: 100%;border: none;" value={this.props.file.content} onChange={this.handleValueChange.bind(this)} onSave={this.handleSaveClick.bind(this)} />
+                <TextEditor lang="en" controlbar={true} allowfullscreen={false} allowpreview={false} allowsave={false} value={this.props.file.content} onChange={this.handleValueChange.bind(this)} onSave={this.handleSaveClick.bind(this)} />
             </div>
         );
     }
