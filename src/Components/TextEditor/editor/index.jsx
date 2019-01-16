@@ -240,6 +240,7 @@ class MdEditor extends React.Component {
                 <div className="for-editor-content">
                   <pre>{value} </pre>
                   <textarea
+                    wrap="off"
                     ref={this.handleEditorRef}
                     value={value}
                     onChange={this.handleChange}
