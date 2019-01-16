@@ -25,7 +25,7 @@ class Markdown extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <div style={this.state.preview_mode ? { display: 'none', height: '100%' } : { display: 'block', height: '100%' }}>
-                    <Text file={this.props.file} addButton={this.props.addButton} />
+                    <Text markdown={true} file={this.props.file} addButton={this.props.addButton} />
                 </div>
                 <div className="modal-markdown-textpreview" style={this.state.preview_mode ? { display: 'block', height: '100%' } : { display: 'none', height: '100%' }}>
                     <ReactMarkdown source={this.state.preview_content} skipHtml={false} escapeHtml={false} />
