@@ -1,5 +1,5 @@
 .filestable_actions_button-container {
-    padding: 0 16px;
+    padding: 0 1rem;
     position: absolute;
     right: 0;
 }
@@ -15,10 +15,10 @@
     max-width: 0;
     transition: max-width .4s ease;
     vertical-align: middle;
-    border-radius: 8px;
+    border-radius: .5rem;
     background-color: #f6f8fa;
-    padding: 5px 0;
-    margin: 0 5px;
+    padding: .25rem 0;
+    margin: 0 .25rem;
 }
 
 .filestable_actions_button-icon i {
@@ -30,8 +30,8 @@
 }
 
 .filestable_actions_button-container[aria-expanded="true"] > .filestable_actions_button_actions-container {
-    max-width: 200px;
-    padding: 5px;
+    max-width: 12.5rem;
+    padding: .25rem;
 }
 
 .filestable_actions_button-icon,
@@ -40,13 +40,13 @@
     -vertical-align: middle;
     border: none;
     border-radius: 50%;
-    font-size: 24px;
-    height: 24px;
+    font-size: 1.5rem;
+    height: 1.5rem;
     margin-left: 0;
     margin-right: 0;
-    min-width: 24px;
-    width: 24px;
-    padding: 4px;
+    min-width: 1.5rem;
+    width: 1.5rem;
+    padding: .25rem;
     color: inherit;
     line-height: normal;
     background-color: transparent;
