@@ -10,6 +10,11 @@
     box-shadow: 0 .125rem .125rem 0 rgba(0,0,0,.14),0 .1875rem .0625rem -.125rem rgba(0,0,0,.2),0 .0625rem .1875rem 0 rgba(0,0,0,.12);
 }
 
+.filestable_content_item-loading {
+    padding: 0;
+    margin: 1rem .125rem;
+}
+
 .filestable_content_item:first-child {
     margin-top: .5rem;
 }
