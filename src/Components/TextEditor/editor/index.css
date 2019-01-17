@@ -88,7 +88,9 @@
     padding: 8px 0 20%;
     min-width: 30px;
     text-align: center;
-    min-height: 100%;
+    position: sticky;
+    left: 0;
+    z-index: 5;
   }
   .for-container .for-editor .for-editor-wrapper .for-line-num.hidden {
     display: none;
