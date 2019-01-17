@@ -1,5 +1,5 @@
 .for-container {
-    font-family: "Consolas", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Consolas', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     height: 600px;
@@ -22,7 +22,7 @@
     padding: 0;
   }
   .for-container .for-controlbar {
-    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     justify-content: space-between;
     padding: 0 6px;
@@ -78,9 +78,11 @@
     height: 100%;
   }
   .for-container .for-editor .for-editor-wrapper .for-editor-block {
-    display: flex;
-    justify-content: space-between;
+    display: inline-grid;
+    justify-content: start;
     min-height: 100%;
+    grid-template-columns: min-content minmax(90%, max-content);
+    min-width: 100%;
   }
   .for-container .for-editor .for-editor-wrapper .for-line-num {
     list-style: none;
@@ -122,7 +124,7 @@
     display: block;
     height: 100%;
     width: 100%;
-    overflow: auto hidden;
+    overflow: hidden;
     resize: none;
     border: none;
     outline: none;
@@ -130,43 +132,27 @@
     color: rgba(0, 0, 0, 0.65);
     background: none;
     line-height: inherit;
+    white-space: pre;
     box-sizing: border-box;
   }
-  
   .for-markdown-preview {
     line-height: 2;
-    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   }
-  .for-markdown-preview p,
-  .for-markdown-preview blockquote,
-  .for-markdown-preview ul,
-  .for-markdown-preview ol,
-  .for-markdown-preview dl,
-  .for-markdown-preview pre {
+  .for-markdown-preview p, .for-markdown-preview blockquote, .for-markdown-preview ul, .for-markdown-preview ol, .for-markdown-preview dl, .for-markdown-preview pre {
     margin-top: 0;
     margin-bottom: 0.6em;
   }
-  .for-markdown-preview h1,
-  .for-markdown-preview h2 {
+  .for-markdown-preview h1, .for-markdown-preview h2 {
     border-bottom: 1px solid #e2e2e2;
   }
-  .for-markdown-preview h1,
-  .for-markdown-preview h2,
-  .for-markdown-preview h3,
-  .for-markdown-preview h4,
-  .for-markdown-preview h5,
-  .for-markdown-preview h6 {
+  .for-markdown-preview h1, .for-markdown-preview h2, .for-markdown-preview h3, .for-markdown-preview h4, .for-markdown-preview h5, .for-markdown-preview h6 {
     padding: 0;
     margin: 0 0 0.6em;
     font-weight: 600;
     text-indent: 0;
   }
-  .for-markdown-preview h1:target,
-  .for-markdown-preview h2:target,
-  .for-markdown-preview h3:target,
-  .for-markdown-preview h4:target,
-  .for-markdown-preview h5:target,
-  .for-markdown-preview h6:target {
+  .for-markdown-preview h1:target, .for-markdown-preview h2:target, .for-markdown-preview h3:target, .for-markdown-preview h4:target, .for-markdown-preview h5:target, .for-markdown-preview h6:target {
     padding-top: 4.5rem;
   }
   .for-markdown-preview a {
@@ -176,27 +162,22 @@
   .for-markdown-preview a:hover {
     text-decoration: underline;
   }
-  .for-markdown-preview ul,
-  .for-markdown-preview ol {
+  .for-markdown-preview ul, .for-markdown-preview ol {
     padding: 0.2em 0.8em;
   }
-  .for-markdown-preview ul > li,
-  .for-markdown-preview ol > li {
+  .for-markdown-preview ul > li, .for-markdown-preview ol > li {
     line-height: 2;
     padding-left: 0.2em;
     margin-left: 0.2em;
     list-style-type: disc;
   }
-  .for-markdown-preview ul > li > p,
-  .for-markdown-preview ol > li > p {
+  .for-markdown-preview ul > li > p, .for-markdown-preview ol > li > p {
     text-indent: 0;
   }
-  .for-markdown-preview ul > li > ul li,
-  .for-markdown-preview ol > li > ul li {
+  .for-markdown-preview ul > li > ul li, .for-markdown-preview ol > li > ul li {
     list-style-type: circle;
   }
-  .for-markdown-preview ul > li > ul:last-child,
-  .for-markdown-preview ol > li > ul:last-child {
+  .for-markdown-preview ul > li > ul:last-child, .for-markdown-preview ol > li > ul:last-child {
     margin-bottom: 0;
   }
   .for-markdown-preview > ul, .for-markdown-preview ol {
@@ -263,3 +244,4 @@
     max-width: 100%;
     margin-bottom: 0.6em;
   }
+  

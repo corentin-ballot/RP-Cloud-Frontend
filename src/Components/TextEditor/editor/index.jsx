@@ -38,6 +38,7 @@ class MdEditor extends React.Component {
 
   componentDidMount() {
     keydownListen(this)
+    this.handleLineIndex(this.props.value)
   }
 
   componentWillUpdate(props, state) {
@@ -47,7 +48,7 @@ class MdEditor extends React.Component {
       this.setState({
         f_history
       })
-      this.handleLineIndex(props.value)
+      this.handleLineIndex(this.props.value)
     }
   }
 
@@ -240,7 +241,7 @@ class MdEditor extends React.Component {
                 <div className="for-editor-content">
                   <pre>{value} </pre>
                   <textarea
-                    wrap="off"
+                    wrap="soft"
                     ref={this.handleEditorRef}
                     value={value}
                     onChange={this.handleChange}
