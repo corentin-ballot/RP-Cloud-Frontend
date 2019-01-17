@@ -60,7 +60,7 @@ class FileList extends Component {
             <div className="filestable">
                 <header className="filestable_header">
                     <div className="filestable_header_select" onClick={() => this.handleSelectAllClick()}>
-                        <i className="material-icons">{allSelected? "check_box":"check_box_outline_blank"}</i>
+                        <i className="material-icons">{allSelected ? "check_box" : "check_box_outline_blank"}</i>
                     </div>
                     <div className="filestable_header_name">Name</div>
                     <FileListActionsButton>
@@ -73,14 +73,14 @@ class FileList extends Component {
                     </FileListActionsButton>
                 </header>
                 <Dropzone className="cloud_navigation_dropzone" onDrop={this.onDrop.bind(this)} disableClick ref={(node) => { this.dropzoneRef = node; }}>
-                <ol className="filestable_content">
-                    {!this.props.isFileListLoaded && <li className="filestable_content_item"><LoadingSpinner /></li>}
-                    {this.props.isFileListLoaded && this.props.displayNewFile && <FileListNewFileItem />}
-                    {this.props.isFileListLoaded && this.props.displayNewDir && <FileListNewDirItem />}
-                    {this.props.isFileListLoaded && this.props.fileList.map((item) => (
-                        (item.name.charAt(0)!=="." || (item.name.charAt(0)==="." && this.props.displayHiddenFiles)) && <FileListItem file={item} key={item.url} />
-                    ))}
-                </ol>
+                    <ol className={this.props.fileList.length === 0 ? "filestable_content filestable_content--empty" : "filestable_content"}>
+                        {!this.props.isFileListLoaded && <li className="filestable_content_item-loading"><LoadingSpinner /></li>}
+                        {this.props.isFileListLoaded && this.props.displayNewFile && <FileListNewFileItem />}
+                        {this.props.isFileListLoaded && this.props.displayNewDir && <FileListNewDirItem />}
+                        {this.props.isFileListLoaded && this.props.fileList.map((item) => (
+                            (item.name.charAt(0) !== "." || (item.name.charAt(0) === "." && this.props.displayHiddenFiles)) && <FileListItem file={item} key={item.url} />
+                        ))}
+                    </ol>
                 </Dropzone>
             </div>
         );
@@ -97,5 +97,5 @@ const mapStateToProps = (state) => {
         path: state.navigation.path
     }
 };
-  
+
 export default connect(mapStateToProps)(FileList);

@@ -43,4 +43,9 @@
   padding: 0;
   margin: 0;
   overflow-y: auto;
+  min-height: 15rem;
+}
+
+.filestable_content--empty {
+  background: center no-repeat url(./empty-dir.svg);
 }
