@@ -2,6 +2,9 @@
   font-size: 1.25rem;
   overflow: auto;
   flex-shrink: 10;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
 }
 
 .filestable_header {
@@ -13,6 +16,7 @@
   position: sticky;
   background-color: white;
   box-shadow: 0 .125rem .125rem 0 rgba(0,0,0,.14),0 .1875rem .0625rem -.125rem rgba(0,0,0,.2),0 .0625rem .1875rem 0 rgba(0,0,0,.12);
+  flex-shrink: 0;
 }
 
 .filestable_header_select {
@@ -44,8 +48,9 @@
   margin: 0;
   overflow-y: auto;
   min-height: 15rem;
+  flex-grow: 1;
 }
 
 .filestable_content--empty {
-  background: center no-repeat url(./empty-dir.svg);
+  background: center / contain no-repeat url(./empty-dir.svg);
 }
