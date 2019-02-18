@@ -31,12 +31,11 @@ class App extends Component {
 
   render() {
     return (
-        <div className="cloud">
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-          <Navigation aria-expanded={ this.props.preview.length <= 0 } />
-          <Preview aria-expanded={ this.props.preview.length > 0 } />
-          <Notifications />
-        </div>
+      <div className="cloud">
+        <Navigation aria-expanded={this.props.preview.length <= 0} />
+        <Preview aria-expanded={this.props.preview.length > 0} />
+        <Notifications />
+      </div>
     );
   }
 }
