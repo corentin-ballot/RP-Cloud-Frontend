@@ -19,7 +19,7 @@ class App extends Component {
           this.props.dispatch(fetchFileList(location.pathname));
           break;
         case 'POP': // location hash change
-          // TODO : dispatch ( ADD_PREVIEW_FILE, REQUEST_PREVIEW_CONTENT and RECEIVE_PREVIEW_CONTENT on received ) or REMOVE_PREVIEW_FILE
+          this.props.dispatch(fetchFileList(location.pathname));
           break;
         default: break;
       }
