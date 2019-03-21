@@ -46,14 +46,15 @@ export function fetchFileList(path) {
     return function action(dispatch) {
         dispatch(requestFileList(path));
 
-        return fetch(`/api/cloud/browse?path=${path}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    response.json().then((json) => dispatch(receiveFileList(json)));
-                } else {
-                    response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
-                }
-            })
+        return fetch(`/api/cloud/dir?url=${path}`, {
+            method: 'GET'
+        }).then(response => {
+            if (response.ok) {
+                response.json().then((json) => dispatch(receiveFileList(json)));
+            } else {
+                response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
+            }
+        })
     }
 }
 
@@ -75,14 +76,15 @@ function receiveRefreshFileList(json) {
 
 export function refreshFileList(path) {
     return function action(dispatch) {
-        return fetch(`/api/cloud/browse?path=${path}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    response.json().then((json) => dispatch(receiveRefreshFileList(json)));
-                } else {
-                    response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
-                }
-            })
+        return fetch(`/api/cloud/dir?url=${path}`, {
+            method: 'GET'
+        }).then(response => {
+            if (response.ok) {
+                response.json().then((json) => dispatch(receiveRefreshFileList(json)));
+            } else {
+                response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
+            }
+        })
     }
 }
 
@@ -141,9 +143,9 @@ export function hideNewFile() {
 export function submitNewDir(path, name) {
     return function action(dispatch) {
         dispatch(hideNewDir());
-        return fetch('/api/cloud/newdir', {
+        return fetch('/api/cloud/dir', {
             method: 'POST',
-            body: JSON.stringify({ dirname: name, path: path })
+            body: JSON.stringify({ url: path + '/' + name })
         }).then(response => {
             if (response.ok) {
                 response.json().then((json) => { dispatch(refreshFileList(path)); dispatch(addNotification(json.msg, json.detail)); });
@@ -157,9 +159,9 @@ export function submitNewDir(path, name) {
 export function submitNewFile(path, name) {
     return function action(dispatch) {
         dispatch(hideNewFile());
-        return fetch('/api/cloud/newfile', {
+        return fetch('/api/cloud/file', {
             method: 'POST',
-            body: JSON.stringify({ filename: name, path: path })
+            body: JSON.stringify({ url: path + '/' + name })
         }).then(response => {
             if (response.ok) {
                 response.json().then((json) => { dispatch(refreshFileList(path)); dispatch(addNotification(json.msg, json.detail)); });
@@ -172,24 +174,27 @@ export function submitNewFile(path, name) {
 
 export function renameFile(file, newUrl) {
     return function action(dispatch) {
-        return fetch("/api/cloud/rename?fileurl=" + file.url + "&newurl=" + newUrl, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    response.json().then((json) => { dispatch(refreshFileList(file.url.replace(file.name, ''))); dispatch(addNotification(json.msg, json.detail)); });
-                } else {
-                    response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
-                }
-            })
+        return fetch('/api/cloud/file', {
+            method: 'PUT',
+            body: JSON.stringify({ url: file.url, newurl: newUrl })
+        }).then(response => {
+            if (response.ok) {
+                response.json().then((json) => { dispatch(refreshFileList(file.url.replace(file.name, ''))); dispatch(addNotification(json.msg, json.detail)); });
+            } else {
+                response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
+            }
+        })
     }
 }
 
 export function uploadFiles(files, path) {
     return function action(dispatch) {
         let data = new FormData();
-        data.append('path', path);
-        data.append('files', files);
-
-        fetch('/api/cloud/upload', {
+        data.append('url', path);
+        files.forEach(function(file, index) {
+            data.append('file-'+index, file, file.name)
+        });
+        fetch('/api/cloud/file', {
             method: 'POST',
             body: data
         }).then(response => {
@@ -208,41 +213,49 @@ export function toggleHiddenFiles() {
     }
 }
 
-export function compressFiles(urls, path) {
+export function compressFiles(files, path) {
     return function action(dispatch) {
-        fetch("/api/cloud/zip?files=" + JSON.stringify(urls) + "&path=" + path)
-            .then(response => {
-                if (response.ok) {
-                    response.json().then((json) => { dispatch(refreshFileList(path)); dispatch(addNotification(json.msg, json.detail)); });
-                } else {
-                    response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
-                }
-            })
+        fetch('/api/cloud/zip', {
+            method: 'POST',
+            body: JSON.stringify({ url: path, files: files })
+        }).then(response => {
+            if (response.ok) {
+                response.json().then((json) => { dispatch(refreshFileList(path)); dispatch(addNotification(json.msg, json.detail)); });
+            } else {
+                response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
+            }
+        })
     }
 }
 
 export function deleteFiles(urls, path) {
     return function action(dispatch) {
-        fetch("/api/cloud/delete?files=" + JSON.stringify(urls), { method: 'POST' })
-            .then(response => {
+        for (let url in urls) {
+
+            fetch('/api/cloud/delete', {
+                method: 'DELETE',
+                body: JSON.stringify({ url: url })
+            }).then(response => {
                 if (response.ok) {
                     response.json().then((json) => { dispatch(refreshFileList(path)); dispatch(addNotification(json.msg, json.detail)); });
                 } else {
                     response.text().then((text) => { dispatch(receiveFileList([])); dispatch(addNotification(response.statusText, text)) });
                 }
             })
+        }
     }
 }
 
 export function downloadFile(file) {
     return function action(dispatch) {
-        fetch('/api/cloud/download?fileurl=' + file.url, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    response.blob().then(blob => saveAs(blob, file.name));
-                } else {
-                    response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
-                }
-            });
+        fetch('/api/cloud/file?url=' + file.url, {
+            method: 'GET'
+        }).then(response => {
+            if (response.ok) {
+                response.blob().then(blob => saveAs(blob, file.name));
+            } else {
+                response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
+            }
+        });
     }
 }
