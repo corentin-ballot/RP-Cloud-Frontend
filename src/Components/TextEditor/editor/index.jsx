@@ -48,7 +48,13 @@ class MdEditor extends React.Component {
       this.setState({
         f_history
       })
-      this.handleLineIndex(this.props.value)
+      this.handleLineIndex(props.value)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.handleLineIndex(nextProps.value)
     }
   }
 
@@ -182,40 +188,42 @@ class MdEditor extends React.Component {
 
     return (
       <div className={fullscreen} style={{ height: this.props.height }}>
-        {this.props.controlbar && <div className="for-controlbar">
-          <ul>
+        <div className="for-controlbar">
+          <ul className="for-controlbar_md">
             <li onClick={this.undo} title={lang[this.props.lang].undo}>
               <i className="foricon for-undo" />
             </li>
             <li onClick={this.redo} title={lang[this.props.lang].redo}>
               <i className="foricon for-redo" />
             </li>
-            <li data-type="h1" onClick={this.insert} title={lang[this.props.lang].h1}>
-              H1
+            {this.props.controlbar && (<>
+              <li data-type="h1" onClick={this.insert} title={lang[this.props.lang].h1}>
+                H1
             </li>
-            <li data-type="h2" onClick={this.insert} title={lang[this.props.lang].h2}>
-              H2
+              <li data-type="h2" onClick={this.insert} title={lang[this.props.lang].h2}>
+                H2
             </li>
-            <li data-type="h3" onClick={this.insert} title={lang[this.props.lang].h3}>
-              H3
+              <li data-type="h3" onClick={this.insert} title={lang[this.props.lang].h3}>
+                H3
             </li>
-            <li data-type="h4" onClick={this.insert} title={lang[this.props.lang].h4}>
-              H4
+              <li data-type="h4" onClick={this.insert} title={lang[this.props.lang].h4}>
+                H4
             </li>
-            <li data-type="image" onClick={this.insert} title={lang[this.props.lang].image}>
-              <i className="foricon for-image" />
-            </li>
-            <li data-type="link" onClick={this.insert} title={lang[this.props.lang].link}>
-              <i className="foricon for-link" />
-            </li>
-            <li data-type="code" onClick={this.insert} title={lang[this.props.lang].code}>
-              <i className="foricon for-code" />
-            </li>
+              <li data-type="image" onClick={this.insert} title={lang[this.props.lang].image}>
+                <i className="foricon for-image" />
+              </li>
+              <li data-type="link" onClick={this.insert} title={lang[this.props.lang].link}>
+                <i className="foricon for-link" />
+              </li>
+              <li data-type="code" onClick={this.insert} title={lang[this.props.lang].code}>
+                <i className="foricon for-code" />
+              </li>
+            </>)}
+          </ul>
+          <ul className="for-controlbar_tools">
             {this.props.allowsave && <li data-type="code" onClick={this.save} title={lang[this.props.lang].save}>
               <i className="foricon for-save" />
             </li>}
-          </ul>
-          <ul>
             {this.props.allowfullscreen && <li className={expandActive} onClick={this.expand}>
               {expandActive ? (
                 <i className="foricon for-contract" />
@@ -231,7 +239,7 @@ class MdEditor extends React.Component {
                 )}
             </li>}
           </ul>
-        </div>}
+        </div>
         <div className="for-editor">
           <div className={editorClass}>
             <div className="for-editor-wrapper">

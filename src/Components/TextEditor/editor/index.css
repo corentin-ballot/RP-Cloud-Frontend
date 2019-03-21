@@ -69,6 +69,8 @@
     border-left: 1px solid #ccc;
     padding: 10px 14px;
     background: #fcfcfc;
+    height: 100%;
+    box-sizing: border-box;
   }
   .for-container .for-editor .for-preview-hidden {
     display: none;
@@ -124,7 +126,7 @@
     display: block;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     resize: none;
     border: none;
     outline: none;
