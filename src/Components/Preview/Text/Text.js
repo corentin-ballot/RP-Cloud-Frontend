@@ -19,13 +19,18 @@ class Text extends Component {
     }
 
     componentWillMount() {
-        this.props.addButton(this.props.file, "save", this.handleSaveClick);
+        let _this = this;
+        var reader = new FileReader();
+        reader.onload = function () {
+            _this.handleValueChange(reader.result);
+        }
+        reader.readAsText(this.props.file.blob);
     }
 
     render() {
         return (
             <div className="cloud_preview_panel_item_container">
-                <TextEditor lang="en" controlbar={typeof this.props.markdown !== 'undefined' ? this.props.markdown : false} allowfullscreen={false} allowpreview={false} allowsave={false} value={this.props.file.content} onChange={this.handleValueChange.bind(this)} onSave={this.handleSaveClick.bind(this)} />
+                <TextEditor lang="en" controlbar={this.props.file.url.match(/\.md$/)} allowfullscreen={true} allowpreview={this.props.file.url.match(/\.(md|html|htm)$/)} allowsave={true} value={this.props.file.content} onChange={this.handleValueChange.bind(this)} onSave={this.handleSaveClick.bind(this)} />
             </div>
         );
     }

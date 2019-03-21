@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import Markdown from './Markdown/Markdown';
 import Image from './Image/Image';
 import Text from './Text/Text';
-import HTML from './HTML/HTML';
 import PDF from './PDF/PDF';
 import Error from './Error/Error';
-import Zip from './Zip/Zip';
+// import Zip from './Zip/Zip';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
 
 import { connect } from 'react-redux'
@@ -51,25 +49,13 @@ class Preview extends Component {
                 <div className="cloud_preview_panel">
                     {this.props.previewFiles.map((item, index) => (
                         <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.activePreview}>
-                            {!item.isContentLoaded && <LoadingSpinner />}
                             {
-                                typeof item.type !== "undefined" && (
-                                    (item.type === "markdown" && <Markdown file={item} addButton={this.addButton} />)
-                                    || (item.type === "image" && <Image url={item.url} alt={item.name} addButton={this.addButton} />)
-                                    || (item.type === "text" && <Text file={item} addButton={this.addButton} />)
-                                    || (item.type === "html" && <HTML file={item} addButton={this.addButton} />)
-                                    || (item.type === "zip" && <Zip file={item} addButton={this.addButton} />)
-                                    || (item.type === "pdf" && <PDF file={item} addButton={this.addButton} />)
-                                    || (item.type === "error" && <Error />)
-                                )
+                                (typeof item.blob != 'undefined' && (
+                                    (item.blob.type.match(/^image\/.*/) && <Image file={item} />)
+                                    || (item.blob.type.match(/^text\/.*/) && <Text file={item} />)
+                                    || (item.blob.type === "application/pdf" && <PDF file={item} />)
+                                )) || ((item.isContentLoaded && <Error />) || <LoadingSpinner />)
                             }
-                            <div className="cloud_preview_panel_item_actions_group">
-                                {
-                                    typeof item.actions !== "undefined" && item.actions.map((e, i, a) => (
-                                        <button className="cloud_preview_panel_item_action" onClick={e.click} key={e.label}><i className="material-icons">{e.label}</i></button>
-                                    ))
-                                }
-                            </div>
                         </div>
                     ))}
                 </div>

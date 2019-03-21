@@ -9,10 +9,11 @@ export const UPDATE_PREVIEW_TAB = 'UPDATE_PREVIEW_TAB';
 export function previewFile(file) {
     return function action(dispatch) {
         dispatch(addPreviewFile(file));
-        fetch("/api/cloud/preview?fileurl=" + file.url, { method: 'POST' })
+        fetch('/api/cloud/file?url=' + file.url, { method: 'GET' })
             .then(response => {
                 if (response.ok) {
-                    response.json().then((json) => { dispatch(receivePreviewContent(file, json)); });
+                    // response.json().then((json) => { dispatch(receivePreviewContent(file, json)); });
+                    response.blob().then((blob) => { dispatch(receivePreviewContent(file, blob)); });
                 } else {
                     response.text().then((text) => { dispatch(receivePreviewContent(file, { type: 'error' })); dispatch(addNotification(response.statusText, text)) });
                 }
@@ -34,10 +35,10 @@ function addPreviewFile(file) {
     }
 }
 
-function receivePreviewContent(file, json) {
+function receivePreviewContent(file, blob) {
     return {
         type: RECEIVE_PREVIEW_CONTENT,
-        json,
+        blob,
         file
     }
 }
@@ -49,15 +50,17 @@ export function selectPreview(index) {
     }
 }
 
-export function saveFile(fileurl, content) {
+export function saveFile(path, content) {
     return function action(dispatch) {
-        fetch("/api/cloud/savetextfile", { method: 'POST', body: JSON.stringify({ fileurl: fileurl, content: content }) })
-            .then(response => {
-                if (response.ok) {
-                    response.json().then((json) => { dispatch(addNotification(json.msg, json.detail)) });
-                } else {
-                    response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
-                }
-            })
+        fetch('/api/cloud/file', {
+            method: 'PUT',
+            body: JSON.stringify({ url: path, content: content })
+        }).then(response => {
+            if (response.ok) {
+                response.json().then((json) => { dispatch(addNotification(json.msg, json.detail)) });
+            } else {
+                response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
+            }
+        })
     }
 }

@@ -4,10 +4,18 @@ import './Image.css';
 
 class Image extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            url: URL.createObjectURL(this.props.file.blob)
+        }
+    }
+
     render() {
         return (
             <div className="cloud_preview_panel_item_image">
-                <a href={this.props.url}><img src={this.props.url} alt={this.props.alt} /></a>
+                <a href={this.state.url}><img src={this.state.url} alt={'preview ' + this.props.file.name + ' image file'} /></a>
             </div>
         );
     }
