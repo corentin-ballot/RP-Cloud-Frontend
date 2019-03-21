@@ -6,7 +6,7 @@ import FileListItem from './FileListItem/FileListItem';
 import FileListActionsButton from './FileListActionsButton/FileListActionsButton.js';
 import FileListNewFileItem from './FileListNewFileItem/FileListNewFileItem.js';
 import FileListNewDirItem from './FileListNewDirItem/FileListNewDirItem.js';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.js';
+import FileListSkeletonItems from './FileListSkeletonItems/FileListSkeletonItems.js';
 
 
 import { selectAllFiles, toggleHiddenFiles, toggleNewDir, toggleNewFile, compressFiles, deleteFiles, uploadFiles } from '../../../Redux/actions/navigation';
@@ -73,8 +73,8 @@ class FileList extends Component {
                     </FileListActionsButton>
                 </header>
                 <Dropzone className="cloud_navigation_dropzone" onDrop={this.onDrop.bind(this)} disableClick ref={(node) => { this.dropzoneRef = node; }}>
-                    <ol className={this.props.fileList.length === 0 ? "filestable_content filestable_content--empty" : "filestable_content"}>
-                        {!this.props.isFileListLoaded && <li className="filestable_content_item-loading"><LoadingSpinner /></li>}
+                    <ol className={this.props.isFileListLoaded && this.props.fileList.length === 0 ? "filestable_content filestable_content--empty" : "filestable_content"}>
+                        {!this.props.isFileListLoaded && <FileListSkeletonItems />}
                         {this.props.isFileListLoaded && this.props.displayNewFile && <FileListNewFileItem />}
                         {this.props.isFileListLoaded && this.props.displayNewDir && <FileListNewDirItem />}
                         {this.props.isFileListLoaded && this.props.fileList.map((item) => (
