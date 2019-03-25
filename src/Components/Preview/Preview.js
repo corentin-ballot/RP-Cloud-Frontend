@@ -3,7 +3,7 @@ import Image from './Image/Image';
 import Text from './Text/Text';
 import PDF from './PDF/PDF';
 import Error from './Error/Error';
-// import Zip from './Zip/Zip';
+import Zip from './Zip/Zip';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
 
 import { connect } from 'react-redux'
@@ -54,6 +54,7 @@ class Preview extends Component {
                                     (item.blob.type.match(/^image\/.*/) && <Image file={item} />)
                                     || (item.blob.type.match(/^text\/.*/) && <Text file={item} />)
                                     || (item.blob.type === "application/pdf" && <PDF file={item} />)
+                                    || (item.blob.type === "application/zip" && <Zip file={item} />)
                                 )) || ((item.isContentLoaded && <Error />) || <LoadingSpinner />)
                             }
                         </div>
