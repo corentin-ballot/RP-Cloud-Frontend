@@ -16,6 +16,7 @@ class Zip extends Component {
         let contents = [];
         for (const entry of entries) {
             if (!entry.directory) {
+                // eslint-disable-next-line
                 let splitname = entry.filename.split(/\/(?=[^\/]+$)/);
                 // create file obj
                 let file = { name: splitname[splitname.length - 1], type: "file", size: entry.uncompressedSize, mtime: entry.lastModDateRaw * 100000, entry };
@@ -30,6 +31,7 @@ class Zip extends Component {
 
 
         function createDir(dirname) {
+            // eslint-disable-next-line
             let splitname = dirname.split(/\/(?=[^\/]+$)/);
 
             // create dir obj
