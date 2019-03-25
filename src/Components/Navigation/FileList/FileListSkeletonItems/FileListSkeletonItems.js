@@ -4,7 +4,7 @@ import ReadableOctets from '../../../Conversion/ReadableOctets/ReadableOctets';
 import ReadableDate from '../../../Conversion/ReadableDate/ReadableDate';
 
 import './FileListSkeletonItems.css';
-import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
+// import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 
 class FileListSkeletonItems extends Component {
 
@@ -33,7 +33,7 @@ class FileListSkeletonItems extends Component {
     }
 
     render() {
-        const itemCount = 6, dirNumber = this.generateDirNumber(itemCount);
+        const itemCount = 5, dirNumber = this.generateDirNumber(itemCount);
         return (
             <div className="skeleton_screen">
                 {[...Array(itemCount)].map((e, i) =>
@@ -49,7 +49,7 @@ class FileListSkeletonItems extends Component {
                         <ReadableDate className="filestable_content_item_lastupdate">{this.generateDate()}</ReadableDate>
                     </li>
                 )}
-                <div className="skeleton_screen__spinner"><LoadingSpinner /></div>
+                {/* <div className="skeleton_screen__spinner"><LoadingSpinner /></div> */}
             </div>
         );
     }

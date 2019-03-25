@@ -31,62 +31,63 @@
     opacity: 0;
 }
 
-.filestable_content_item.--skeleton:nth-child(1) {
-    animation: .5s linear .25s item_1;
-    animation-fill-mode: forwards;
+@keyframes opacity_blink {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-@keyframes item_1 {
-    from { opacity: 0; }
-    to { opacity: .5; }
+.filestable_content_item.--skeleton:nth-child(1) {
+    animation: 1s linear 0s opacity_blink;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .filestable_content_item.--skeleton:nth-child(2) {
-    animation: .5s linear .5s item_2;
+    animation: 1s linear .25s opacity_blink;
     animation-fill-mode: forwards;
-}
-
-@keyframes item_2 {
-    from { opacity: 0; }
-    to { opacity: .4; }
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .filestable_content_item.--skeleton:nth-child(3) {
-    animation: .5s linear .75s item_3;
+    animation: 1s linear .5s opacity_blink;
     animation-fill-mode: forwards;
-}
-
-@keyframes item_3 {
-    from { opacity: 0; }
-    to { opacity: .3; }
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .filestable_content_item.--skeleton:nth-child(4) {
-    animation: .5s linear 1s item_4;
+    animation: 1s linear .75s opacity_blink;
     animation-fill-mode: forwards;
-}
-
-@keyframes item_4 {
-    from { opacity: 0; }
-    to { opacity: .2; }
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .filestable_content_item.--skeleton:nth-child(5) {
-    animation: .5s linear 1.25s item_5;
+    animation: 1s linear 1s opacity_blink;
     animation-fill-mode: forwards;
-}
-
-@keyframes item_5 {
-    from { opacity: 0; }
-    to { opacity: .1; }
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .filestable_content_item.--skeleton:nth-child(6) {
-    animation: .5s linear 1.5s item_6;
+    animation: 1s linear 1.25s opacity_blink;
     animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
-@keyframes item_6 {
-    from { opacity: 0; }
-    to { opacity: .05; }
+.filestable_content_item.--skeleton:nth-child(7) {
+    animation: 1s linear 1.5s opacity_blink;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.filestable_content_item.--skeleton:nth-child(8) {
+    animation: 1s linear 1.75s opacity_blink;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
