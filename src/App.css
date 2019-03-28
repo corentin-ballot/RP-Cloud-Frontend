@@ -1,12 +1,26 @@
 #root {
   height: 100%;
-  font-family: sans-serif;
 }
 
 .cloud {
+  font-family: sans-serif;
   width: 100%;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column;
   height: 100%;
   background-color: #f6f8fa;
+  position: relative;
+
+  /* debug */
+  min-height: 500px;
+}
+
+.cloud_main {
+  flex-grow:1;
+}
+
+.cloud_notifications {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

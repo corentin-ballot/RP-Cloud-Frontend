@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navigation from './Components/Navigation/Navigation';
 import Notifications from './Components/Notifications/Notifications';
-import Preview from './Components/Preview/Preview';
 import { connect } from 'react-redux'
 import { fetchFileList } from './Redux/actions/navigation'
+
+import Breadcrumb from './Components/Breadcrumb';
+import Preview from './Components/Preview';
+import FileList from './Components/FileList/FileList';
 
 class App extends Component {
 
@@ -31,11 +33,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="cloud">
-        <Navigation aria-expanded={this.props.preview.length <= 0} />
-        <Preview aria-expanded={this.props.preview.length > 0} />
-        <Notifications />
-      </div>
+      <section className="cloud">
+        <header className="cloud_header">
+          <Breadcrumb />
+        </header>
+        <main className="cloud_main">
+          <section className="cloud_navigation" aria-expanded={this.props.preview.length <= 0}>
+            <FileList />
+          </section>
+          <section className="cloud_preview" aria-expanded={this.props.preview.length > 0}>
+            <Preview />
+          </section>
+
+          <div className="cloud_notifications"><Notifications /></div>
+        </main>
+      </section>
     );
   }
 }
