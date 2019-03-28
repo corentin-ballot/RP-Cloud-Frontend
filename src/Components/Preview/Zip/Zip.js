@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import './Zip.css';
-import ReadableOctets from '../../Conversion/ReadableOctets/ReadableOctets';
-import ReadableDate from '../../Conversion/ReadableDate/ReadableDate';
+import ReadableOctets from '../../ReadableOctets';
+import ReadableDate from '../../ReadableDate';
 
 class Zip extends Component {
 

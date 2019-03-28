@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import ReadableOctets from '../../../Conversion/ReadableOctets/ReadableOctets';
-import ReadableDate from '../../../Conversion/ReadableDate/ReadableDate';
+import ReadableOctets from '../../ReadableOctets';
+import ReadableDate from '../../ReadableDate';
 
 import './FileListSkeletonItems.css';
 // import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';

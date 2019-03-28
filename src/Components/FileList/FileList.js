@@ -9,7 +9,7 @@ import FileListNewDirItem from './FileListNewDirItem/FileListNewDirItem.js';
 import FileListSkeletonItems from './FileListSkeletonItems/FileListSkeletonItems.js';
 
 
-import { selectAllFiles, toggleHiddenFiles, toggleNewDir, toggleNewFile, compressFiles, deleteFiles, uploadFiles } from '../../../Redux/actions/navigation';
+import { selectAllFiles, toggleHiddenFiles, toggleNewDir, toggleNewFile, compressFiles, deleteFiles, uploadFiles } from '../../Redux/actions/navigation';
 
 import { connect } from 'react-redux'
 

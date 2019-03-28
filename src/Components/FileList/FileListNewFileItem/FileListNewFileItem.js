@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
-import { submitNewFile, hideNewFile } from '../../../../Redux/actions/navigation';
+import { submitNewFile, hideNewFile } from '../../../Redux/actions/navigation';
 
 class FilestableNewFileItem extends Component {
 
@@ -18,7 +18,7 @@ class FilestableNewFileItem extends Component {
             <li className="filestable_content_item">
                 <div className="filestable_content_item_select"><i className="material-icons">note_add</i></div>
                 <form className="filestable_content_item_name">
-                    <input name="newfile" className="filestable_content_item_name_rename" type="text" placeholder="New file name" ref={el => this.filename=el} />
+                    <input name="newfile" className="filestable_content_item_name_rename" type="text" placeholder="New file name" ref={el => this.filename = el} />
                 </form>
                 <div className="filestable_content_item_icons">
                     <button className="filestable_content_item_icons_item" onClick={() => this.handleSubmitNewFileClick(this.filename.value)}><i className="material-icons">done</i></button>
@@ -36,5 +36,5 @@ const mapStateToProps = (state) => {
         path: state.navigation.path
     }
 };
-  
+
 export default connect(mapStateToProps)(FilestableNewFileItem);

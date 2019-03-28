@@ -36,17 +36,21 @@ class Preview extends Component {
 
     render() {
         return (
-            <div className="cloud_preview" {...this.props}>
-                <div className="cloud_preview_tabsbar" role="tablist">
-                    {this.props.previewFiles.map((item, index) => (
-                        <div key={item.url} className="cloud_preview_tabsbar_item" aria-selected={index === this.props.activePreview}>
-                            <button role="tab" className="cloud_preview_tabsbar_item_name" id={"preview-" + index} onClick={() => this.handleTabClick(item, index)} title={item.url}> {item.name} </button>
-                            <button className="cloud_preview_tabsbar_item_close_btn material-icons" onClick={() => this.handleCloseTabClick(item.url)}>close</button>
-                        </div>
-                    ))}
-                </div>
+            <>
+                <header>
+                    <nav>
+                        <ol className="cloud_preview_tabsbar" role="tablist">
+                            {this.props.previewFiles.map((item, index) => (
+                                <li key={item.url} className="cloud_preview_tabsbar_item" role="tab" aria-selected={index === this.props.activePreview}>
+                                    <button role="tab" className="cloud_preview_tabsbar_item_name" id={"preview-" + index} onClick={() => this.handleTabClick(item, index)} title={item.url}> {item.name} </button>
+                                    <button className="cloud_preview_tabsbar_item_close_btn material-icons" onClick={() => this.handleCloseTabClick(item.url)}>close</button>
+                                </li>
+                            ))}
+                        </ol>
+                    </nav>
+                </header>
 
-                <div className="cloud_preview_panel">
+                <main className="cloud_preview_panel">
                     {this.props.previewFiles.map((item, index) => (
                         <div key={item.url} role="tabpanel" className="cloud_preview_panel_item" aria-labelledby={"preview-" + index} hidden={index !== this.props.activePreview}>
                             {
@@ -59,8 +63,8 @@ class Preview extends Component {
                             }
                         </div>
                     ))}
-                </div>
-            </div>
+                </main>
+            </>
         );
     }
 }

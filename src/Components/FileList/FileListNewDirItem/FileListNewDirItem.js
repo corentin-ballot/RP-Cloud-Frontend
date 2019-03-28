@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
-import { submitNewDir, hideNewDir } from '../../../../Redux/actions/navigation';
+import { submitNewDir, hideNewDir } from '../../../Redux/actions/navigation';
 
 class FilestableNewDirItem extends Component {
 
@@ -18,7 +18,7 @@ class FilestableNewDirItem extends Component {
             <li className="filestable_content_item">
                 <div className="filestable_content_item_select"><i className="material-icons">create_new_folder</i></div>
                 <form className="filestable_content_item_name">
-                    <input name="newfile" className="filestable_content_item_name_rename" type="text" placeholder="New dir name" ref={el => this.dirname=el} />
+                    <input name="newfile" className="filestable_content_item_name_rename" type="text" placeholder="New dir name" ref={el => this.dirname = el} />
                 </form>
                 <div className="filestable_content_item_icons">
                     <button className="filestable_content_item_icons_item" onClick={() => this.handleSubmitNewDirClick(this.dirname.value)}><i className="material-icons">done</i></button>
@@ -36,5 +36,5 @@ const mapStateToProps = (state) => {
         path: state.navigation.path
     }
 };
-  
+
 export default connect(mapStateToProps)(FilestableNewDirItem);

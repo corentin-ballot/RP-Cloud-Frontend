@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { renameFile, toggleFileSelect, enableFileEditName, disableFileEditName, downloadFile } from '../../../../Redux/actions/navigation';
-import { previewFile } from '../../../../Redux/actions/preview';
+import { renameFile, toggleFileSelect, enableFileEditName, disableFileEditName, downloadFile } from '../../../Redux/actions/navigation';
+import { previewFile } from '../../../Redux/actions/preview';
 import { connect } from 'react-redux'
 
-import ReadableOctets from '../../../Conversion/ReadableOctets/ReadableOctets';
-import ReadableDate from '../../../Conversion/ReadableDate/ReadableDate';
+import ReadableOctets from '../../ReadableOctets';
+import ReadableDate from '../../ReadableDate';
 
 import './FileListItem.css';
 
