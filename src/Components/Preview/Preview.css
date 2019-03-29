@@ -7,8 +7,9 @@
     
 }
 .cloud_preview[aria-expanded="true"] {
-    width: 60%;
-    padding: .5rem;
+    width: 65%;
+    padding-left: .5rem;
+    box-sizing: border-box;
 }
 .cloud_preview_tabsbar {
     display: flex;
@@ -16,6 +17,7 @@
     flex-wrap: nowrap;
     font-size: 16px;
     margin: 0 0 .5rem 0;
+    padding: 0;
 }
 .cloud_preview_tabsbar_item {
     flex-grow: 1;
