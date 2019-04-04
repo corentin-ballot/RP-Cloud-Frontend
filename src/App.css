@@ -11,22 +11,22 @@
   height: 100%;
   background-color: #f6f8fa;
   position: relative;
-
-  /* debug */
-  min-height: 500px;
+  overflow: hidden;
 }
 
 .cloud_main {
   flex-grow:1;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .cloud_navigation {
   width: 100%;
+  overflow: auto;
 }
 
-.cloud_navigation[aira-expanded=false] {
+.cloud_navigation[aira-expanded="false"] {
   width: 40%;
 }
 
