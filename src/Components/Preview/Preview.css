@@ -1,15 +1,9 @@
 .cloud_preview {
-    width: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     align-content: stretch;
     
-}
-.cloud_preview[aria-expanded="true"] {
-    width: 65%;
-    padding-left: .5rem;
-    box-sizing: border-box;
 }
 .cloud_preview_tabsbar {
     display: flex;
