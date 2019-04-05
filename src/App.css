@@ -34,7 +34,7 @@
   width: 0;
 }
 .cloud_preview[aria-expanded="true"] {
-  width: 60%;
+  width: 100%;
   padding-left: .5rem;
   box-sizing: border-box;
 }
