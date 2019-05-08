@@ -56,7 +56,7 @@ class Preview extends Component {
                             {
                                 (typeof item.blob != 'undefined' && (
                                     (item.blob.type.match(/^image\/.*/) && <Image file={item} />)
-                                    || (item.blob.type.match(/^text\/.*/) && <Text file={item} />)
+                                    || (item.blob.type.match(/^(text\/.*|inode\/x-empty)/) && <Text file={item} />)
                                     || (item.blob.type === "application/pdf" && <PDF file={item} />)
                                     || (item.blob.type === "application/zip" && <Zip file={item} />)
                                 )) || ((item.isContentLoaded && <Error />) || <LoadingSpinner />)
