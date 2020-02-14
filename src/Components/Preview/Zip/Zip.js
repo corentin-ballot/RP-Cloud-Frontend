@@ -3,15 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import './Zip.css';
-import ReadableOctets from '../../ReadableOctets';
-import ReadableDate from '../../ReadableDate';
+import ReadableOctets from '../../../Components/ReadableOctets';
+import ReadableDate from '../../../Components/ReadableDate';
 
 class Zip extends Component {
 
     state = { zip: [] }
 
     process(entries) {
-        console.log(entries);
         let array = [];
         let contents = [];
         for (const entry of entries) {
@@ -108,13 +107,6 @@ class ZipDir extends Component {
 }
 
 class ZipFile extends Component {
-    // handleClick() {
-    //     this.props.file.entry.getData(new window.zip.TextWriter(), function (text) {
-    //         console.log(text);
-    //         //reader.close();
-    //     })
-    // }
-
     render() {
         return (
             // <div className="cloud_preview_panel_item_zip_file" onClick={this.handleClick.bind(this)}>

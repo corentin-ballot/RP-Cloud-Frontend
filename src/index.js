@@ -8,10 +8,10 @@ import store from './Redux/configureStore'
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter basename="/cloud">
-            <Route path="/" render={(props) =>
-                <App {...props} />
-            } />
+        <BrowserRouter basename="/">
+                <Route path="/" render={(props) =>
+                    <App {...props} />
+                } />
         </BrowserRouter>
     </Provider>, document.getElementById('root'));
 registerServiceWorker();

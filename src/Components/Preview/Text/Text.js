@@ -5,8 +5,6 @@ import { saveFile } from '../../../Redux/actions/preview';
 
 import TextEditor from '../../TextEditor'
 
-import './Text.css';
-
 class Text extends Component {
 
     handleSaveClick = () => {

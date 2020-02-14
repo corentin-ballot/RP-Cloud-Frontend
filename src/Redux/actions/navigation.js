@@ -13,6 +13,8 @@ export const HIDE_NEW_DIR = 'HIDE_NEW_DIR';
 export const HIDE_NEW_FILE = 'HIDE_NEW_FILE';
 export const REFRESH_FILE_LIST = 'REFRESH_FILE_LIST';
 export const TOGGLE_HIDDEN_FILES = 'TOGGLE_HIDDEN_FILES';
+export const UPDATE_FILTER = 'UPDATE_FILTER';
+export const SORT_BY = 'SORT_BY';
 
 function pathToBreadcrumb(path) {
     return (path.slice(-1) === '/' ? path.substring(0, path.length - 1) : path).split('/').map((item, index, array) => {
@@ -257,5 +259,19 @@ export function downloadFile(file) {
                 response.text().then((text) => { dispatch(addNotification(response.statusText, text)) });
             }
         });
+    }
+}
+
+export function sortFilesBy(prop) {
+    return {
+        type: SORT_BY,
+        prop
+    }
+}
+
+export function filterFiles(filter) {
+    return {
+        type: UPDATE_FILTER,
+        filter
     }
 }
