@@ -8,7 +8,7 @@ import store from './Redux/configureStore'
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter basename="/">
+        <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
                 <Route path="/" render={(props) =>
                     <App {...props} />
                 } />
