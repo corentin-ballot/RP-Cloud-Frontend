@@ -48,7 +48,7 @@ export function fetchFileList(path) {
     return function action(dispatch) {
         dispatch(requestFileList(path));
 
-        return fetch(`/api/cloud/dir?url=${path}`, {
+        return fetch(`${process.env.REACT_APP_API_DIRECTORY}?url=${path}`, {
             method: 'GET'
         }).then(response => {
             if (response.ok) {
@@ -78,7 +78,7 @@ function receiveRefreshFileList(json) {
 
 export function refreshFileList(path) {
     return function action(dispatch) {
-        return fetch(`/api/cloud/dir?url=${path}`, {
+        return fetch(`${process.env.REACT_APP_API_DIRECTORY}?url=${path}`, {
             method: 'GET'
         }).then(response => {
             if (response.ok) {
@@ -145,7 +145,7 @@ export function hideNewFile() {
 export function submitNewDir(path, name) {
     return function action(dispatch) {
         dispatch(hideNewDir());
-        return fetch('/api/cloud/dir', {
+        return fetch(process.env.REACT_APP_API_DIRECTORY, {
             method: 'POST',
             body: JSON.stringify({ url: path + '/' + name })
         }).then(response => {
@@ -161,7 +161,7 @@ export function submitNewDir(path, name) {
 export function submitNewFile(path, name) {
     return function action(dispatch) {
         dispatch(hideNewFile());
-        return fetch('/api/cloud/file', {
+        return fetch(process.env.REACT_APP_API_FILE, {
             method: 'POST',
             body: JSON.stringify({ url: path + '/' + name })
         }).then(response => {
@@ -176,7 +176,7 @@ export function submitNewFile(path, name) {
 
 export function renameFile(file, newUrl) {
     return function action(dispatch) {
-        return fetch('/api/cloud/file', {
+        return fetch(process.env.REACT_APP_API_FILE, {
             method: 'PUT',
             body: JSON.stringify({ url: file.url, newurl: newUrl })
         }).then(response => {
@@ -196,7 +196,7 @@ export function uploadFiles(files, path) {
         files.forEach(function(file, index) {
             data.append('file-'+index, file, file.name)
         });
-        fetch('/api/cloud/file', {
+        fetch(process.env.REACT_APP_API_FILE, {
             method: 'POST',
             body: data
         }).then(response => {
@@ -217,7 +217,7 @@ export function toggleHiddenFiles() {
 
 export function compressFiles(files, path) {
     return function action(dispatch) {
-        fetch('/api/cloud/zip', {
+        fetch(process.env.REACT_APP_API_ZIP, {
             method: 'POST',
             body: JSON.stringify({ url: path, files: files })
         }).then(response => {
@@ -234,7 +234,7 @@ export function deleteFiles(urls, path) {
     return function action(dispatch) {
         for (let url in urls) {
 
-            fetch('/api/cloud/delete', {
+            fetch(process.env.REACT_APP_API_FILE, {
                 method: 'DELETE',
                 body: JSON.stringify({ url: url })
             }).then(response => {
@@ -250,7 +250,7 @@ export function deleteFiles(urls, path) {
 
 export function downloadFile(file) {
     return function action(dispatch) {
-        fetch('/api/cloud/file?url=' + file.url, {
+        fetch(process.env.REACT_APP_API_FILE + '?url=' + file.url, {
             method: 'GET'
         }).then(response => {
             if (response.ok) {
