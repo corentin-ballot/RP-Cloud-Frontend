@@ -110,7 +110,7 @@ class ZipFile extends Component {
     render() {
         return (
             // <div className="cloud_preview_panel_item_zip_file" onClick={this.handleClick.bind(this)}>
-            <div className="cloud_preview_panel_item_zip_file" onClick={this.handleClick.bind(this)}>
+            <div className="cloud_preview_panel_item_zip_file">
 
                 <span className="cloud_preview_panel_item_zip_file_icon"><i className="material-icons">insert_drive_file</i></span>
                 <span className="cloud_preview_panel_item_zip_file_name">{this.props.file.name}</span>
