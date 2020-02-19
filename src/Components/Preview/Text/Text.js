@@ -27,9 +27,7 @@ class Text extends Component {
 
     render() {
         return (
-            <div className="cloud_preview_panel_item_container">
-                <TextEditor lang="en" controlbar={this.props.file.url.match(/\.md$/)} allowfullscreen={true} allowpreview={this.props.file.url.match(/\.(md|html|htm)$/)} allowsave={true} value={this.props.file.content} onChange={this.handleValueChange.bind(this)} onSave={this.handleSaveClick.bind(this)} />
-            </div>
+            <TextEditor lang="en" controlbar={this.props.file.url.match(/\.md$/)} allowfullscreen={true} allowpreview={this.props.file.url.match(/\.(md|html|htm)$/)} allowsave={true} value={this.props.file.content} onChange={this.handleValueChange.bind(this)} onSave={this.handleSaveClick.bind(this)} />
         );
     }
 }

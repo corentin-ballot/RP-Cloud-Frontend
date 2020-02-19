@@ -65,7 +65,7 @@ class App extends Component {
             {/* FILES TABLE */}
             <div className="row flex-grow-1 flex-shrink-1 overflow-hidden">
                 <FilesTable className={`${this.props.preview.length?"col-xl-4 d-none d-xl-block":"col-xl-12"}`} dropzone={this.dropzone}/>
-                <div className={this.props.preview.length?"col-12 col-xl-8 h-100 overflow-auto":"w-0 overflow-hidden"}>
+                <div className={this.props.preview.length?"col-12 col-xl-8 h-100 overflow-auto d-flex flex-column":"w-0 overflow-hidden"}>
                     <Preview />
                 </div>
             </div>

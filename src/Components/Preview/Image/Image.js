@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './Image.css';
-
 class Image extends Component {
 
     constructor(props) {
@@ -14,8 +12,8 @@ class Image extends Component {
 
     render() {
         return (
-            <div className="cloud_preview_panel_item_image">
-                <a href={this.state.url}><img src={this.state.url} alt={'preview ' + this.props.file.name + ' image file'} /></a>
+            <div className="text-center">
+                <a href={this.state.url}><img className="mh-100 mw-100 h-auto w-auto" src={this.state.url} alt={'preview ' + this.props.file.name + ' image file'} /></a>
             </div>
         );
     }

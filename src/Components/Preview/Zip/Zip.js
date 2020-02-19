@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
 
-import './Zip.css';
 import ReadableOctets from '../../../Components/ReadableOctets';
-import ReadableDate from '../../../Components/ReadableDate';
 
 class Zip extends Component {
 
@@ -70,7 +68,7 @@ class Zip extends Component {
 
     render() {
         return (
-            <div className="cloud_preview_panel_item_container">
+            <div>
                 {this.state.zip.map((e) => (
                     (e.type === "dir" && <ZipDir dir={e} />) || <ZipFile file={e} />
                 ))}
@@ -91,12 +89,12 @@ class ZipDir extends Component {
 
     render() {
         return (
-            <div aria-expanded={this.state.expanded} className="cloud_preview_panel_item_zip_dir">
-                <button className="cloud_preview_panel_item_zip_dir_infos" onClick={this.handleClick}>
-                    <span className="cloud_preview_panel_item_zip_dir_infos_icon"><i className="material-icons">{this.state.expanded ? "folder_open" : "folder"}</i></span>
-                    <span className="cloud_preview_panel_item_zip_dir_infos_name">{this.props.dir.name}</span>
+            <div aria-expanded={this.state.expanded}>
+                <button className="btn btn-light w-100 text-left" onClick={this.handleClick}>
+                    <span className="mr-2"><Icon icon="folder"/></span>
+                    <span className="mr-2">{this.props.dir.name}</span>
                 </button>
-                <div className="cloud_preview_panel_item_zip_dir_content">
+                <div className="ml-3 pl-3 border-left">
                     {this.props.dir.content.map((e) => (
                         (e.type === "dir" && <ZipDir dir={e} />) || <ZipFile file={e} />
                     ))}
@@ -109,13 +107,10 @@ class ZipDir extends Component {
 class ZipFile extends Component {
     render() {
         return (
-            // <div className="cloud_preview_panel_item_zip_file" onClick={this.handleClick.bind(this)}>
-            <div className="cloud_preview_panel_item_zip_file">
-
-                <span className="cloud_preview_panel_item_zip_file_icon"><i className="material-icons">insert_drive_file</i></span>
-                <span className="cloud_preview_panel_item_zip_file_name">{this.props.file.name}</span>
-                <ReadableOctets className="cloud_preview_panel_item_zip_file_size">{this.props.file.size}</ReadableOctets>
-                <ReadableDate className="cloud_preview_panel_item_zip_file_mtime">{this.props.file.mtime}</ReadableDate>
+            <div className="d-flex align-items-center p-1">
+                <Icon className="mr-2" icon="text_file"/>
+                <span className="flex-grow-1 mr-2">{this.props.file.name}</span>
+                <ReadableOctets className="mr-2">{this.props.file.size}</ReadableOctets>
             </div>
         );
     }

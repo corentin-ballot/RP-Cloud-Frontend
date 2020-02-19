@@ -37,7 +37,7 @@ class Preview extends Component {
     render() {
         return (
             <>
-                <header className="sticky-top -shadow-sm bg-white" style={{ zIndex: 100 }}>
+                <header className="sticky-top bg-white" style={{ zIndex: 100 }}>
                     <ol className="nav nav-tabs" role="tablist">
                         {this.props.previewFiles.map((item, index) => (
                             <li key={item.url} className="nav-item" role="tab" aria-selected={index === this.props.activePreview}>
@@ -52,9 +52,9 @@ class Preview extends Component {
                     </ol>
                 </header>
 
-                <main style={{borderLeft: "1px solid #dee2e6",borderRight: "1px solid #dee2e6"}}>
+                <main className="flex-grow-1" style={{borderLeft: "1px solid #dee2e6",borderRight: "1px solid #dee2e6"}}>
                     {this.props.previewFiles.map((item, index) => (
-                        <div key={item.url} role="tabpanel" className="" aria-labelledby={"preview-" + index} hidden={index !== this.props.activePreview}>
+                        <div key={item.url} role="tabpanel" className="h-100 p-2" aria-labelledby={"preview-" + index} hidden={index !== this.props.activePreview}>
                             {
                                 (typeof item.blob != 'undefined' && (
                                     (item.blob.type.match(/^image\/.*/) && <Image file={item} />)
