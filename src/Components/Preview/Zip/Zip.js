@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import ReadableOctets from '../../../Components/ReadableOctets';
+import Icon from '../../../Components/Icon';
 
 class Zip extends Component {
 
