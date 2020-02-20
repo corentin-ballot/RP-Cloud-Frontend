@@ -49,7 +49,8 @@ export function fetchFileList(path) {
         dispatch(requestFileList(path));
 
         return fetch(`${process.env.REACT_APP_API_DIRECTORY}?url=${path}`, {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include'
         }).then(response => {
             if (response.ok) {
                 response.json().then((json) => dispatch(receiveFileList(json)));
@@ -79,7 +80,8 @@ function receiveRefreshFileList(json) {
 export function refreshFileList(path) {
     return function action(dispatch) {
         return fetch(`${process.env.REACT_APP_API_DIRECTORY}?url=${path}`, {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include'
         }).then(response => {
             if (response.ok) {
                 response.json().then((json) => dispatch(receiveRefreshFileList(json)));
@@ -147,6 +149,7 @@ export function submitNewDir(path, name) {
         dispatch(hideNewDir());
         return fetch(process.env.REACT_APP_API_DIRECTORY, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({ url: path + '/' + name })
         }).then(response => {
             if (response.ok) {
@@ -163,6 +166,7 @@ export function submitNewFile(path, name) {
         dispatch(hideNewFile());
         return fetch(process.env.REACT_APP_API_FILE, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({ url: path + '/' + name })
         }).then(response => {
             if (response.ok) {
@@ -178,6 +182,7 @@ export function renameFile(file, newUrl) {
     return function action(dispatch) {
         return fetch(process.env.REACT_APP_API_FILE, {
             method: 'PUT',
+            credentials: 'include',
             body: JSON.stringify({ url: file.url, newurl: newUrl })
         }).then(response => {
             if (response.ok) {
@@ -198,6 +203,7 @@ export function uploadFiles(files, path) {
         });
         fetch(process.env.REACT_APP_API_FILE, {
             method: 'POST',
+            credentials: 'include',
             body: data
         }).then(response => {
             if (response.ok) {
@@ -219,6 +225,7 @@ export function compressFiles(files, path) {
     return function action(dispatch) {
         fetch(process.env.REACT_APP_API_ZIP, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({ url: path, files: files })
         }).then(response => {
             if (response.ok) {
@@ -236,6 +243,7 @@ export function deleteFiles(urls, path) {
 
             fetch(process.env.REACT_APP_API_FILE, {
                 method: 'DELETE',
+                credentials: 'include',
                 body: JSON.stringify({ url: url })
             }).then(response => {
                 if (response.ok) {
@@ -251,7 +259,8 @@ export function deleteFiles(urls, path) {
 export function downloadFile(file) {
     return function action(dispatch) {
         fetch(process.env.REACT_APP_API_FILE + '?url=' + file.url, {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include'
         }).then(response => {
             if (response.ok) {
                 response.blob().then(blob => saveAs(blob, file.name));
