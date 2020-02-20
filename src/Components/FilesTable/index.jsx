@@ -80,12 +80,10 @@ class FilesTable extends Component {
     }
 
     handleDownloadfilesClick = () => {
-        let n = this.props.fileList.filter(file => file.selected).length;
-        if (n === 1) this.props.dispatch(downloadFile(this.props.file));
-        else {
-            // TODO compress files and download archive
-            //this.props.dispatch(compressFiles(this.props.fileList.filter((e) => e.selected).map((e) => e.url), this.props.path));
-        }
+        let files = this.props.fileList.filter(file => file.selected);
+        files.forEach(file => {
+            this.props.dispatch(downloadFile(file));
+        });
     }
 
     handleCompressfilesClick = () => {
